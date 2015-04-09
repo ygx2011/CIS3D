@@ -1,0 +1,492 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B53372581AC27E6A00848BB6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B53372571AC27E6A00848BB6 /* main.m */; };
+		B533725B1AC27E6A00848BB6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B533725A1AC27E6A00848BB6 /* AppDelegate.m */; };
+		B53372611AC27E6A00848BB6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B533725F1AC27E6A00848BB6 /* Main.storyboard */; };
+		B53372631AC27E6A00848BB6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B53372621AC27E6A00848BB6 /* Images.xcassets */; };
+		B53372661AC27E6A00848BB6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B53372641AC27E6A00848BB6 /* LaunchScreen.xib */; };
+		B53372721AC27E6A00848BB6 /* CIS3DTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B53372711AC27E6A00848BB6 /* CIS3DTests.m */; };
+		B54D22941ACE575600F986F3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54D22931ACE575600F986F3 /* OpenGLES.framework */; };
+		B54D22961ACE575E00F986F3 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54D22951ACE575E00F986F3 /* GLKit.framework */; };
+		B54D22981ACE576D00F986F3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54D22971ACE576D00F986F3 /* QuartzCore.framework */; };
+		B5C486CE1ACFA49F00630B40 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5C486CD1ACFA49F00630B40 /* opencv2.framework */; };
+		B5C486D31ACFAAE500630B40 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C486D21ACFAAE500630B40 /* CameraViewController.m */; };
+		B5C8B46B1ACFC0FE0077116A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5C8B46A1ACFC0FE0077116A /* AVFoundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B533726C1AC27E6A00848BB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B533724A1AC27E6A00848BB6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B53372511AC27E6A00848BB6;
+			remoteInfo = CIS3D;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B53372521AC27E6A00848BB6 /* CIS3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CIS3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B53372561AC27E6A00848BB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B53372571AC27E6A00848BB6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B53372591AC27E6A00848BB6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B533725A1AC27E6A00848BB6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B53372601AC27E6A00848BB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B53372621AC27E6A00848BB6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		B53372651AC27E6A00848BB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		B533726B1AC27E6A00848BB6 /* CIS3DTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CIS3DTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B53372701AC27E6A00848BB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B53372711AC27E6A00848BB6 /* CIS3DTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIS3DTests.m; sourceTree = "<group>"; };
+		B54D22931ACE575600F986F3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		B54D22951ACE575E00F986F3 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		B54D22971ACE576D00F986F3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		B5C486CD1ACFA49F00630B40 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		B5C486D11ACFAAE500630B40 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
+		B5C486D21ACFAAE500630B40 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
+		B5C8B46A1ACFC0FE0077116A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B533724F1AC27E6A00848BB6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5C8B46B1ACFC0FE0077116A /* AVFoundation.framework in Frameworks */,
+				B54D22981ACE576D00F986F3 /* QuartzCore.framework in Frameworks */,
+				B54D22961ACE575E00F986F3 /* GLKit.framework in Frameworks */,
+				B5C486CE1ACFA49F00630B40 /* opencv2.framework in Frameworks */,
+				B54D22941ACE575600F986F3 /* OpenGLES.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B53372681AC27E6A00848BB6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B53372491AC27E6A00848BB6 = {
+			isa = PBXGroup;
+			children = (
+				B53372541AC27E6A00848BB6 /* CIS3D */,
+				B533726E1AC27E6A00848BB6 /* CIS3DTests */,
+				B53372531AC27E6A00848BB6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B53372531AC27E6A00848BB6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B53372521AC27E6A00848BB6 /* CIS3D.app */,
+				B533726B1AC27E6A00848BB6 /* CIS3DTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B53372541AC27E6A00848BB6 /* CIS3D */ = {
+			isa = PBXGroup;
+			children = (
+				B54D22921ACE56AC00F986F3 /* Models */,
+				B5C486CF1ACFA51700630B40 /* Views */,
+				B5C486D01ACFA54D00630B40 /* Controllers */,
+				B54D22991ACE577500F986F3 /* Frameworks */,
+				B53372621AC27E6A00848BB6 /* Images.xcassets */,
+				B53372551AC27E6A00848BB6 /* Supporting Files */,
+			);
+			path = CIS3D;
+			sourceTree = "<group>";
+		};
+		B53372551AC27E6A00848BB6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B53372591AC27E6A00848BB6 /* AppDelegate.h */,
+				B533725A1AC27E6A00848BB6 /* AppDelegate.m */,
+				B53372561AC27E6A00848BB6 /* Info.plist */,
+				B53372571AC27E6A00848BB6 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B533726E1AC27E6A00848BB6 /* CIS3DTests */ = {
+			isa = PBXGroup;
+			children = (
+				B53372711AC27E6A00848BB6 /* CIS3DTests.m */,
+				B533726F1AC27E6A00848BB6 /* Supporting Files */,
+			);
+			path = CIS3DTests;
+			sourceTree = "<group>";
+		};
+		B533726F1AC27E6A00848BB6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B53372701AC27E6A00848BB6 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B54D22921ACE56AC00F986F3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		B54D22991ACE577500F986F3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B5C8B46A1ACFC0FE0077116A /* AVFoundation.framework */,
+				B54D22971ACE576D00F986F3 /* QuartzCore.framework */,
+				B54D22951ACE575E00F986F3 /* GLKit.framework */,
+				B5C486CD1ACFA49F00630B40 /* opencv2.framework */,
+				B54D22931ACE575600F986F3 /* OpenGLES.framework */,
+			);
+			name = Frameworks;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		B5C486CF1ACFA51700630B40 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B533725F1AC27E6A00848BB6 /* Main.storyboard */,
+				B53372641AC27E6A00848BB6 /* LaunchScreen.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		B5C486D01ACFA54D00630B40 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B5C486D11ACFAAE500630B40 /* CameraViewController.h */,
+				B5C486D21ACFAAE500630B40 /* CameraViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B53372511AC27E6A00848BB6 /* CIS3D */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B53372751AC27E6A00848BB6 /* Build configuration list for PBXNativeTarget "CIS3D" */;
+			buildPhases = (
+				B533724E1AC27E6A00848BB6 /* Sources */,
+				B533724F1AC27E6A00848BB6 /* Frameworks */,
+				B53372501AC27E6A00848BB6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CIS3D;
+			productName = CIS3D;
+			productReference = B53372521AC27E6A00848BB6 /* CIS3D.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B533726A1AC27E6A00848BB6 /* CIS3DTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B53372781AC27E6A00848BB6 /* Build configuration list for PBXNativeTarget "CIS3DTests" */;
+			buildPhases = (
+				B53372671AC27E6A00848BB6 /* Sources */,
+				B53372681AC27E6A00848BB6 /* Frameworks */,
+				B53372691AC27E6A00848BB6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B533726D1AC27E6A00848BB6 /* PBXTargetDependency */,
+			);
+			name = CIS3DTests;
+			productName = CIS3DTests;
+			productReference = B533726B1AC27E6A00848BB6 /* CIS3DTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B533724A1AC27E6A00848BB6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = PKU;
+				TargetAttributes = {
+					B53372511AC27E6A00848BB6 = {
+						CreatedOnToolsVersion = 6.2;
+					};
+					B533726A1AC27E6A00848BB6 = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = B53372511AC27E6A00848BB6;
+					};
+				};
+			};
+			buildConfigurationList = B533724D1AC27E6A00848BB6 /* Build configuration list for PBXProject "CIS3D" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B53372491AC27E6A00848BB6;
+			productRefGroup = B53372531AC27E6A00848BB6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B53372511AC27E6A00848BB6 /* CIS3D */,
+				B533726A1AC27E6A00848BB6 /* CIS3DTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B53372501AC27E6A00848BB6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B53372611AC27E6A00848BB6 /* Main.storyboard in Resources */,
+				B53372661AC27E6A00848BB6 /* LaunchScreen.xib in Resources */,
+				B53372631AC27E6A00848BB6 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B53372691AC27E6A00848BB6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B533724E1AC27E6A00848BB6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5C486D31ACFAAE500630B40 /* CameraViewController.m in Sources */,
+				B533725B1AC27E6A00848BB6 /* AppDelegate.m in Sources */,
+				B53372581AC27E6A00848BB6 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B53372671AC27E6A00848BB6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B53372721AC27E6A00848BB6 /* CIS3DTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B533726D1AC27E6A00848BB6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B53372511AC27E6A00848BB6 /* CIS3D */;
+			targetProxy = B533726C1AC27E6A00848BB6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B533725F1AC27E6A00848BB6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B53372601AC27E6A00848BB6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B53372641AC27E6A00848BB6 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B53372651AC27E6A00848BB6 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B53372731AC27E6A00848BB6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		B53372741AC27E6A00848BB6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B53372761AC27E6A00848BB6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "libstdc++";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = CIS3D/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B53372771AC27E6A00848BB6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "libstdc++";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = CIS3D/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		B53372791AC27E6A00848BB6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CIS3DTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CIS3D.app/CIS3D";
+			};
+			name = Debug;
+		};
+		B533727A1AC27E6A00848BB6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CIS3DTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CIS3D.app/CIS3D";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B533724D1AC27E6A00848BB6 /* Build configuration list for PBXProject "CIS3D" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B53372731AC27E6A00848BB6 /* Debug */,
+				B53372741AC27E6A00848BB6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B53372751AC27E6A00848BB6 /* Build configuration list for PBXNativeTarget "CIS3D" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B53372761AC27E6A00848BB6 /* Debug */,
+				B53372771AC27E6A00848BB6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B53372781AC27E6A00848BB6 /* Build configuration list for PBXNativeTarget "CIS3DTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B53372791AC27E6A00848BB6 /* Debug */,
+				B533727A1AC27E6A00848BB6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B533724A1AC27E6A00848BB6 /* Project object */;
+}
