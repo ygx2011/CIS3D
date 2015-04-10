@@ -10,18 +10,39 @@
 
 @interface CISImage()
 
-@property cv::Mat image;
-
 @end
 
 @implementation CISImage
 
-#pragma makr - Utility convertions
+@synthesize image         = _image;
+@synthesize keyDescriptor = _keyDescriptor;
+@synthesize keyPoints     = _keyPoints;
+
+#pragma mark - initilization
+- (void)initWithUIImage:(UIImage *)image {
+    _image = [CISImage cvMatFromUIImage:image];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        cv::Ptr<cv::FeatureDetector> detector      = cv::FeatureDetector::create("PyramidORB");
+        cv::Ptr<cv::DescriptorExtractor> extractor = cv::DescriptorExtractor::create("ORB");
+        
+        detector ->detect (_image, _keyPoints);
+        extractor->compute(_image, _keyPoints, _keyDescriptor);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // TODO: after features extracted
+        });
+    });
+}
+
+#pragma mark - Utility convertions
 + (cv::Mat)cvMatFromUIImage:(UIImage *)image {
     CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage);
     
     CGFloat cols = image.size.width;
     CGFloat rows = image.size.height;
+    
+    NSLog(@"%f", rows);
     
     cv::Mat cvMat(rows, cols, CV_8UC4); // 8 bits per component, 4 channels (color channels + alpha)
     
@@ -40,7 +61,7 @@
     return cvMat;
 }
 
-+ (UIImage *)UIImageFromCVMat:(cv::Mat)cvMat {
++ (UIImage *)UIImageFromCVMat:(cv::Mat &)cvMat {
     CGColorSpaceRef colorSpace;
     NSData *data = [NSData dataWithBytes:cvMat.data length:cvMat.elemSize()*cvMat.total()];
     
@@ -59,13 +80,12 @@
                                         8 * cvMat.elemSize(),                       //bits per pixel
                                         cvMat.step[0],                              //bytesPerRow
                                         colorSpace,                                 //colorspace
-                                        kCGImageAlphaNone|kCGBitmapByteOrderDefault,// bitmap info
+                                        kCGImageAlphaNone |
+                                        kCGBitmapByteOrderDefault,                  //bitmap info
                                         provider,                                   //CGDataProviderRef
                                         NULL,                                       //decode
                                         false,                                      //should interpolate
-                                        kCGRenderingIntentDefault                   //intent
-                                        );
-    
+                                        kCGRenderingIntentDefault);                 //intent
     
     // Getting UIImage from CGImage
     UIImage *image = [UIImage imageWithCGImage:imageRef scale:1.0 orientation:UIImageOrientationRight];
@@ -74,10 +94,6 @@
     CGColorSpaceRelease(colorSpace);
     
     return image;
-}
-
-- (void)initWithUIImage:(UIImage *)image {
-    
 }
 
 @end

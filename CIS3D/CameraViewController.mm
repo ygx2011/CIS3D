@@ -117,7 +117,8 @@
         NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
         UIImage *image = [UIImage imageWithData:imageData];
         
-        _imageView.image = [CISImage UIImageFromCVMat:[CISImage cvMatFromUIImage:image]];
+        cv::Mat cvMat = [CISImage cvMatFromUIImage:image];
+        _imageView.image = [CISImage UIImageFromCVMat:cvMat];
         NSLog(@"image size = %@",NSStringFromCGSize(image.size));
     }];
 }

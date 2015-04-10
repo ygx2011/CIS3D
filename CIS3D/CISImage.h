@@ -8,12 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+
 #import <opencv2/opencv.hpp>
+#import <vector>
 
 @interface CISImage : NSObject
 
+@property(nonatomic) cv::Mat                   image;
+@property(nonatomic) cv::Mat                   keyDescriptor;
+@property(nonatomic) std::vector<cv::KeyPoint> keyPoints;
+
 + (cv::Mat)cvMatFromUIImage:(UIImage *)image;
-+ (UIImage *)UIImageFromCVMat:(cv::Mat)cvMat;
++ (UIImage *)UIImageFromCVMat:(cv::Mat &)cvMat;
 
 - (void)initWithUIImage:(UIImage *)image;
 
