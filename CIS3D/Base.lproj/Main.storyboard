@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xSk-4H-t43">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XI0-Ou-c7B">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <scenes>
         <!--Camera View Controller-->
@@ -15,12 +15,92 @@
                     <view key="view" contentMode="scaleToFill" id="LRO-OG-5nM">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ax6-st-oaI">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="470"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z7g-dp-VeX">
+                                <rect key="frame" x="267" y="477" width="66" height="66"/>
+                                <state key="normal" image="captureButton">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didCaputre:" destination="xSk-4H-t43" eventType="touchUpInside" id="cWq-Bp-Msh"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sct-fS-HX3">
+                                <rect key="frame" x="7" y="477" width="50" height="66"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="66" id="3Wn-ee-uD7"/>
+                                    <constraint firstAttribute="width" constant="50" id="yox-0N-Cza"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="sct-fS-HX3" secondAttribute="bottom" constant="57" id="1zG-FE-2cv"/>
+                            <constraint firstItem="sct-fS-HX3" firstAttribute="leading" secondItem="LRO-OG-5nM" secondAttribute="leading" constant="7" id="2MK-Ad-Nsw"/>
+                            <constraint firstItem="z7g-dp-VeX" firstAttribute="top" secondItem="Ax6-st-oaI" secondAttribute="bottom" constant="7" id="OSk-EF-ESU"/>
+                            <constraint firstAttribute="trailing" secondItem="Ax6-st-oaI" secondAttribute="trailing" id="OeU-yu-Kj3"/>
+                            <constraint firstItem="z7g-dp-VeX" firstAttribute="centerX" secondItem="Ax6-st-oaI" secondAttribute="centerX" id="RZc-cP-N7B"/>
+                            <constraint firstItem="Ax6-st-oaI" firstAttribute="leading" secondItem="LRO-OG-5nM" secondAttribute="leading" id="gcY-Uo-4pU"/>
+                            <constraint firstItem="Ic2-86-qrA" firstAttribute="top" secondItem="z7g-dp-VeX" secondAttribute="bottom" constant="8" symbolic="YES" id="lBT-Lj-UDT"/>
+                            <constraint firstItem="Ax6-st-oaI" firstAttribute="top" secondItem="LRO-OG-5nM" secondAttribute="top" id="qrC-Yg-5gG"/>
+                        </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" systemItem="topRated" id="lu0-jF-gxW"/>
+                    <connections>
+                        <outlet property="imageView" destination="sct-fS-HX3" id="4VI-7f-zo9"/>
+                        <outlet property="previewView" destination="Ax6-st-oaI" id="LeV-N4-uem"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4qE-UN-Oy1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136" y="-889"/>
+        </scene>
+        <!--GLKit View Controller-->
+        <scene sceneID="bHo-9j-cdl">
+            <objects>
+                <glkViewController preferredFramesPerSecond="30" id="dIv-i8-33G" customClass="PointCloudViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="orG-tO-8bm"/>
+                        <viewControllerLayoutGuide type="bottom" id="Rwo-N4-U9G"/>
+                    </layoutGuides>
+                    <glkView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" enableSetNeedsDisplay="NO" id="6gg-RQ-CrD">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <connections>
+                            <outlet property="delegate" destination="dIv-i8-33G" id="eaQ-dZ-Vp4"/>
+                        </connections>
+                    </glkView>
+                    <tabBarItem key="tabBarItem" systemItem="history" id="4D4-T6-YDI"/>
+                </glkViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SWl-CC-3o2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136" y="63"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="FFb-K0-HPc">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="XI0-Ou-c7B" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="D6V-ak-aEW">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="xSk-4H-t43" kind="relationship" relationship="viewControllers" id="z81-zn-X7D"/>
+                        <segue destination="dIv-i8-33G" kind="relationship" relationship="viewControllers" id="J3m-0Z-sdo"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cHe-dR-z8F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-634" y="-437"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="captureButton" width="66" height="66"/>
+    </resources>
 </document>

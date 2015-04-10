@@ -8,13 +8,18 @@
 
 #import "CameraViewController.h"
 
-@interface CameraViewController() 
+@interface CameraViewController()
 
 @property (strong, nonatomic) AVCaptureSession           *session;
 @property (strong, nonatomic) AVCaptureDeviceInput       *videoInput;
 @property (strong, nonatomic) AVCaptureStillImageOutput  *stillImageOutput;
 @property (strong, nonatomic) AVCaptureVideoPreviewLayer *previewLayer;
 @property (strong, nonatomic) AVCaptureDevice            *rearCamera;
+
+@property (strong, nonatomic) IBOutlet UIView            *previewView;
+@property (strong, nonatomic) IBOutlet UIImageView       *imageView;
+
+- (IBAction)didCaputre:(UIButton *)sender;
 
 @end
 
@@ -25,6 +30,8 @@
 @synthesize stillImageOutput  = _stillImageOutput;
 @synthesize previewLayer      = _previewLayer;
 @synthesize rearCamera        = _rearCamera;
+@synthesize previewView       = _previewView;
+@synthesize imageView         = _imageView;
 
 #pragma mark - Device selecting
 - (AVCaptureDevice *)cameraWithPosition:(AVCaptureDevicePosition) position {
@@ -70,11 +77,11 @@
     [super viewWillAppear:animated];
     if (_previewLayer == nil) {
         _previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_session];
-
-        CALayer *layer = [self.view layer];
+        
+        CALayer *layer = [_previewView layer];
         [layer setMasksToBounds:YES];
         
-        [_previewLayer setFrame:[self.view bounds]];
+        [_previewLayer setFrame:[_previewView bounds]];
         [_previewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
         
         [layer insertSublayer:_previewLayer below:[[layer sublayers] objectAtIndex:0]];
@@ -93,6 +100,26 @@
     if (_session) {
         [_session stopRunning];
     }
+}
+
+- (IBAction)didCaputre:(UIButton *)sender {
+    AVCaptureConnection * videoConnection = [_stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
+    
+    if (!videoConnection) {
+        NSLog(@"take photo failed!");
+        return;
+    }
+    
+    [_stillImageOutput captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
+        if (imageDataSampleBuffer == NULL) {
+            return;
+        }
+        NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+        UIImage *image = [UIImage imageWithData:imageData];
+        
+        _imageView.image = [CISImage UIImageFromCVMat:[CISImage cvMatFromUIImage:image]];
+        NSLog(@"image size = %@",NSStringFromCGSize(image.size));
+    }];
 }
 
 @end
