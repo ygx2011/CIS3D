@@ -23,34 +23,34 @@
     _image = [CISImage cvMatFromUIImage:image];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        cv::Ptr<cv::FeatureDetector> detector      = cv::FeatureDetector::create("PyramidORB");
+        cv::Ptr<cv::FeatureDetector>     detector  = cv::FeatureDetector::create("PyramidORB");
         cv::Ptr<cv::DescriptorExtractor> extractor = cv::DescriptorExtractor::create("ORB");
         
-        detector ->detect (_image, _keyPoints);
-        extractor->compute(_image, _keyPoints, _keyDescriptor);
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // TODO: after features extracted
-        });
+        detector ->detect (*_image, *_keyPoints);
+        extractor->compute(*_image, *_keyPoints, *_keyDescriptor);
+                
+        NSDictionary *d = [NSDictionary dictionaryWithObject:self forKey:CISImageAddedAction];
+        [[NSNotificationCenter defaultCenter] postNotificationName:CISImageAddedNotification
+                                                            object:self
+                                                          userInfo:d];
     });
 }
 
 #pragma mark - Utility convertions
-+ (cv::Mat)cvMatFromUIImage:(UIImage *)image {
++ (cv::Mat *)cvMatFromUIImage:(UIImage *)image {
     CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage);
     
     CGFloat cols = image.size.width;
     CGFloat rows = image.size.height;
     
-    NSLog(@"%f", rows);
+    // 8 bits per component, 4 channels (color channels + alpha)
+    cv::Mat *cvMat = new cv::Mat(rows, cols, CV_8UC4);
     
-    cv::Mat cvMat(rows, cols, CV_8UC4); // 8 bits per component, 4 channels (color channels + alpha)
-    
-    CGContextRef contextRef = CGBitmapContextCreate(cvMat.data,                 // Pointer to  data
+    CGContextRef contextRef = CGBitmapContextCreate(cvMat->data,                 // Pointer to  data
                                                     cols,                       // Width of bitmap
                                                     rows,                       // Height of bitmap
                                                     8,                          // Bits per component
-                                                    cvMat.step[0],              // Bytes per row
+                                                    cvMat->step[0],              // Bytes per row
                                                     colorSpace,                 // Colorspace
                                                     kCGImageAlphaNoneSkipLast |
                                                     kCGBitmapByteOrderDefault); // Bitmap info flags

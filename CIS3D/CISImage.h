@@ -12,13 +12,17 @@
 #import <opencv2/opencv.hpp>
 #import <vector>
 
+#import "CISConsts.h"
+#import "CISCamera.h"
+
 @interface CISImage : NSObject
 
-@property(nonatomic) cv::Mat                   image;
-@property(nonatomic) cv::Mat                   keyDescriptor;
-@property(nonatomic) std::vector<cv::KeyPoint> keyPoints;
+@property(nonatomic) cv::Mat*                   image;
+@property(atomic)    cv::Mat*                   keyDescriptor;
+@property(atomic)    std::vector<cv::KeyPoint>* keyPoints;
+@property(nonatomic, strong) CISCamera*         camera;
 
-+ (cv::Mat)cvMatFromUIImage:(UIImage *)image;
++ (cv::Mat *)cvMatFromUIImage:(UIImage *)image;
 + (UIImage *)UIImageFromCVMat:(cv::Mat &)cvMat;
 
 - (void)initWithUIImage:(UIImage *)image;

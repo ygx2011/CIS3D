@@ -22,6 +22,7 @@
 		B5AAD8701AD6B40D0013527F /* PointCloudViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5AAD86F1AD6B40D0013527F /* PointCloudViewController.m */; };
 		B5C486D31ACFAAE500630B40 /* CameraViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5C486D21ACFAAE500630B40 /* CameraViewController.mm */; };
 		B5C8B46B1ACFC0FE0077116A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5C8B46A1ACFC0FE0077116A /* AVFoundation.framework */; };
+		B5DA0A081AD9650B0066CE47 /* CISGeometry.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5DA0A071AD9650B0066CE47 /* CISGeometry.mm */; };
 		B5EE69B01AD7C94D00661595 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5EE69AF1AD7C94D00661595 /* opencv2.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,9 @@
 		B5C486D11ACFAAE500630B40 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		B5C486D21ACFAAE500630B40 /* CameraViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CameraViewController.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		B5C8B46A1ACFC0FE0077116A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		B5DA0A051AD955F60066CE47 /* CISConsts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CISConsts.h; sourceTree = "<group>"; };
+		B5DA0A061AD9650B0066CE47 /* CISGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CISGeometry.h; sourceTree = "<group>"; };
+		B5DA0A071AD9650B0066CE47 /* CISGeometry.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CISGeometry.mm; sourceTree = "<group>"; };
 		B5EE69AF1AD7C94D00661595 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,6 +159,9 @@
 				B541438F1AD7745100CA894F /* CISImage.mm */,
 				B58C5CB21AD7B0D2005C1E64 /* CISCamera.h */,
 				B58C5CB31AD7B0D2005C1E64 /* CISCamera.mm */,
+				B5DA0A051AD955F60066CE47 /* CISConsts.h */,
+				B5DA0A061AD9650B0066CE47 /* CISGeometry.h */,
+				B5DA0A071AD9650B0066CE47 /* CISGeometry.mm */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -295,6 +302,7 @@
 				B535BC861AD7A84300DD90C3 /* CISSfM.mm in Sources */,
 				B5C486D31ACFAAE500630B40 /* CameraViewController.mm in Sources */,
 				B54143901AD7745100CA894F /* CISImage.mm in Sources */,
+				B5DA0A081AD9650B0066CE47 /* CISGeometry.mm in Sources */,
 				B5AAD8701AD6B40D0013527F /* PointCloudViewController.m in Sources */,
 				B533725B1AC27E6A00848BB6 /* AppDelegate.m in Sources */,
 				B58C5CB41AD7B0D2005C1E64 /* CISCamera.mm in Sources */,
