@@ -17,10 +17,10 @@
 
 @interface CISImage : NSObject
 
-@property(nonatomic) cv::Mat*                   image;
-@property(atomic)    cv::Mat*                   keyDescriptor;
-@property(atomic)    std::vector<cv::KeyPoint>* keyPoints;
-@property(nonatomic, strong) CISCamera*         camera;
+@property(nonatomic) cv::Mat                   *image;
+@property(atomic)    cv::Mat                   *keyDescriptor;
+@property(atomic)    std::vector<cv::KeyPoint> *keyPoints;
+@property(nonatomic, strong) CISCamera         *camera;
 
 + (cv::Mat *)cvMatFromUIImage:(UIImage *)image;
 + (UIImage *)UIImageFromCVMat:(cv::Mat &)cvMat;

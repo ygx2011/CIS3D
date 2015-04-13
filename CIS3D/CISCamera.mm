@@ -19,6 +19,7 @@
 @synthesize R = _R;
 @synthesize t = _t;
 
+#pragma mark - life cycle
 - (void)initWithFundamentalMat:(cv::Mat &)F {
     _P = new cv::Mat(3, 4, CV_64F);
     
@@ -30,6 +31,13 @@
     tmp.copyTo( (*_P)(cv::Range(0, 3), cv::Range(0, 3)) );
     
     *_P /= tmp.at<double>(2, 2);
+}
+
+- (void)dealloc {
+    delete _P;
+    delete _K;
+    delete _R;
+    delete _t;
 }
 
 @end

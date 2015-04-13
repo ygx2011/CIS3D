@@ -15,10 +15,10 @@
 @interface CISCamera : NSObject
 
 /* P = K [ R | t] */
-@property(nonatomic) cv::Mat* P;
-@property(nonatomic) cv::Mat* K;
-@property(nonatomic) cv::Mat* R;
-@property(nonatomic) cv::Mat* t;
+@property(nonatomic) cv::Mat *P;
+@property(nonatomic) cv::Mat *K;
+@property(nonatomic) cv::Mat *R;
+@property(nonatomic) cv::Mat *t;
 
 - (void)initWithFundamentalMat:(cv::Mat &)F;
 
