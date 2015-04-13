@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B53372581AC27E6A00848BB6 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = B53372571AC27E6A00848BB6 /* main.mm */; };
-		B533725B1AC27E6A00848BB6 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = B533725A1AC27E6A00848BB6 /* AppDelegate.mm */; };
+		B53372581AC27E6A00848BB6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B53372571AC27E6A00848BB6 /* main.m */; };
+		B533725B1AC27E6A00848BB6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B533725A1AC27E6A00848BB6 /* AppDelegate.m */; };
 		B53372611AC27E6A00848BB6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B533725F1AC27E6A00848BB6 /* Main.storyboard */; };
 		B53372631AC27E6A00848BB6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B53372621AC27E6A00848BB6 /* Images.xcassets */; };
 		B53372661AC27E6A00848BB6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B53372641AC27E6A00848BB6 /* LaunchScreen.xib */; };
@@ -44,9 +44,9 @@
 /* Begin PBXFileReference section */
 		B53372521AC27E6A00848BB6 /* CIS3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CIS3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B53372561AC27E6A00848BB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B53372571AC27E6A00848BB6 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		B53372571AC27E6A00848BB6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B53372591AC27E6A00848BB6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		B533725A1AC27E6A00848BB6 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		B533725A1AC27E6A00848BB6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		B53372601AC27E6A00848BB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B53372621AC27E6A00848BB6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B53372651AC27E6A00848BB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -142,7 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				B53372561AC27E6A00848BB6 /* Info.plist */,
-				B53372571AC27E6A00848BB6 /* main.mm */,
+				B53372571AC27E6A00848BB6 /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -212,7 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				B53372591AC27E6A00848BB6 /* AppDelegate.h */,
-				B533725A1AC27E6A00848BB6 /* AppDelegate.mm */,
+				B533725A1AC27E6A00848BB6 /* AppDelegate.m */,
 				B5B4D1431ADBEE2B001BFADC /* PointCloudViewController.h */,
 				B5B4D1421ADBEE2B001BFADC /* PointCloudViewController.mm */,
 				B5C486D11ACFAAE500630B40 /* CameraViewController.h */,
@@ -326,8 +326,8 @@
 				B5B4D1361ADBED75001BFADC /* CISImagePair.mm in Sources */,
 				B5B4D1441ADBEE2B001BFADC /* PointCloudViewController.mm in Sources */,
 				B5B4D1351ADBED75001BFADC /* CISCloud.mm in Sources */,
-				B533725B1AC27E6A00848BB6 /* AppDelegate.mm in Sources */,
-				B53372581AC27E6A00848BB6 /* main.mm in Sources */,
+				B533725B1AC27E6A00848BB6 /* AppDelegate.m in Sources */,
+				B53372581AC27E6A00848BB6 /* main.m in Sources */,
 				B5B4D1391ADBED75001BFADC /* CISSfM.mm in Sources */,
 				B5B4D13A1ADBED75001BFADC /* CISGeometry.mm in Sources */,
 				B5B4D1371ADBED75001BFADC /* CISImage.mm in Sources */,

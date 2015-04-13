@@ -16,9 +16,22 @@
 
 @implementation CISSfM
 
+
 @synthesize images = _images;
 @synthesize pairs  = _pairs;
 @synthesize cloud  = _cloud;
+
+#pragma mark - singleton method
++ (CISSfM *)sharedInstance {
+    static CISSfM *singletonSfM = nil;
+
+    static dispatch_once_t singleton;
+    dispatch_once(&singleton, ^{
+        singletonSfM = [[CISSfM alloc] init];
+    });
+    
+    return singletonSfM;
+}
 
 #pragma mark - life cycle
 - (instancetype)init {

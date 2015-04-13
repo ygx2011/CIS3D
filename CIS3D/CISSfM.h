@@ -21,4 +21,6 @@
 @property(atomic) NSMutableArray   *pairs;
 @property(atomic, strong) CISCloud *cloud;
 
++ (CISSfM *)sharedInstance;
+
 @end
