@@ -55,7 +55,6 @@
         }
     }
     [_images addObject:image];
-
 }
 
 @end

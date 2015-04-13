@@ -25,6 +25,6 @@
 + (cv::Mat *)cvMatFromUIImage:(UIImage *)image;
 + (UIImage *)UIImageFromCVMat:(cv::Mat &)cvMat;
 
-- (void)initWithUIImage:(UIImage *)image;
+- (instancetype)initWithUIImage:(UIImage *)image;
 
 @end

@@ -30,8 +30,7 @@
     
     _glView = (GLKView *)self.view;
     _glView.context = _glContext;
-    _glView.drawableColorFormat = GLKViewDrawableDepthFormat24;
-    
+    _glView.drawableDepthFormat = GLKViewDrawableDepthFormat24;
 }
 
 @end

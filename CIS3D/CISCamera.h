@@ -20,6 +20,6 @@
 @property(nonatomic) cv::Mat *R;
 @property(nonatomic) cv::Mat *t;
 
-- (void)initWithFundamentalMat:(cv::Mat &)F;
+- (instancetype)initWithFundamentalMat:(cv::Mat &)F;
 
 @end

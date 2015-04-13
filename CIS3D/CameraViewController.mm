@@ -14,7 +14,6 @@
 @property (strong, nonatomic) AVCaptureDeviceInput       *videoInput;
 @property (strong, nonatomic) AVCaptureStillImageOutput  *stillImageOutput;
 @property (strong, nonatomic) AVCaptureVideoPreviewLayer *previewLayer;
-@property (strong, nonatomic) AVCaptureDevice            *rearCamera;
 
 @property (strong, nonatomic) IBOutlet UIView            *previewView;
 @property (strong, nonatomic) IBOutlet UIImageView       *imageView;
@@ -29,7 +28,6 @@
 @synthesize videoInput        = _videoInput;
 @synthesize stillImageOutput  = _stillImageOutput;
 @synthesize previewLayer      = _previewLayer;
-@synthesize rearCamera        = _rearCamera;
 @synthesize previewView       = _previewView;
 @synthesize imageView         = _imageView;
 
@@ -114,7 +112,9 @@
         if (imageDataSampleBuffer == NULL) {
             return;
         }
+        
         NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+    
         UIImage *image = [UIImage imageWithData:imageData];
         
         cv::Mat* cvMat = [CISImage cvMatFromUIImage:image];

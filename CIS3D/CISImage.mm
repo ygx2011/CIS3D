@@ -19,22 +19,24 @@
 @synthesize keyPoints     = _keyPoints;
 
 #pragma mark - life cycle
-- (void)initWithUIImage:(UIImage *)image {
-    _image = [CISImage cvMatFromUIImage:image];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+- (instancetype)initWithUIImage:(UIImage *)image {
+    self = [super init];
+    if (self) {
+        _image = [CISImage cvMatFromUIImage:image];
+        
         cv::Ptr<cv::FeatureDetector>     detector  = cv::FeatureDetector::create("SIFT");
         cv::Ptr<cv::DescriptorExtractor> extractor = cv::DescriptorExtractor::create("SIFT");
-        
+            
         detector ->detect (*_image, *_keyPoints);
         extractor->compute(*_image, *_keyPoints, *_keyDescriptor);
-        
+            
         /* 完成特征提取以后，向SfM发布消息，将其添加至队列中 */
         NSDictionary *d = [NSDictionary dictionaryWithObject:self forKey:CISImageAdded];
         [[NSNotificationCenter defaultCenter] postNotificationName:CISImageAddedNotification
                                                             object:self
-                                                          userInfo:d];
-    });
+                                                            userInfo:d];
+    }
+    return self;
 }
 
 - (void)dealloc {

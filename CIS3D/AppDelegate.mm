@@ -14,8 +14,9 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    //CISSfM *sfm = [[CISSfM alloc] init];
+    //NSLog(@"SFM Instance Created");
     return YES;
 }
 

@@ -7,24 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B511A17C1ADA53FB00A2A6A3 /* CISImagePair.mm in Sources */ = {isa = PBXBuildFile; fileRef = B511A17B1ADA53FB00A2A6A3 /* CISImagePair.mm */; };
-		B53372581AC27E6A00848BB6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B53372571AC27E6A00848BB6 /* main.m */; };
-		B533725B1AC27E6A00848BB6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B533725A1AC27E6A00848BB6 /* AppDelegate.m */; };
+		B53372581AC27E6A00848BB6 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = B53372571AC27E6A00848BB6 /* main.mm */; };
+		B533725B1AC27E6A00848BB6 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = B533725A1AC27E6A00848BB6 /* AppDelegate.mm */; };
 		B53372611AC27E6A00848BB6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B533725F1AC27E6A00848BB6 /* Main.storyboard */; };
 		B53372631AC27E6A00848BB6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B53372621AC27E6A00848BB6 /* Images.xcassets */; };
 		B53372661AC27E6A00848BB6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B53372641AC27E6A00848BB6 /* LaunchScreen.xib */; };
 		B53372721AC27E6A00848BB6 /* CIS3DTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B53372711AC27E6A00848BB6 /* CIS3DTests.m */; };
-		B535BC861AD7A84300DD90C3 /* CISSfM.mm in Sources */ = {isa = PBXBuildFile; fileRef = B535BC851AD7A84300DD90C3 /* CISSfM.mm */; };
-		B53655121ADA052A00074DA5 /* CISCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = B53655111ADA052A00074DA5 /* CISCloud.m */; };
-		B54143901AD7745100CA894F /* CISImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = B541438F1AD7745100CA894F /* CISImage.mm */; };
 		B54D22941ACE575600F986F3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54D22931ACE575600F986F3 /* OpenGLES.framework */; };
 		B54D22961ACE575E00F986F3 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54D22951ACE575E00F986F3 /* GLKit.framework */; };
 		B54D22981ACE576D00F986F3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54D22971ACE576D00F986F3 /* QuartzCore.framework */; };
-		B58C5CB41AD7B0D2005C1E64 /* CISCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = B58C5CB31AD7B0D2005C1E64 /* CISCamera.mm */; };
-		B5AAD8701AD6B40D0013527F /* PointCloudViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5AAD86F1AD6B40D0013527F /* PointCloudViewController.m */; };
+		B5B4D1351ADBED75001BFADC /* CISCloud.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5B4D1281ADBED75001BFADC /* CISCloud.mm */; };
+		B5B4D1361ADBED75001BFADC /* CISImagePair.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5B4D1291ADBED75001BFADC /* CISImagePair.mm */; };
+		B5B4D1371ADBED75001BFADC /* CISImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5B4D12A1ADBED75001BFADC /* CISImage.mm */; };
+		B5B4D1381ADBED75001BFADC /* CISCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5B4D12C1ADBED75001BFADC /* CISCamera.mm */; };
+		B5B4D1391ADBED75001BFADC /* CISSfM.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5B4D12E1ADBED75001BFADC /* CISSfM.mm */; };
+		B5B4D13A1ADBED75001BFADC /* CISGeometry.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5B4D1331ADBED75001BFADC /* CISGeometry.mm */; };
+		B5B4D13D1ADBEDB4001BFADC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5B4D13C1ADBEDB4001BFADC /* Foundation.framework */; };
+		B5B4D13F1ADBEDBB001BFADC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5B4D13E1ADBEDBB001BFADC /* UIKit.framework */; };
+		B5B4D1411ADBEE12001BFADC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5B4D1401ADBEE12001BFADC /* CoreGraphics.framework */; };
+		B5B4D1441ADBEE2B001BFADC /* PointCloudViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5B4D1421ADBEE2B001BFADC /* PointCloudViewController.mm */; };
 		B5C486D31ACFAAE500630B40 /* CameraViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5C486D21ACFAAE500630B40 /* CameraViewController.mm */; };
 		B5C8B46B1ACFC0FE0077116A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5C8B46A1ACFC0FE0077116A /* AVFoundation.framework */; };
-		B5DA0A081AD9650B0066CE47 /* CISGeometry.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5DA0A071AD9650B0066CE47 /* CISGeometry.mm */; };
 		B5EE69B01AD7C94D00661595 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5EE69AF1AD7C94D00661595 /* opencv2.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,38 +42,41 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B511A17A1ADA53FB00A2A6A3 /* CISImagePair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CISImagePair.h; sourceTree = "<group>"; };
-		B511A17B1ADA53FB00A2A6A3 /* CISImagePair.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CISImagePair.mm; sourceTree = "<group>"; };
 		B53372521AC27E6A00848BB6 /* CIS3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CIS3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B53372561AC27E6A00848BB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B53372571AC27E6A00848BB6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B53372571AC27E6A00848BB6 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		B53372591AC27E6A00848BB6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		B533725A1AC27E6A00848BB6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B533725A1AC27E6A00848BB6 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		B53372601AC27E6A00848BB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B53372621AC27E6A00848BB6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B53372651AC27E6A00848BB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		B533726B1AC27E6A00848BB6 /* CIS3DTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CIS3DTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B53372701AC27E6A00848BB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B53372711AC27E6A00848BB6 /* CIS3DTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIS3DTests.m; sourceTree = "<group>"; };
-		B535BC841AD7A84300DD90C3 /* CISSfM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CISSfM.h; sourceTree = "<group>"; };
-		B535BC851AD7A84300DD90C3 /* CISSfM.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CISSfM.mm; sourceTree = "<group>"; };
-		B53655101ADA052A00074DA5 /* CISCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CISCloud.h; sourceTree = "<group>"; };
-		B53655111ADA052A00074DA5 /* CISCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CISCloud.m; sourceTree = "<group>"; };
-		B541438E1AD7745100CA894F /* CISImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CISImage.h; sourceTree = "<group>"; };
-		B541438F1AD7745100CA894F /* CISImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CISImage.mm; sourceTree = "<group>"; };
 		B54D22931ACE575600F986F3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		B54D22951ACE575E00F986F3 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		B54D22971ACE576D00F986F3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		B58C5CB21AD7B0D2005C1E64 /* CISCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CISCamera.h; sourceTree = "<group>"; };
-		B58C5CB31AD7B0D2005C1E64 /* CISCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CISCamera.mm; sourceTree = "<group>"; };
-		B5AAD86E1AD6B40D0013527F /* PointCloudViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointCloudViewController.h; sourceTree = "<group>"; };
-		B5AAD86F1AD6B40D0013527F /* PointCloudViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointCloudViewController.m; sourceTree = "<group>"; };
+		B5B4D1281ADBED75001BFADC /* CISCloud.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CISCloud.mm; sourceTree = "<group>"; };
+		B5B4D1291ADBED75001BFADC /* CISImagePair.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CISImagePair.mm; sourceTree = "<group>"; };
+		B5B4D12A1ADBED75001BFADC /* CISImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CISImage.mm; sourceTree = "<group>"; };
+		B5B4D12B1ADBED75001BFADC /* CISImagePair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CISImagePair.h; sourceTree = "<group>"; };
+		B5B4D12C1ADBED75001BFADC /* CISCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CISCamera.mm; sourceTree = "<group>"; };
+		B5B4D12D1ADBED75001BFADC /* CISCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CISCamera.h; sourceTree = "<group>"; };
+		B5B4D12E1ADBED75001BFADC /* CISSfM.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CISSfM.mm; sourceTree = "<group>"; };
+		B5B4D12F1ADBED75001BFADC /* CISImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CISImage.h; sourceTree = "<group>"; };
+		B5B4D1301ADBED75001BFADC /* CISConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CISConsts.h; sourceTree = "<group>"; };
+		B5B4D1311ADBED75001BFADC /* CISSfM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CISSfM.h; sourceTree = "<group>"; };
+		B5B4D1321ADBED75001BFADC /* CISCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CISCloud.h; sourceTree = "<group>"; };
+		B5B4D1331ADBED75001BFADC /* CISGeometry.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CISGeometry.mm; sourceTree = "<group>"; };
+		B5B4D1341ADBED75001BFADC /* CISGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CISGeometry.h; sourceTree = "<group>"; };
+		B5B4D13C1ADBEDB4001BFADC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B5B4D13E1ADBEDBB001BFADC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		B5B4D1401ADBEE12001BFADC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		B5B4D1421ADBEE2B001BFADC /* PointCloudViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PointCloudViewController.mm; sourceTree = "<group>"; };
+		B5B4D1431ADBEE2B001BFADC /* PointCloudViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointCloudViewController.h; sourceTree = "<group>"; };
 		B5C486D11ACFAAE500630B40 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		B5C486D21ACFAAE500630B40 /* CameraViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CameraViewController.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		B5C8B46A1ACFC0FE0077116A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		B5DA0A051AD955F60066CE47 /* CISConsts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CISConsts.h; sourceTree = "<group>"; };
-		B5DA0A061AD9650B0066CE47 /* CISGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CISGeometry.h; sourceTree = "<group>"; };
-		B5DA0A071AD9650B0066CE47 /* CISGeometry.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CISGeometry.mm; sourceTree = "<group>"; };
 		B5EE69AF1AD7C94D00661595 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,6 +85,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5B4D1411ADBEE12001BFADC /* CoreGraphics.framework in Frameworks */,
+				B5B4D13F1ADBEDBB001BFADC /* UIKit.framework in Frameworks */,
+				B5B4D13D1ADBEDB4001BFADC /* Foundation.framework in Frameworks */,
 				B5C8B46B1ACFC0FE0077116A /* AVFoundation.framework in Frameworks */,
 				B54D22981ACE576D00F986F3 /* QuartzCore.framework in Frameworks */,
 				B54D22961ACE575E00F986F3 /* GLKit.framework in Frameworks */,
@@ -100,6 +109,7 @@
 		B53372491AC27E6A00848BB6 = {
 			isa = PBXGroup;
 			children = (
+				B5B4D1401ADBEE12001BFADC /* CoreGraphics.framework */,
 				B53372541AC27E6A00848BB6 /* CIS3D */,
 				B533726E1AC27E6A00848BB6 /* CIS3DTests */,
 				B53372531AC27E6A00848BB6 /* Products */,
@@ -118,7 +128,7 @@
 		B53372541AC27E6A00848BB6 /* CIS3D */ = {
 			isa = PBXGroup;
 			children = (
-				B54D22921ACE56AC00F986F3 /* Models */,
+				B5B4D13B1ADBED7C001BFADC /* Models */,
 				B5C486CF1ACFA51700630B40 /* Views */,
 				B5C486D01ACFA54D00630B40 /* Controllers */,
 				B54D22991ACE577500F986F3 /* Frameworks */,
@@ -131,10 +141,8 @@
 		B53372551AC27E6A00848BB6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B53372591AC27E6A00848BB6 /* AppDelegate.h */,
-				B533725A1AC27E6A00848BB6 /* AppDelegate.m */,
 				B53372561AC27E6A00848BB6 /* Info.plist */,
-				B53372571AC27E6A00848BB6 /* main.m */,
+				B53372571AC27E6A00848BB6 /* main.mm */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -156,37 +164,39 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		B54D22921ACE56AC00F986F3 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				B535BC841AD7A84300DD90C3 /* CISSfM.h */,
-				B535BC851AD7A84300DD90C3 /* CISSfM.mm */,
-				B53655101ADA052A00074DA5 /* CISCloud.h */,
-				B53655111ADA052A00074DA5 /* CISCloud.m */,
-				B541438E1AD7745100CA894F /* CISImage.h */,
-				B541438F1AD7745100CA894F /* CISImage.mm */,
-				B511A17A1ADA53FB00A2A6A3 /* CISImagePair.h */,
-				B511A17B1ADA53FB00A2A6A3 /* CISImagePair.mm */,
-				B58C5CB21AD7B0D2005C1E64 /* CISCamera.h */,
-				B58C5CB31AD7B0D2005C1E64 /* CISCamera.mm */,
-				B5DA0A051AD955F60066CE47 /* CISConsts.h */,
-				B5DA0A061AD9650B0066CE47 /* CISGeometry.h */,
-				B5DA0A071AD9650B0066CE47 /* CISGeometry.mm */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
 		B54D22991ACE577500F986F3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				B5EE69AF1AD7C94D00661595 /* opencv2.framework */,
 				B5C8B46A1ACFC0FE0077116A /* AVFoundation.framework */,
-				B54D22971ACE576D00F986F3 /* QuartzCore.framework */,
+				B5B4D13C1ADBEDB4001BFADC /* Foundation.framework */,
 				B54D22951ACE575E00F986F3 /* GLKit.framework */,
 				B54D22931ACE575600F986F3 /* OpenGLES.framework */,
+				B54D22971ACE576D00F986F3 /* QuartzCore.framework */,
+				B5B4D13E1ADBEDBB001BFADC /* UIKit.framework */,
 			);
 			name = Frameworks;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		B5B4D13B1ADBED7C001BFADC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B5B4D1311ADBED75001BFADC /* CISSfM.h */,
+				B5B4D12E1ADBED75001BFADC /* CISSfM.mm */,
+				B5B4D1321ADBED75001BFADC /* CISCloud.h */,
+				B5B4D1281ADBED75001BFADC /* CISCloud.mm */,
+				B5B4D12F1ADBED75001BFADC /* CISImage.h */,
+				B5B4D12A1ADBED75001BFADC /* CISImage.mm */,
+				B5B4D12B1ADBED75001BFADC /* CISImagePair.h */,
+				B5B4D1291ADBED75001BFADC /* CISImagePair.mm */,
+				B5B4D12D1ADBED75001BFADC /* CISCamera.h */,
+				B5B4D12C1ADBED75001BFADC /* CISCamera.mm */,
+				B5B4D1301ADBED75001BFADC /* CISConsts.h */,
+				B5B4D1341ADBED75001BFADC /* CISGeometry.h */,
+				B5B4D1331ADBED75001BFADC /* CISGeometry.mm */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		B5C486CF1ACFA51700630B40 /* Views */ = {
@@ -201,8 +211,10 @@
 		B5C486D01ACFA54D00630B40 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B5AAD86E1AD6B40D0013527F /* PointCloudViewController.h */,
-				B5AAD86F1AD6B40D0013527F /* PointCloudViewController.m */,
+				B53372591AC27E6A00848BB6 /* AppDelegate.h */,
+				B533725A1AC27E6A00848BB6 /* AppDelegate.mm */,
+				B5B4D1431ADBEE2B001BFADC /* PointCloudViewController.h */,
+				B5B4D1421ADBEE2B001BFADC /* PointCloudViewController.mm */,
 				B5C486D11ACFAAE500630B40 /* CameraViewController.h */,
 				B5C486D21ACFAAE500630B40 /* CameraViewController.mm */,
 			);
@@ -309,16 +321,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B535BC861AD7A84300DD90C3 /* CISSfM.mm in Sources */,
-				B53655121ADA052A00074DA5 /* CISCloud.m in Sources */,
 				B5C486D31ACFAAE500630B40 /* CameraViewController.mm in Sources */,
-				B54143901AD7745100CA894F /* CISImage.mm in Sources */,
-				B5DA0A081AD9650B0066CE47 /* CISGeometry.mm in Sources */,
-				B5AAD8701AD6B40D0013527F /* PointCloudViewController.m in Sources */,
-				B533725B1AC27E6A00848BB6 /* AppDelegate.m in Sources */,
-				B511A17C1ADA53FB00A2A6A3 /* CISImagePair.mm in Sources */,
-				B58C5CB41AD7B0D2005C1E64 /* CISCamera.mm in Sources */,
-				B53372581AC27E6A00848BB6 /* main.m in Sources */,
+				B5B4D1381ADBED75001BFADC /* CISCamera.mm in Sources */,
+				B5B4D1361ADBED75001BFADC /* CISImagePair.mm in Sources */,
+				B5B4D1441ADBEE2B001BFADC /* PointCloudViewController.mm in Sources */,
+				B5B4D1351ADBED75001BFADC /* CISCloud.mm in Sources */,
+				B533725B1AC27E6A00848BB6 /* AppDelegate.mm in Sources */,
+				B53372581AC27E6A00848BB6 /* main.mm in Sources */,
+				B5B4D1391ADBED75001BFADC /* CISSfM.mm in Sources */,
+				B5B4D13A1ADBED75001BFADC /* CISGeometry.mm in Sources */,
+				B5B4D1371ADBED75001BFADC /* CISImage.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

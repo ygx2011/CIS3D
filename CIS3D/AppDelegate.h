@@ -6,12 +6,14 @@
 //  Copyright (c) 2015年 PKU. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+
+#import "CISSfM.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
-
+@property(strong, nonatomic) UIWindow *window;
 
 @end
 

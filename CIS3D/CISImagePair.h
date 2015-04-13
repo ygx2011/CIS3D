@@ -16,6 +16,7 @@
 @interface CISImagePair : NSObject
 
 @property(nonatomic) std::vector<cv::DMatch> *matches;
+@property(nonatomic) cv::Mat                 *fundamentalMat;
 @property(nonatomic) CISImage                *image1;
 @property(nonatomic) CISImage                *image2;
 
