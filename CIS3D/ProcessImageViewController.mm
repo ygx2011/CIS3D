@@ -10,7 +10,7 @@
 
 @interface ProcessImageViewController ()
 
-@property(strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
 - (void)didReceiveImageAddedNotification:(NSNotification *)notification;
 

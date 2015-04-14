@@ -10,15 +10,16 @@
 
 #import <opencv2/opencv.hpp>
 
+#import "CISConsts.h"
 #import "CISGeometry.h"
 
 @interface CISCamera : NSObject
 
 /* P = K [ R | t] */
-@property(nonatomic) cv::Mat *P;
-@property(nonatomic) cv::Mat *K;
-@property(nonatomic) cv::Mat *R;
-@property(nonatomic) cv::Mat *t;
+@property (nonatomic) cv::Mat *P;
+@property (nonatomic) cv::Mat *K;
+@property (nonatomic) cv::Mat *R;
+@property (nonatomic) cv::Mat *t;
 
 - (instancetype)initWithFundamentalMat:(cv::Mat &)F;
 

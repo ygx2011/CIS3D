@@ -216,10 +216,10 @@
 			children = (
 				B53372591AC27E6A00848BB6 /* AppDelegate.h */,
 				B533725A1AC27E6A00848BB6 /* AppDelegate.m */,
-				B5B4D1431ADBEE2B001BFADC /* PointCloudViewController.h */,
-				B5B4D1421ADBEE2B001BFADC /* PointCloudViewController.mm */,
 				B5C486D11ACFAAE500630B40 /* CameraViewController.h */,
 				B5C486D21ACFAAE500630B40 /* CameraViewController.mm */,
+				B5B4D1431ADBEE2B001BFADC /* PointCloudViewController.h */,
+				B5B4D1421ADBEE2B001BFADC /* PointCloudViewController.mm */,
 				B5AEA01D1ADCDECA00B716A6 /* ProcessImageViewController.h */,
 				B5AEA01E1ADCDECA00B716A6 /* ProcessImageViewController.mm */,
 			);

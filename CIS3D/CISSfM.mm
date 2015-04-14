@@ -10,12 +10,12 @@
 
 @interface CISSfM ()
 
-- (void)didReceiveImageAddedNotification:(NSNotification *)notification;
+- (void)constructWithImagePair:(CISImagePair *)pair;
+- (void)updateWithImagePair:(CISImagePair *)pair;
 
 @end
 
 @implementation CISSfM
-
 
 @synthesize images = _images;
 @synthesize pairs  = _pairs;
@@ -27,6 +27,9 @@
 
     static dispatch_once_t singleton;
     dispatch_once(&singleton, ^{
+#ifdef LOG
+        NSLog(@"CISSfM: instantialized.");
+#endif
         singletonSfM = [[CISSfM alloc] init];
     });
     
@@ -40,34 +43,52 @@
         _images = [[NSMutableArray alloc] init];
         _pairs  = [[NSMutableArray alloc] init];
         _cloud  = [[CISCloud alloc] init];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(didReceiveImageAddedNotification:)
-                                                     name:CISImageAddedNotification
-                                                   object:nil];
     }
     return self;
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-#pragma mark - update when a new image comes in
-- (void)didReceiveImageAddedNotification:(NSNotification *)notification {
-    CISImage *image = [[notification userInfo] objectForKey:CISImageAdded];
+#pragma mark - update
+- (void)addImage:(CISImage *)image {
+#ifdef LOG
+    NSLog(@"CISSfM: %lu images in _image.", (unsigned long)[_images count]);
+    NSLog(@"CISSfM: %lu pairs in _pair."  , (unsigned long)[_pairs count]);
+#endif
     switch ([_images count]) {
-        case 0: break;
+        case 0: {
+            [_images addObject:image];
+            break;
+        }
         case 1: {
-            CISImagePair *imagePair = [[CISImagePair alloc] initWithImage1:[_images objectAtIndex:0]
-                                                                 andImage2:image];
-            [_pairs addObject:imagePair];
+            /* 队列里只存储了一个图像时，新图像与之匹配 */
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                CISImage *imageToMatch = [_images firstObject];
+                CISImagePair *pair = [[CISImagePair alloc] initWithImage1:imageToMatch andImage2:image];
+                
+                [self constructWithImagePair:pair];
+                [_images addObject:image];
+                [_pairs  addObject:pair];
+            });
             break;
         }
         default: {
+            /* 队列里已经有很多图像时，新图像 [暂时] 只与最后一个匹配 */
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                CISImage *imageToMatch = [_images lastObject];
+                CISImagePair *pair = [[CISImagePair alloc] initWithImage1:imageToMatch andImage2:image];
+                
+                [self updateWithImagePair:pair];
+                [_images addObject:image];
+                [_pairs  addObject:pair];
+            });
             break;
         }
     }
-    [_images addObject:image];
+}
+
+- (void)constructWithImagePair:(CISImagePair *)pair {
+}
+
+- (void)updateWithImagePair:(CISImagePair *)pair {
 }
 
 @end

@@ -16,8 +16,10 @@
 
 @synthesize image         = _image;
 @synthesize featuredImage = _featuredImage;
+
 @synthesize keyDescriptor = _keyDescriptor;
 @synthesize keyPoints     = _keyPoints;
+@synthesize camera        = _camera;
 
 #pragma mark - life cycle
 - (instancetype)initWithUIImage:(UIImage *)image {
@@ -29,17 +31,16 @@
         cv::SiftFeatureDetector     detector;
         cv::SiftDescriptorExtractor extractor;
         
+        /* 抽取特征 */
         cv::Mat __keyDescriptor;
         detector .detect (*_image, *_keyPoints);
         extractor.compute(*_image, *_keyPoints, __keyDescriptor);
-        
         _keyDescriptor = new cv::Mat(__keyDescriptor);
         
+        /* 绘制特征点 */
         cv::Mat __featuredImage, __image;
         cv::cvtColor(*_image, __image, CV_RGBA2RGB);
-        
         cv::drawKeypoints(__image, *_keyPoints, __featuredImage);
-        
         _featuredImage = new cv::Mat(__featuredImage);
     }
     return self;
@@ -51,7 +52,7 @@
     delete _keyPoints;
 }
 
-#pragma mark - Utility convertions
+#pragma mark - utility convertions
 + (cv::Mat *)cvMatFromUIImage:(UIImage *)image {
     CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage);
     
@@ -61,11 +62,11 @@
     // 8 bits per component, 4 channels (color channels + alpha)
     cv::Mat *cvMat = new cv::Mat(rows, cols, CV_8UC4);
     
-    CGContextRef contextRef = CGBitmapContextCreate(cvMat->data,                 // Pointer to  data
+    CGContextRef contextRef = CGBitmapContextCreate(cvMat->data,                // Pointer to  data
                                                     cols,                       // Width of bitmap
                                                     rows,                       // Height of bitmap
                                                     8,                          // Bits per component
-                                                    cvMat->step[0],              // Bytes per row
+                                                    cvMat->step[0],             // Bytes per row
                                                     colorSpace,                 // Colorspace
                                                     kCGImageAlphaNoneSkipLast |
                                                     kCGBitmapByteOrderDefault); // Bitmap info flags

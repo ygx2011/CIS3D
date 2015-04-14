@@ -10,8 +10,8 @@
 
 @interface PointCloudViewController()
 
-@property(strong, nonatomic) EAGLContext *glContext;
-@property(strong, nonatomic) GLKView     *glView;
+@property (strong, nonatomic) EAGLContext *glContext;
+@property (strong, nonatomic) GLKView     *glView;
 
 @end
 

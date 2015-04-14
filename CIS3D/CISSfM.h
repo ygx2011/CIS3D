@@ -11,16 +11,17 @@
 #import <opencv2/opencv.hpp>
 
 #import "CISConsts.h"
-#import "CISCloud.h"
 #import "CISImage.h"
 #import "CISImagePair.h"
+#import "CISCloud.h"
 
 @interface CISSfM : NSObject
 
-@property(atomic) NSMutableArray   *images;
-@property(atomic) NSMutableArray   *pairs;
-@property(atomic, strong) CISCloud *cloud;
+@property (atomic) NSMutableArray   *images;
+@property (atomic) NSMutableArray   *pairs;
+@property (atomic, strong) CISCloud *cloud;
 
 + (CISSfM *)sharedInstance;
+- (void)addImage:(CISImage *)image;
 
 @end

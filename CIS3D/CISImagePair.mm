@@ -8,6 +8,10 @@
 
 #import "CISImagePair.h"
 
+#ifdef LOG
+#include <iostream>
+#endif
+
 @implementation CISImagePair
 
 @synthesize matches        = _matches;
@@ -36,7 +40,19 @@
                 keyPoints2.push_back((*image2.keyPoints)[best.trainIdx].pt);
             }
         }
+#ifdef LOG
+        NSLog(@"CISImagePair: %lu matches in _matches", _matches->size());
+#endif
+        
         _fundamentalMat = new cv::Mat(cv::findFundamentalMat(keyPoints1, keyPoints2));
+  
+#ifdef LOG
+        std::cout << "CISImagePair: _fundamentalMat = \n" << *_fundamentalMat << std::endl;
+#endif
+        
+        /* 然后算第二个CISImage的P，乘以猜的H */
+        /* 然后三角化，算出初始的点云 */
+        /* 然后 3D 到 2D */
     }
     return self;
 }

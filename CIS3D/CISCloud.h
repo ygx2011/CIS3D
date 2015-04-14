@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "CISConsts.h"
+
 @interface CISCloud : NSObject
 
 @end

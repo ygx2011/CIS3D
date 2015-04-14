@@ -10,13 +10,13 @@
 
 @interface CameraViewController()
 
-@property(strong, nonatomic) AVCaptureSession           *session;
-@property(strong, nonatomic) AVCaptureDeviceInput       *videoInput;
-@property(strong, nonatomic) AVCaptureStillImageOutput  *stillImageOutput;
-@property(strong, nonatomic) AVCaptureVideoPreviewLayer *previewLayer;
+@property (strong, nonatomic) AVCaptureSession           *session;
+@property (strong, nonatomic) AVCaptureDeviceInput       *videoInput;
+@property (strong, nonatomic) AVCaptureStillImageOutput  *stillImageOutput;
+@property (strong, nonatomic) AVCaptureVideoPreviewLayer *previewLayer;
 
-@property(strong, nonatomic) IBOutlet UIView            *previewView;
-@property(strong, nonatomic) IBOutlet UIImageView       *imageView;
+@property (strong, nonatomic) IBOutlet UIView            *previewView;
+@property (strong, nonatomic) IBOutlet UIImageView       *imageView;
 
 - (IBAction)didCaputre:(UIButton *)sender;
 
@@ -31,7 +31,7 @@
 @synthesize previewView       = _previewView;
 @synthesize imageView         = _imageView;
 
-#pragma mark - Device selecting
+#pragma mark - device selecting
 - (AVCaptureDevice *)cameraWithPosition:(AVCaptureDevicePosition) position {
     NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
     for (AVCaptureDevice *device in devices) {
@@ -50,7 +50,7 @@
     return [self cameraWithPosition:AVCaptureDevicePositionBack];
 }
 
-#pragma mark - View LifeCycle
+#pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -101,6 +101,7 @@
     }
 }
 
+#pragma mark - !!! IMPORTANT MODUAL -- Event-driven loop is evoked here !!!
 - (IBAction)didCaputre:(UIButton *)sender {
     AVCaptureConnection * videoConnection = [_stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
     
@@ -109,29 +110,35 @@
         return;
     }
     
-    [_stillImageOutput captureStillImageAsynchronouslyFromConnection:videoConnection completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
-        if (imageDataSampleBuffer == NULL) {
-            return;
-        }
-        
-        UIImage *image = [UIImage imageWithData:[AVCaptureStillImageOutput
-                                                 jpegStillImageNSDataRepresentation:imageDataSampleBuffer]];
-        
-        /* 获取图片后，在CISImage初始化中进行一系列特征提取运算 */
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            CISImage *capturedImage = [[CISImage alloc] initWithUIImage:image];
-           
-            dispatch_async(dispatch_get_main_queue(), ^{
-                _imageView.image = [CISImage UIImageFromCVMat:*capturedImage.featuredImage];
-                
-                /* 完成特征提取以后，向SfM发布消息，将其添加至SfM维护的队列中 */
-                NSDictionary *d = [NSDictionary dictionaryWithObject:capturedImage forKey:CISImageAdded];
-                [[NSNotificationCenter defaultCenter] postNotificationName:CISImageAddedNotification
-                                                                    object:self
-                                                                  userInfo:d];
-            });
-        });
-    }];
+    [_stillImageOutput captureStillImageAsynchronouslyFromConnection:videoConnection
+                                                   completionHandler:
+     ^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
+         /* 异步获取图片 */
+         if (imageDataSampleBuffer == NULL) {
+             return;
+         }
+         
+         UIImage *image = [UIImage imageWithData:[AVCaptureStillImageOutput
+                                                  jpegStillImageNSDataRepresentation:imageDataSampleBuffer]];
+         
+         /* 获取图片后，在CISImage初始化中进行一系列特征提取运算 */
+         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+             CISImage *capturedImage = [[CISImage alloc] initWithUIImage:image];
+             
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 /* 更新UI */
+                 _imageView.image = [CISImage UIImageFromCVMat:*capturedImage.featuredImage];
+                 
+                 /* 完成特征提取以后，向ProcessImageViewController发布消息，更新ImageView */
+                 NSDictionary *d = [NSDictionary dictionaryWithObject:capturedImage forKey:CISImageAdded];
+                 [[NSNotificationCenter defaultCenter] postNotificationName:CISImageAddedNotification
+                                                                     object:self
+                                                                   userInfo:d];
+                 /* 将图像添加至SfM维护的队列中 */
+                 [[CISSfM sharedInstance] addImage:capturedImage];
+             });
+         });
+     }];
 }
 
 @end

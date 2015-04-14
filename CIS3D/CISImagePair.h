@@ -10,15 +10,15 @@
 
 #import <opencv2/opencv.hpp>
 
-#import "CISImage.h"
 #import "CISConsts.h"
+#import "CISImage.h"
 
 @interface CISImagePair : NSObject
 
-@property(nonatomic) std::vector<cv::DMatch> *matches;
-@property(nonatomic) cv::Mat                 *fundamentalMat;
-@property(nonatomic) CISImage                *image1;
-@property(nonatomic) CISImage                *image2;
+@property (nonatomic) std::vector<cv::DMatch> *matches;
+@property (nonatomic) cv::Mat                 *fundamentalMat;
+@property (nonatomic) CISImage                *image1;
+@property (nonatomic) CISImage                *image2;
 
 - (instancetype)initWithImage1:(CISImage *)image1 andImage2:(CISImage *)image2;
 

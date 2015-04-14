@@ -9,6 +9,7 @@
 #ifndef CIS3D_CISConsts_h
 #define CIS3D_CISConsts_h
 
+#define LOG
 #define CISImageAdded             @"CISImageAdded"
 #define CISImageAddedNotification @"CISImageAddedNotification"
 #define KNN_THRESHOLD             0.6
