@@ -23,6 +23,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSLog(@"PC view loaded");
+
     _glContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
     if (!_glContext) {
         NSLog(@"Failed to init OpenGL");

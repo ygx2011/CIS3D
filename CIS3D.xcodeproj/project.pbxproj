@@ -16,6 +16,7 @@
 		B54D22941ACE575600F986F3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54D22931ACE575600F986F3 /* OpenGLES.framework */; };
 		B54D22961ACE575E00F986F3 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54D22951ACE575E00F986F3 /* GLKit.framework */; };
 		B54D22981ACE576D00F986F3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54D22971ACE576D00F986F3 /* QuartzCore.framework */; };
+		B5AEA01F1ADCDECA00B716A6 /* ProcessImageViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5AEA01E1ADCDECA00B716A6 /* ProcessImageViewController.mm */; };
 		B5B4D1351ADBED75001BFADC /* CISCloud.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5B4D1281ADBED75001BFADC /* CISCloud.mm */; };
 		B5B4D1361ADBED75001BFADC /* CISImagePair.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5B4D1291ADBED75001BFADC /* CISImagePair.mm */; };
 		B5B4D1371ADBED75001BFADC /* CISImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5B4D12A1ADBED75001BFADC /* CISImage.mm */; };
@@ -56,6 +57,8 @@
 		B54D22931ACE575600F986F3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		B54D22951ACE575E00F986F3 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		B54D22971ACE576D00F986F3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		B5AEA01D1ADCDECA00B716A6 /* ProcessImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProcessImageViewController.h; sourceTree = "<group>"; };
+		B5AEA01E1ADCDECA00B716A6 /* ProcessImageViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ProcessImageViewController.mm; sourceTree = "<group>"; };
 		B5B4D1281ADBED75001BFADC /* CISCloud.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CISCloud.mm; sourceTree = "<group>"; };
 		B5B4D1291ADBED75001BFADC /* CISImagePair.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CISImagePair.mm; sourceTree = "<group>"; };
 		B5B4D12A1ADBED75001BFADC /* CISImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CISImage.mm; sourceTree = "<group>"; };
@@ -217,6 +220,8 @@
 				B5B4D1421ADBEE2B001BFADC /* PointCloudViewController.mm */,
 				B5C486D11ACFAAE500630B40 /* CameraViewController.h */,
 				B5C486D21ACFAAE500630B40 /* CameraViewController.mm */,
+				B5AEA01D1ADCDECA00B716A6 /* ProcessImageViewController.h */,
+				B5AEA01E1ADCDECA00B716A6 /* ProcessImageViewController.mm */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -330,6 +335,7 @@
 				B53372581AC27E6A00848BB6 /* main.m in Sources */,
 				B5B4D1391ADBED75001BFADC /* CISSfM.mm in Sources */,
 				B5B4D13A1ADBED75001BFADC /* CISGeometry.mm in Sources */,
+				B5AEA01F1ADCDECA00B716A6 /* ProcessImageViewController.mm in Sources */,
 				B5B4D1371ADBED75001BFADC /* CISImage.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -2,12 +2,13 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XI0-Ou-c7B">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Camera View Controller-->
         <scene sceneID="IEI-Po-jLs">
             <objects>
-                <viewController id="xSk-4H-t43" customClass="CameraViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CameraViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xSk-4H-t43" customClass="CameraViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vvK-vJ-Nog"/>
                         <viewControllerLayoutGuide type="bottom" id="Ic2-86-qrA"/>
@@ -31,6 +32,7 @@
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sct-fS-HX3">
                                 <rect key="frame" x="7" y="477" width="50" height="66"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="66" id="3Wn-ee-uD7"/>
                                     <constraint firstAttribute="width" constant="50" id="yox-0N-Cza"/>
@@ -59,10 +61,10 @@
             </objects>
             <point key="canvasLocation" x="136" y="-889"/>
         </scene>
-        <!--View Controller-->
+        <!--Process Image View Controller-->
         <scene sceneID="qnq-cY-hD3">
             <objects>
-                <viewController id="RKM-4T-ahy" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProcessImageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RKM-4T-ahy" customClass="ProcessImageViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gky-oy-S9F"/>
                         <viewControllerLayoutGuide type="bottom" id="mvN-CJ-sZq"/>
@@ -72,18 +74,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wvh-RR-W7R">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <rect key="frame" x="16" y="20" width="300" height="400"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="G9j-Au-GJC"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Wvh-RR-W7R" firstAttribute="top" secondItem="6gz-s2-DIP" secondAttribute="top" id="4gi-xj-zP9"/>
-                            <constraint firstItem="Wvh-RR-W7R" firstAttribute="leading" secondItem="6gz-s2-DIP" secondAttribute="leading" id="e1W-dx-UHv"/>
-                            <constraint firstAttribute="trailing" secondItem="Wvh-RR-W7R" secondAttribute="trailing" id="vXg-ha-VDU"/>
-                            <constraint firstItem="Wvh-RR-W7R" firstAttribute="bottom" secondItem="mvN-CJ-sZq" secondAttribute="top" id="y8W-Ck-NJO"/>
+                            <constraint firstItem="Wvh-RR-W7R" firstAttribute="top" secondItem="gky-oy-S9F" secondAttribute="bottom" id="WYp-uA-fWj"/>
+                            <constraint firstItem="mvN-CJ-sZq" firstAttribute="top" secondItem="Wvh-RR-W7R" secondAttribute="bottom" constant="131" id="jJs-eR-QIE"/>
+                            <constraint firstItem="Wvh-RR-W7R" firstAttribute="leading" secondItem="6gz-s2-DIP" secondAttribute="leadingMargin" id="tT0-5B-sk5"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="bookmarks" id="8aj-sV-Wy3"/>
+                    <connections>
+                        <outlet property="imageView" destination="Wvh-RR-W7R" id="XyO-Dk-Zkk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0TP-d8-XQz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -92,7 +99,7 @@
         <!--GLKit View Controller-->
         <scene sceneID="bHo-9j-cdl">
             <objects>
-                <glkViewController preferredFramesPerSecond="30" id="dIv-i8-33G" customClass="PointCloudViewController" sceneMemberID="viewController">
+                <glkViewController storyboardIdentifier="PointCloudViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" preferredFramesPerSecond="30" id="dIv-i8-33G" customClass="PointCloudViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="orG-tO-8bm"/>
                         <viewControllerLayoutGuide type="bottom" id="Rwo-N4-U9G"/>

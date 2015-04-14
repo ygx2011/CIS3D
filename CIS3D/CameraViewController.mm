@@ -10,13 +10,13 @@
 
 @interface CameraViewController()
 
-@property (strong, nonatomic) AVCaptureSession           *session;
-@property (strong, nonatomic) AVCaptureDeviceInput       *videoInput;
-@property (strong, nonatomic) AVCaptureStillImageOutput  *stillImageOutput;
-@property (strong, nonatomic) AVCaptureVideoPreviewLayer *previewLayer;
+@property(strong, nonatomic) AVCaptureSession           *session;
+@property(strong, nonatomic) AVCaptureDeviceInput       *videoInput;
+@property(strong, nonatomic) AVCaptureStillImageOutput  *stillImageOutput;
+@property(strong, nonatomic) AVCaptureVideoPreviewLayer *previewLayer;
 
-@property (strong, nonatomic) IBOutlet UIView            *previewView;
-@property (strong, nonatomic) IBOutlet UIImageView       *imageView;
+@property(strong, nonatomic) IBOutlet UIView            *previewView;
+@property(strong, nonatomic) IBOutlet UIImageView       *imageView;
 
 - (IBAction)didCaputre:(UIButton *)sender;
 
@@ -54,6 +54,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSLog(@"Camera view loaded");
     _session = [[AVCaptureSession alloc] init];
     if ([_session canSetSessionPreset:AVCaptureSessionPreset640x480]) {
         _session.sessionPreset = AVCaptureSessionPreset640x480;
@@ -113,13 +114,23 @@
             return;
         }
         
-        NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
-    
-        UIImage *image = [UIImage imageWithData:imageData];
+        UIImage *image = [UIImage imageWithData:[AVCaptureStillImageOutput
+                                                 jpegStillImageNSDataRepresentation:imageDataSampleBuffer]];
         
-        cv::Mat* cvMat = [CISImage cvMatFromUIImage:image];
-        _imageView.image = [CISImage UIImageFromCVMat:*cvMat];
-        NSLog(@"image size = %@",NSStringFromCGSize(image.size));
+        /* 获取图片后，在CISImage初始化中进行一系列特征提取运算 */
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            CISImage *capturedImage = [[CISImage alloc] initWithUIImage:image];
+           
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _imageView.image = [CISImage UIImageFromCVMat:*capturedImage.featuredImage];
+                
+                /* 完成特征提取以后，向SfM发布消息，将其添加至SfM维护的队列中 */
+                NSDictionary *d = [NSDictionary dictionaryWithObject:capturedImage forKey:CISImageAdded];
+                [[NSNotificationCenter defaultCenter] postNotificationName:CISImageAddedNotification
+                                                                    object:self
+                                                                  userInfo:d];
+            });
+        });
     }];
 }
 
