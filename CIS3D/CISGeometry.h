@@ -14,6 +14,8 @@
 
 @interface CISGeometry : NSObject
 
-+ (cv::Mat)crossMatrix:(cv::Mat &)mat;
+/* 只有在运算过程中会用到关于Mat的辅助函数，才储存成变量形式；
+ * 作为接口的Mat，全都储存成指针。 */
++ (cv::Mat)crossMatrix:(cv::Mat &)A;
 
 @end

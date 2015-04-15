@@ -10,6 +10,7 @@
 
 #import "CISConsts.h"
 #import "CISImage.h"
+#import "CISImagePair.h"
 
 @interface ProcessImageViewController : UIViewController
 

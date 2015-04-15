@@ -10,15 +10,19 @@
 
 @interface ProcessImageViewController ()
 
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UIImageView *monoImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *stereoImageView;
+
 
 - (void)didReceiveImageAddedNotification:(NSNotification *)notification;
+- (void)didReceiveImagePairAddedNotification:(NSNotification *)notification;
 
 @end
 
 @implementation ProcessImageViewController
 
-@synthesize imageView = _imageView;
+@synthesize monoImageView   = _monoImageView;
+@synthesize stereoImageView = _stereoImageView;
 
 #pragma mark - life cycle
 - (void)viewDidLoad {
@@ -29,6 +33,10 @@
                                              selector:@selector(didReceiveImageAddedNotification:)
                                                  name:CISImageAddedNotification
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceiveImagePairAddedNotification:)
+                                                 name:CISImagePairAddedNotification
+                                               object:nil];
 }
 
 - (void)dealloc {
@@ -37,8 +45,15 @@
 
 #pragma mark - update image frame when a new image comes in
 - (void)didReceiveImageAddedNotification:(NSNotification *)notification {
-    NSLog(@"Get it");
+    NSLog(@"ProcessImageViewController: Image get.");
     CISImage *image = [[notification userInfo] objectForKey:CISImageAdded];
-    _imageView.image = [CISImage UIImageFromCVMat:*(image.featuredImage)];
+    _monoImageView.image = [CISImage UIImageFromCVMat:image.drawImage];
 }
+
+- (void)didReceiveImagePairAddedNotification:(NSNotification *)notification {
+    NSLog(@"ProcessImageViewController: Image pair get");
+    CISImagePair *pair = [[notification userInfo] objectForKey:CISImagePairAdded];
+    _stereoImageView.image = [CISImage UIImageFromCVMat:pair.drawImage];
+}
+
 @end

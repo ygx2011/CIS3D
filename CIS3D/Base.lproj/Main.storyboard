@@ -73,23 +73,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wvh-RR-W7R">
-                                <rect key="frame" x="16" y="20" width="300" height="400"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ziK-CO-Uw1">
+                                <rect key="frame" x="16" y="20" width="568" height="250"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="G9j-Au-GJC"/>
+                                    <constraint firstAttribute="height" constant="250" id="KcX-gz-KWM"/>
                                 </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cQ3-5l-FPS">
+                                <rect key="frame" x="16" y="289" width="568" height="254"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Wvh-RR-W7R" firstAttribute="top" secondItem="gky-oy-S9F" secondAttribute="bottom" id="WYp-uA-fWj"/>
-                            <constraint firstItem="mvN-CJ-sZq" firstAttribute="top" secondItem="Wvh-RR-W7R" secondAttribute="bottom" constant="131" id="jJs-eR-QIE"/>
-                            <constraint firstItem="Wvh-RR-W7R" firstAttribute="leading" secondItem="6gz-s2-DIP" secondAttribute="leadingMargin" id="tT0-5B-sk5"/>
+                            <constraint firstItem="ziK-CO-Uw1" firstAttribute="top" secondItem="gky-oy-S9F" secondAttribute="bottom" id="39p-kn-X6Q"/>
+                            <constraint firstItem="cQ3-5l-FPS" firstAttribute="top" secondItem="ziK-CO-Uw1" secondAttribute="bottom" constant="19" id="9e6-NN-b3O"/>
+                            <constraint firstItem="cQ3-5l-FPS" firstAttribute="leading" secondItem="ziK-CO-Uw1" secondAttribute="leading" id="O5u-9i-5c6"/>
+                            <constraint firstItem="cQ3-5l-FPS" firstAttribute="trailing" secondItem="6gz-s2-DIP" secondAttribute="trailingMargin" id="Uke-Og-PuH"/>
+                            <constraint firstItem="cQ3-5l-FPS" firstAttribute="trailing" secondItem="ziK-CO-Uw1" secondAttribute="trailing" id="eUi-YW-K3X"/>
+                            <constraint firstItem="mvN-CJ-sZq" firstAttribute="top" secondItem="cQ3-5l-FPS" secondAttribute="bottom" constant="8" symbolic="YES" id="pHY-oG-eAR"/>
+                            <constraint firstItem="ziK-CO-Uw1" firstAttribute="leading" secondItem="6gz-s2-DIP" secondAttribute="leadingMargin" id="z9W-W9-bW5"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="bookmarks" id="8aj-sV-Wy3"/>
                     <connections>
-                        <outlet property="imageView" destination="Wvh-RR-W7R" id="XyO-Dk-Zkk"/>
+                        <outlet property="monoImageView" destination="ziK-CO-Uw1" id="WJh-tx-BeJ"/>
+                        <outlet property="stereoImageView" destination="cQ3-5l-FPS" id="0sg-fH-vt8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0TP-d8-XQz" userLabel="First Responder" sceneMemberID="firstResponder"/>

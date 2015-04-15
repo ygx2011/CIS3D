@@ -127,13 +127,8 @@
              
              dispatch_async(dispatch_get_main_queue(), ^{
                  /* 更新UI */
-                 _imageView.image = [CISImage UIImageFromCVMat:*capturedImage.featuredImage];
+                 _imageView.image = [CISImage UIImageFromCVMat:capturedImage.drawImage];
                  
-                 /* 完成特征提取以后，向ProcessImageViewController发布消息，更新ImageView */
-                 NSDictionary *d = [NSDictionary dictionaryWithObject:capturedImage forKey:CISImageAdded];
-                 [[NSNotificationCenter defaultCenter] postNotificationName:CISImageAddedNotification
-                                                                     object:self
-                                                                   userInfo:d];
                  /* 将图像添加至SfM维护的队列中 */
                  [[CISSfM sharedInstance] addImage:capturedImage];
              });

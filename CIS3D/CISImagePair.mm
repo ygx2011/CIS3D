@@ -18,6 +18,7 @@
 @synthesize fundamentalMat = _fundamentalMat;
 @synthesize image1         = _image1;
 @synthesize image2         = _image2;
+@synthesize drawImage      = _drawImage;
 
 #pragma mark - life cycle
 - (instancetype)initWithImage1:(CISImage *)image1 andImage2:(CISImage *)image2 {
@@ -40,12 +41,25 @@
                 keyPoints2.push_back((*image2.keyPoints)[best.trainIdx].pt);
             }
         }
+        
 #ifdef LOG
         NSLog(@"CISImagePair: %lu matches in _matches", _matches->size());
 #endif
         
         _fundamentalMat = new cv::Mat(cv::findFundamentalMat(keyPoints1, keyPoints2));
-  
+        _image1.camera = [[CISCamera alloc] init];
+        _image2.camera = [[CISCamera alloc] initWithFundamentalMat:_fundamentalMat];
+        
+        cv::Mat __image1, __image2, __drawImage;
+        cv::cvtColor(*_image1.image, __image1, CV_RGBA2RGB);
+        cv::cvtColor(*_image2.image, __image2, CV_RGBA2RGB);
+        
+        cv::drawMatches(__image1, *_image1.keyPoints,
+                        __image2, *_image2.keyPoints,
+                        *_matches, __drawImage);
+        
+        _drawImage = new cv::Mat(__drawImage);
+        
 #ifdef LOG
         std::cout << "CISImagePair: _fundamentalMat = \n" << *_fundamentalMat << std::endl;
 #endif

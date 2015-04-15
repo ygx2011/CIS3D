@@ -15,7 +15,7 @@
 @implementation CISImage
 
 @synthesize image         = _image;
-@synthesize featuredImage = _featuredImage;
+@synthesize drawImage     = _drawImage;
 
 @synthesize keyDescriptor = _keyDescriptor;
 @synthesize keyPoints     = _keyPoints;
@@ -38,16 +38,17 @@
         _keyDescriptor = new cv::Mat(__keyDescriptor);
         
         /* 绘制特征点 */
-        cv::Mat __featuredImage, __image;
+        cv::Mat __drawImage, __image;
         cv::cvtColor(*_image, __image, CV_RGBA2RGB);
-        cv::drawKeypoints(__image, *_keyPoints, __featuredImage);
-        _featuredImage = new cv::Mat(__featuredImage);
+        cv::drawKeypoints(__image, *_keyPoints, __drawImage);
+        _drawImage = new cv::Mat(__drawImage);
     }
     return self;
 }
 
 - (void)dealloc {
     delete _image;
+    delete _drawImage;
     delete _keyDescriptor;
     delete _keyPoints;
 }
@@ -77,11 +78,11 @@
     return cvMat;
 }
 
-+ (UIImage *)UIImageFromCVMat:(cv::Mat &)cvMat {
++ (UIImage *)UIImageFromCVMat:(cv::Mat *)cvMat {
     CGColorSpaceRef colorSpace;
-    NSData *data = [NSData dataWithBytes:cvMat.data length:cvMat.elemSize()*cvMat.total()];
+    NSData *data = [NSData dataWithBytes:cvMat->data length:cvMat->elemSize()*cvMat->total()];
     
-    if (cvMat.elemSize() == 1) {
+    if (cvMat->elemSize() == 1) {
         colorSpace = CGColorSpaceCreateDeviceGray();
     } else {
         colorSpace = CGColorSpaceCreateDeviceRGB();
@@ -90,11 +91,11 @@
     CGDataProviderRef provider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
     
     // Creating CGImage from cv::Mat
-    CGImageRef imageRef = CGImageCreate(cvMat.cols,                                 //width
-                                        cvMat.rows,                                 //height
+    CGImageRef imageRef = CGImageCreate(cvMat->cols,                                 //width
+                                        cvMat->rows,                                 //height
                                         8,                                          //bits per component
-                                        8 * cvMat.elemSize(),                       //bits per pixel
-                                        cvMat.step[0],                              //bytesPerRow
+                                        8 * cvMat->elemSize(),                       //bits per pixel
+                                        cvMat->step[0],                              //bytesPerRow
                                         colorSpace,                                 //colorspace
                                         kCGImageAlphaNone |
                                         kCGBitmapByteOrderDefault,                  //bitmap info
