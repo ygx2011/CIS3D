@@ -15,11 +15,11 @@
 @implementation CISImage
 
 @synthesize image         = _image;
-@synthesize drawImage     = _drawImage;
-
 @synthesize keyDescriptor = _keyDescriptor;
 @synthesize keyPoints     = _keyPoints;
 @synthesize camera        = _camera;
+
+@synthesize drawImage     = _drawImage;
 
 #pragma mark - life cycle
 - (instancetype)initWithUIImage:(UIImage *)image {
@@ -37,7 +37,7 @@
         extractor.compute(*_image, *_keyPoints, __keyDescriptor);
         _keyDescriptor = new cv::Mat(__keyDescriptor);
         
-        /* 绘制特征点 */
+        /* 四通道图片没法调用drawKeyPoints，必须转换颜色 */
         cv::Mat __drawImage, __image;
         cv::cvtColor(*_image, __image, CV_RGBA2RGB);
         cv::drawKeypoints(__image, *_keyPoints, __drawImage);
@@ -55,6 +55,13 @@
 
 #pragma mark - utility convertions
 + (cv::Mat *)cvMatFromUIImage:(UIImage *)image {
+    /* http://stackoverflow.com/questions/1315251/how-to-rotate-a-uiimage-90-degrees */
+    /* Stavash 的 trick */
+    UIGraphicsBeginImageContext(image.size);
+    [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
     CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage);
     
     CGFloat cols = image.size.width;
@@ -74,11 +81,15 @@
     
     CGContextDrawImage(contextRef, CGRectMake(0, 0, cols, rows), image.CGImage);
     CGContextRelease(contextRef);
-    
+        
     return cvMat;
 }
 
 + (UIImage *)UIImageFromCVMat:(cv::Mat *)cvMat {
+    return [CISImage UIImageFromCVMat:cvMat WithOrientation:UIImageOrientationUp];
+}
+
++ (UIImage *)UIImageFromCVMat:(cv::Mat *)cvMat WithOrientation:(UIImageOrientation)orientation {
     CGColorSpaceRef colorSpace;
     NSData *data = [NSData dataWithBytes:cvMat->data length:cvMat->elemSize()*cvMat->total()];
     
@@ -91,11 +102,11 @@
     CGDataProviderRef provider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
     
     // Creating CGImage from cv::Mat
-    CGImageRef imageRef = CGImageCreate(cvMat->cols,                                 //width
-                                        cvMat->rows,                                 //height
+    CGImageRef imageRef = CGImageCreate(cvMat->cols,                                //width
+                                        cvMat->rows,                                //height
                                         8,                                          //bits per component
-                                        8 * cvMat->elemSize(),                       //bits per pixel
-                                        cvMat->step[0],                              //bytesPerRow
+                                        8 * cvMat->elemSize(),                      //bits per pixel
+                                        cvMat->step[0],                             //bytesPerRow
                                         colorSpace,                                 //colorspace
                                         kCGImageAlphaNone |
                                         kCGBitmapByteOrderDefault,                  //bitmap info
@@ -105,7 +116,7 @@
                                         kCGRenderingIntentDefault);                 //intent
     
     // Getting UIImage from CGImage
-    UIImage *image = [UIImage imageWithCGImage:imageRef scale:1.0 orientation:UIImageOrientationRight];
+    UIImage *image = [UIImage imageWithCGImage:imageRef scale:1.0 orientation:orientation];
     CGImageRelease(imageRef);
     CGDataProviderRelease(provider);
     CGColorSpaceRelease(colorSpace);

@@ -22,8 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    NSLog(@"PC view loaded");
+    NSLog(@"PointCloudViewController loaded");
 
     _glContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
     if (!_glContext) {

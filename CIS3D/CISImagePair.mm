@@ -8,16 +8,18 @@
 
 #import "CISImagePair.h"
 
-#ifdef LOG
-#include <iostream>
-#endif
+@interface CISImagePair ()
+
+@end
 
 @implementation CISImagePair
 
-@synthesize matches        = _matches;
-@synthesize fundamentalMat = _fundamentalMat;
 @synthesize image1         = _image1;
 @synthesize image2         = _image2;
+
+@synthesize matches        = _matches;
+@synthesize fundamentalMat = _fundamentalMat;
+
 @synthesize drawImage      = _drawImage;
 
 #pragma mark - life cycle
@@ -32,7 +34,7 @@
         std::vector<std::vector<cv::DMatch> > knnMatches;
         
         std::vector<cv::Point2f> keyPoints1, keyPoints2;
-        matcher.knnMatch(*(image1.keyDescriptor), *(image2.keyDescriptor), knnMatches, 2);
+        matcher.knnMatch(*(_image1.keyDescriptor), *(_image2.keyDescriptor), knnMatches, 2);
         for (int i = 0; i < knnMatches.size(); ++i) {
             cv::DMatch best = knnMatches[i][0], good = knnMatches[i][1];
             if (best.distance < good.distance * KNN_THRESHOLD) {
@@ -42,14 +44,13 @@
             }
         }
         
-#ifdef LOG
         NSLog(@"CISImagePair: %lu matches in _matches", _matches->size());
-#endif
         
         _fundamentalMat = new cv::Mat(cv::findFundamentalMat(keyPoints1, keyPoints2));
         _image1.camera = [[CISCamera alloc] init];
         _image2.camera = [[CISCamera alloc] initWithFundamentalMat:_fundamentalMat];
         
+        /* 四通道图片没法调用drawMatches，必须转换颜色 */
         cv::Mat __image1, __image2, __drawImage;
         cv::cvtColor(*_image1.image, __image1, CV_RGBA2RGB);
         cv::cvtColor(*_image2.image, __image2, CV_RGBA2RGB);
@@ -59,10 +60,7 @@
                         *_matches, __drawImage);
         
         _drawImage = new cv::Mat(__drawImage);
-        
-#ifdef LOG
         std::cout << "CISImagePair: _fundamentalMat = \n" << *_fundamentalMat << std::endl;
-#endif
         
         /* 然后算第二个CISImage的P，乘以猜的H */
         /* 然后三角化，算出初始的点云 */

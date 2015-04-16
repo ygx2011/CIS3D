@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import <iostream>
 #import <opencv2/opencv.hpp>
 
 #import "CISConsts.h"
@@ -15,10 +16,12 @@
 
 @interface CISImagePair : NSObject
 
-@property (nonatomic) std::vector<cv::DMatch> *matches;
-@property (nonatomic) cv::Mat                 *fundamentalMat;
 @property (nonatomic) CISImage                *image1;
 @property (nonatomic) CISImage                *image2;
+
+@property (nonatomic) std::vector<cv::DMatch> *matches;
+@property (nonatomic) cv::Mat                 *fundamentalMat;
+
 @property (nonatomic) cv::Mat                 *drawImage;
 
 - (instancetype)initWithImage1:(CISImage *)image1 andImage2:(CISImage *)image2;

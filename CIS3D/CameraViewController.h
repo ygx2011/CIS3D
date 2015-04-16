@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
-#import "CISImage.h"
 #import "CISSfM.h"
+#import "CISImage.h"
 
 @interface CameraViewController : UIViewController
 

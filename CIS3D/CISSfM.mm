@@ -17,9 +17,12 @@
 
 @implementation CISSfM
 
-@synthesize images = _images;
-@synthesize pairs  = _pairs;
-@synthesize cloud  = _cloud;
+@synthesize images            = _images;
+@synthesize pairs             = _pairs;
+@synthesize cloud             = _cloud;
+
+@synthesize cachedMonoImage   = _cachedMonoImage;
+@synthesize cachedStereoImage = _cachedStereoImage;
 
 #pragma mark - singleton method
 + (CISSfM *)sharedInstance {
@@ -27,9 +30,7 @@
 
     static dispatch_once_t singleton;
     dispatch_once(&singleton, ^{
-#ifdef LOG
         NSLog(@"CISSfM: instantialized.");
-#endif
         singletonSfM = [[CISSfM alloc] init];
     });
     
@@ -49,16 +50,17 @@
 
 #pragma mark - update
 - (void)addImage:(CISImage *)image {
+    _cachedMonoImage = image.drawImage;
+    
     /* 完成特征提取以后，向ProcessImageViewController发布消息，更新ImageView */
     NSDictionary *d = [NSDictionary dictionaryWithObject:image forKey:CISImageAdded];
     [[NSNotificationCenter defaultCenter] postNotificationName:CISImageAddedNotification
                                                         object:self
                                                       userInfo:d];
     
-#ifdef LOG
     NSLog(@"CISSfM: %lu images in _image.", (unsigned long)[_images count]);
     NSLog(@"CISSfM: %lu pairs in _pair."  , (unsigned long)[_pairs count]);
-#endif
+    
     switch ([_images count]) {
         case 0: {
             [_images addObject:image];
@@ -75,6 +77,7 @@
                 [_pairs  addObject:pair];
 
                 /* 完成Pair匹配以后，也向ProcessImageViewController发布消息，更新ImageView */
+                _cachedStereoImage = pair.drawImage;
                 NSDictionary *d = [NSDictionary dictionaryWithObject:pair forKey:CISImagePairAdded];
                 [[NSNotificationCenter defaultCenter] postNotificationName:CISImagePairAddedNotification
                                                                     object:self
@@ -91,6 +94,13 @@
                 [self updateWithImagePair:pair];
                 [_images addObject:image];
                 [_pairs  addObject:pair];
+                
+                /* 完成Pair匹配以后，也向ProcessImageViewController发布消息，更新ImageView */
+                _cachedStereoImage = pair.drawImage;
+                NSDictionary *d = [NSDictionary dictionaryWithObject:pair forKey:CISImagePairAdded];
+                [[NSNotificationCenter defaultCenter] postNotificationName:CISImagePairAddedNotification
+                                                                    object:self
+                                                                  userInfo:d];
             });
             break;
         }

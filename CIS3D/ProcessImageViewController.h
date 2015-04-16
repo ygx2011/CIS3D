@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "CISConsts.h"
+#import "CISSfM.h"
 #import "CISImage.h"
 #import "CISImagePair.h"
 

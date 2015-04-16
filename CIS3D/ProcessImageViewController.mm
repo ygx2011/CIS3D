@@ -13,7 +13,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *monoImageView;
 @property (strong, nonatomic) IBOutlet UIImageView *stereoImageView;
 
-
 - (void)didReceiveImageAddedNotification:(NSNotification *)notification;
 - (void)didReceiveImagePairAddedNotification:(NSNotification *)notification;
 
@@ -27,8 +26,8 @@
 #pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"ProcessImageViewController loaded");
     
-    NSLog(@"Process view loaded");
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didReceiveImageAddedNotification:)
                                                  name:CISImageAddedNotification
@@ -37,6 +36,14 @@
                                              selector:@selector(didReceiveImagePairAddedNotification:)
                                                  name:CISImagePairAddedNotification
                                                object:nil];
+    
+    cv::Mat *image;
+    if ((image = [CISSfM sharedInstance].cachedMonoImage)) {
+        _monoImageView.image = [CISImage UIImageFromCVMat:image];
+    }
+    if ((image = [CISSfM sharedInstance].cachedStereoImage)) {
+        _stereoImageView.image = [CISImage UIImageFromCVMat:image];
+    }
 }
 
 - (void)dealloc {
@@ -51,7 +58,7 @@
 }
 
 - (void)didReceiveImagePairAddedNotification:(NSNotification *)notification {
-    NSLog(@"ProcessImageViewController: Image pair get");
+    NSLog(@"ProcessImageViewController: Image pair get.");
     CISImagePair *pair = [[notification userInfo] objectForKey:CISImagePairAdded];
     _stereoImageView.image = [CISImage UIImageFromCVMat:pair.drawImage];
 }

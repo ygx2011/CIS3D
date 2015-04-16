@@ -53,8 +53,8 @@
 #pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"CameraViewController loaded");
     
-    NSLog(@"Camera view loaded");
     _session = [[AVCaptureSession alloc] init];
     if ([_session canSetSessionPreset:AVCaptureSessionPreset640x480]) {
         _session.sessionPreset = AVCaptureSessionPreset640x480;
@@ -106,7 +106,7 @@
     AVCaptureConnection * videoConnection = [_stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
     
     if (!videoConnection) {
-        NSLog(@"take photo failed!");
+        NSLog(@"Error taking pictures.");
         return;
     }
     

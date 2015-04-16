@@ -17,6 +17,6 @@
 #define CISImagePairAdded             @"CISImagePairAdded"
 #define CISImagePairAddedNotification @"CISImagePairAdedNotifiation"
 
-#define KNN_THRESHOLD             0.6
+#define KNN_THRESHOLD                 0.6
 
 #endif

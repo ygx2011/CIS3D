@@ -20,7 +20,7 @@
 @synthesize t = _t;
 
 #pragma mark - life cycle
-/* 在一个CISImagePair中，图像2由此method初始化 */
+/* 在一个CISImagePair中，图像2由此method初始化，是相差一个 H 的 K [R | t] */
 - (instancetype)initWithFundamentalMat:(cv::Mat *)F {
     self = [super init];
     if (self) {

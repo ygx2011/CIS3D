@@ -135,7 +135,6 @@
 				B5C486CF1ACFA51700630B40 /* Views */,
 				B5C486D01ACFA54D00630B40 /* Controllers */,
 				B54D22991ACE577500F986F3 /* Frameworks */,
-				B53372621AC27E6A00848BB6 /* Images.xcassets */,
 				B53372551AC27E6A00848BB6 /* Supporting Files */,
 			);
 			path = CIS3D;
@@ -185,6 +184,9 @@
 		B5B4D13B1ADBED7C001BFADC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B5B4D1301ADBED75001BFADC /* CISConsts.h */,
+				B5B4D1341ADBED75001BFADC /* CISGeometry.h */,
+				B5B4D1331ADBED75001BFADC /* CISGeometry.mm */,
 				B5B4D1311ADBED75001BFADC /* CISSfM.h */,
 				B5B4D12E1ADBED75001BFADC /* CISSfM.mm */,
 				B5B4D1321ADBED75001BFADC /* CISCloud.h */,
@@ -195,9 +197,6 @@
 				B5B4D1291ADBED75001BFADC /* CISImagePair.mm */,
 				B5B4D12D1ADBED75001BFADC /* CISCamera.h */,
 				B5B4D12C1ADBED75001BFADC /* CISCamera.mm */,
-				B5B4D1301ADBED75001BFADC /* CISConsts.h */,
-				B5B4D1341ADBED75001BFADC /* CISGeometry.h */,
-				B5B4D1331ADBED75001BFADC /* CISGeometry.mm */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -207,6 +206,7 @@
 			children = (
 				B533725F1AC27E6A00848BB6 /* Main.storyboard */,
 				B53372641AC27E6A00848BB6 /* LaunchScreen.xib */,
+				B53372621AC27E6A00848BB6 /* Images.xcassets */,
 			);
 			name = Views;
 			sourceTree = "<group>";

@@ -5,7 +5,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Camera View Controller-->
+        <!--Camera-->
         <scene sceneID="IEI-Po-jLs">
             <objects>
                 <viewController storyboardIdentifier="CameraViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xSk-4H-t43" customClass="CameraViewController" sceneMemberID="viewController">
@@ -51,7 +51,7 @@
                             <constraint firstItem="Ax6-st-oaI" firstAttribute="top" secondItem="LRO-OG-5nM" secondAttribute="top" id="qrC-Yg-5gG"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="topRated" id="lu0-jF-gxW"/>
+                    <tabBarItem key="tabBarItem" title="Camera" image="camera" id="lu0-jF-gxW"/>
                     <connections>
                         <outlet property="imageView" destination="sct-fS-HX3" id="4VI-7f-zo9"/>
                         <outlet property="previewView" destination="Ax6-st-oaI" id="LeV-N4-uem"/>
@@ -61,7 +61,7 @@
             </objects>
             <point key="canvasLocation" x="136" y="-889"/>
         </scene>
-        <!--Process Image View Controller-->
+        <!--Photo-->
         <scene sceneID="qnq-cY-hD3">
             <objects>
                 <viewController storyboardIdentifier="ProcessImageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RKM-4T-ahy" customClass="ProcessImageViewController" sceneMemberID="viewController">
@@ -74,27 +74,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ziK-CO-Uw1">
-                                <rect key="frame" x="16" y="20" width="568" height="250"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="KcX-gz-KWM"/>
-                                </constraints>
+                                <rect key="frame" x="16" y="20" width="568" height="285"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cQ3-5l-FPS">
-                                <rect key="frame" x="16" y="289" width="568" height="254"/>
+                                <rect key="frame" x="16" y="322" width="568" height="221"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="221" id="kvp-f2-JM6"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ziK-CO-Uw1" firstAttribute="top" secondItem="gky-oy-S9F" secondAttribute="bottom" id="39p-kn-X6Q"/>
-                            <constraint firstItem="cQ3-5l-FPS" firstAttribute="top" secondItem="ziK-CO-Uw1" secondAttribute="bottom" constant="19" id="9e6-NN-b3O"/>
-                            <constraint firstItem="cQ3-5l-FPS" firstAttribute="leading" secondItem="ziK-CO-Uw1" secondAttribute="leading" id="O5u-9i-5c6"/>
-                            <constraint firstItem="cQ3-5l-FPS" firstAttribute="trailing" secondItem="6gz-s2-DIP" secondAttribute="trailingMargin" id="Uke-Og-PuH"/>
-                            <constraint firstItem="cQ3-5l-FPS" firstAttribute="trailing" secondItem="ziK-CO-Uw1" secondAttribute="trailing" id="eUi-YW-K3X"/>
-                            <constraint firstItem="mvN-CJ-sZq" firstAttribute="top" secondItem="cQ3-5l-FPS" secondAttribute="bottom" constant="8" symbolic="YES" id="pHY-oG-eAR"/>
-                            <constraint firstItem="ziK-CO-Uw1" firstAttribute="leading" secondItem="6gz-s2-DIP" secondAttribute="leadingMargin" id="z9W-W9-bW5"/>
+                            <constraint firstItem="ziK-CO-Uw1" firstAttribute="trailing" secondItem="cQ3-5l-FPS" secondAttribute="trailing" id="17E-8c-iJK"/>
+                            <constraint firstItem="cQ3-5l-FPS" firstAttribute="top" secondItem="ziK-CO-Uw1" secondAttribute="bottom" constant="17" id="1R8-YL-tlh"/>
+                            <constraint firstItem="mvN-CJ-sZq" firstAttribute="top" secondItem="cQ3-5l-FPS" secondAttribute="bottom" constant="8" symbolic="YES" id="2rm-lQ-pSB"/>
+                            <constraint firstItem="ziK-CO-Uw1" firstAttribute="trailing" secondItem="6gz-s2-DIP" secondAttribute="trailingMargin" id="6AB-Ls-KBW"/>
+                            <constraint firstItem="ziK-CO-Uw1" firstAttribute="leading" secondItem="6gz-s2-DIP" secondAttribute="leadingMargin" id="Lbi-8t-236"/>
+                            <constraint firstItem="ziK-CO-Uw1" firstAttribute="top" secondItem="gky-oy-S9F" secondAttribute="bottom" id="VUf-e3-wJA"/>
+                            <constraint firstItem="cQ3-5l-FPS" firstAttribute="leading" secondItem="ziK-CO-Uw1" secondAttribute="leading" id="kDo-lb-CLN"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="bookmarks" id="8aj-sV-Wy3"/>
+                    <tabBarItem key="tabBarItem" title="Photo" image="photo" id="8aj-sV-Wy3"/>
                     <connections>
                         <outlet property="monoImageView" destination="ziK-CO-Uw1" id="WJh-tx-BeJ"/>
                         <outlet property="stereoImageView" destination="cQ3-5l-FPS" id="0sg-fH-vt8"/>
@@ -104,7 +104,7 @@
             </objects>
             <point key="canvasLocation" x="876" y="-437"/>
         </scene>
-        <!--GLKit View Controller-->
+        <!--Model-->
         <scene sceneID="bHo-9j-cdl">
             <objects>
                 <glkViewController storyboardIdentifier="PointCloudViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" preferredFramesPerSecond="30" id="dIv-i8-33G" customClass="PointCloudViewController" sceneMemberID="viewController">
@@ -119,7 +119,7 @@
                             <outlet property="delegate" destination="dIv-i8-33G" id="eaQ-dZ-Vp4"/>
                         </connections>
                     </glkView>
-                    <tabBarItem key="tabBarItem" systemItem="history" id="4D4-T6-YDI"/>
+                    <tabBarItem key="tabBarItem" title="Model" image="model" id="4D4-T6-YDI"/>
                 </glkViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SWl-CC-3o2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -147,6 +147,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="camera" width="32" height="32"/>
         <image name="captureButton" width="66" height="66"/>
+        <image name="model" width="32" height="32"/>
+        <image name="photo" width="32" height="32"/>
     </resources>
 </document>
