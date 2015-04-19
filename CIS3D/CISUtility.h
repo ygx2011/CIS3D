@@ -1,5 +1,5 @@
 //
-//  CISConsts.h
+//  CISUtility.h
 //  CIS3D
 //
 //  Created by Neo on 15/4/11.
@@ -19,5 +19,12 @@
 
 #define KNN_THRESHOLD                 0.6
 #define MIN_MATCH_THRESHOLD           10
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+@interface CISUtility : NSObject
+
+@end
 
 #endif

@@ -11,7 +11,7 @@
 #import <iostream>
 #import <opencv2/opencv.hpp>
 
-#import "CISConsts.h"
+#import "CISUtility.h"
 #import "CISImage.h"
 
 @interface CISImagePair : NSObject

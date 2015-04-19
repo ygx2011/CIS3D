@@ -6,16 +6,16 @@
 //  Copyright (c) 2015年 PKU. All rights reserved.
 //
 
-#import "PointCloudViewController.h"
+#import "ModelViewController.h"
 
-@interface PointCloudViewController()
+@interface ModelViewController ()
 
 @property (strong, nonatomic) EAGLContext *glContext;
 @property (strong, nonatomic) GLKView     *glView;
 
 @end
 
-@implementation PointCloudViewController
+@implementation ModelViewController
 
 @synthesize glContext = _glContext;
 @synthesize glView    = _glView;

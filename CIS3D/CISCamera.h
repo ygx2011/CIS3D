@@ -10,7 +10,7 @@
 
 #import <opencv2/opencv.hpp>
 
-#import "CISConsts.h"
+#import "CISUtility.h"
 #import "CISGeometry.h"
 
 @interface CISCamera : NSObject

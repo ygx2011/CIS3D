@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-#import "CISConsts.h"
+#import "CISUtility.h"
 #import "CISSfM.h"
 #import "CISImage.h"
 #import "CISImagePair.h"
 
-@interface ProcessImageViewController : UIViewController
+@interface PhotoViewController : UIViewController
+
+- (void)didReceiveImageAddedNotification:(NSNotification *)notification;
+- (void)didReceiveImagePairAddedNotification:(NSNotification *)notification;
 
 @end

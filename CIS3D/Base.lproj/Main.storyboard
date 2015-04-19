@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XI0-Ou-c7B">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XI0-Ou-c7B">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -8,7 +8,7 @@
         <!--Camera-->
         <scene sceneID="IEI-Po-jLs">
             <objects>
-                <viewController storyboardIdentifier="CameraViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xSk-4H-t43" customClass="CameraViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Camera" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xSk-4H-t43" customClass="CameraViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vvK-vJ-Nog"/>
                         <viewControllerLayoutGuide type="bottom" id="Ic2-86-qrA"/>
@@ -64,7 +64,7 @@
         <!--Photo-->
         <scene sceneID="qnq-cY-hD3">
             <objects>
-                <viewController storyboardIdentifier="ProcessImageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RKM-4T-ahy" customClass="ProcessImageViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Photo" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RKM-4T-ahy" customClass="PhotoViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gky-oy-S9F"/>
                         <viewControllerLayoutGuide type="bottom" id="mvN-CJ-sZq"/>
@@ -107,7 +107,7 @@
         <!--Model-->
         <scene sceneID="bHo-9j-cdl">
             <objects>
-                <glkViewController storyboardIdentifier="PointCloudViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" preferredFramesPerSecond="30" id="dIv-i8-33G" customClass="PointCloudViewController" sceneMemberID="viewController">
+                <glkViewController storyboardIdentifier="Model" useStoryboardIdentifierAsRestorationIdentifier="YES" preferredFramesPerSecond="30" id="dIv-i8-33G" customClass="ModelViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="orG-tO-8bm"/>
                         <viewControllerLayoutGuide type="bottom" id="Rwo-N4-U9G"/>

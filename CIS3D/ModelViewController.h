@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 
-@interface PointCloudViewController : GLKViewController
+@interface ModelViewController : GLKViewController
 
 @end
