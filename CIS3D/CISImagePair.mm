@@ -10,6 +10,9 @@
 
 @interface CISImagePair ()
 
+@property (nonatomic) std::vector<cv::Point2f> *keyPoints1;
+@property (nonatomic) std::vector<cv::Point2f> *keyPoints2;
+
 @end
 
 @implementation CISImagePair
@@ -22,6 +25,9 @@
 
 @synthesize drawImage      = _drawImage;
 
+@synthesize keyPoints1     = _keyPoints1;
+@synthesize keyPoints2     = _keyPoints2;
+
 #pragma mark - life cycle
 - (instancetype)initWithImage1:(CISImage *)image1 andImage2:(CISImage *)image2 {
     self = [super init];
@@ -33,22 +39,18 @@
         cv::FlannBasedMatcher matcher;
         std::vector<std::vector<cv::DMatch> > knnMatches;
         
-        std::vector<cv::Point2f> keyPoints1, keyPoints2;
+        _keyPoints1 = new std::vector<cv::Point2f>();
+        _keyPoints2 = new std::vector<cv::Point2f>();
+
         matcher.knnMatch(*(_image1.keyDescriptor), *(_image2.keyDescriptor), knnMatches, 2);
         for (int i = 0; i < knnMatches.size(); ++i) {
             cv::DMatch best = knnMatches[i][0], good = knnMatches[i][1];
             if (best.distance < good.distance * KNN_THRESHOLD) {
                 _matches->push_back(best);
-                keyPoints1.push_back((*image1.keyPoints)[best.queryIdx].pt);
-                keyPoints2.push_back((*image2.keyPoints)[best.trainIdx].pt);
+                _keyPoints1->push_back((*_image1.keyPoints)[best.queryIdx].pt);
+                _keyPoints2->push_back((*_image2.keyPoints)[best.trainIdx].pt);
             }
         }
-        
-        NSLog(@"CISImagePair: %lu matches in _matches", _matches->size());
-        
-        _fundamentalMat = new cv::Mat(cv::findFundamentalMat(keyPoints1, keyPoints2));
-        _image1.camera = [[CISCamera alloc] init];
-        _image2.camera = [[CISCamera alloc] initWithFundamentalMat:_fundamentalMat];
         
         /* 四通道图片没法调用drawMatches，必须转换颜色 */
         cv::Mat __image1, __image2, __drawImage;
@@ -60,7 +62,15 @@
                         *_matches, __drawImage);
         
         _drawImage = new cv::Mat(__drawImage);
-        std::cout << "CISImagePair: _fundamentalMat = \n" << *_fundamentalMat << std::endl;
+        
+        /* 当两幅图完全不匹配时可能发生崩溃。此时不必计算 F */
+        NSLog(@"CISImagePair: %lu matches in _matches", _matches->size());
+        if (_matches->size() > MIN_MATCH_THRESHOLD) {
+            _fundamentalMat = new cv::Mat(cv::findFundamentalMat(*_keyPoints1, *_keyPoints2));
+            _image1.camera = [[CISCamera alloc] init];
+            _image2.camera = [[CISCamera alloc] initWithFundamentalMat:_fundamentalMat];
+            std::cout << "CISImagePair: _fundamentalMat = \n" << *_fundamentalMat << std::endl;
+        }
         
         /* 然后算第二个CISImage的P，乘以猜的H */
         /* 然后三角化，算出初始的点云 */
@@ -72,6 +82,11 @@
 - (void)dealloc {
     delete _matches;
     delete _fundamentalMat;
+    
+    delete _drawImage;
+    
+    delete _keyPoints1;
+    delete _keyPoints2;
 }
 
 @end

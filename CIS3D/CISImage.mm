@@ -51,6 +51,8 @@
     delete _drawImage;
     delete _keyDescriptor;
     delete _keyPoints;
+    
+    delete _drawImage;
 }
 
 #pragma mark - utility convertions

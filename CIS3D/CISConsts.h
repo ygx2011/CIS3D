@@ -18,5 +18,6 @@
 #define CISImagePairAddedNotification @"CISImagePairAdedNotifiation"
 
 #define KNN_THRESHOLD                 0.6
+#define MIN_MATCH_THRESHOLD           10
 
 #endif

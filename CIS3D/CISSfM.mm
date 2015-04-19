@@ -48,6 +48,11 @@
     return self;
 }
 
+- (void)dealloc {
+    delete _cachedMonoImage;
+    delete _cachedStereoImage;
+}
+
 #pragma mark - update
 - (void)addImage:(CISImage *)image {
     _cachedMonoImage = image.drawImage;

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B52BB8E71AE26E1B00CD42F0 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B52BB8E61AE26E1B00CD42F0 /* CoreMotion.framework */; };
 		B53372581AC27E6A00848BB6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B53372571AC27E6A00848BB6 /* main.m */; };
 		B533725B1AC27E6A00848BB6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B533725A1AC27E6A00848BB6 /* AppDelegate.m */; };
 		B53372611AC27E6A00848BB6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B533725F1AC27E6A00848BB6 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 		B5B4D1441ADBEE2B001BFADC /* PointCloudViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5B4D1421ADBEE2B001BFADC /* PointCloudViewController.mm */; };
 		B5C486D31ACFAAE500630B40 /* CameraViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5C486D21ACFAAE500630B40 /* CameraViewController.mm */; };
 		B5C8B46B1ACFC0FE0077116A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5C8B46A1ACFC0FE0077116A /* AVFoundation.framework */; };
+		B5CD1C5F1AE0F70000F593A8 /* CISSensor.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CD1C5E1AE0F70000F593A8 /* CISSensor.m */; };
 		B5EE69B01AD7C94D00661595 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5EE69AF1AD7C94D00661595 /* opencv2.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B52BB8E61AE26E1B00CD42F0 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		B53372521AC27E6A00848BB6 /* CIS3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CIS3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B53372561AC27E6A00848BB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B53372571AC27E6A00848BB6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -80,6 +83,8 @@
 		B5C486D11ACFAAE500630B40 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		B5C486D21ACFAAE500630B40 /* CameraViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CameraViewController.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		B5C8B46A1ACFC0FE0077116A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		B5CD1C5D1AE0F70000F593A8 /* CISSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CISSensor.h; sourceTree = "<group>"; };
+		B5CD1C5E1AE0F70000F593A8 /* CISSensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CISSensor.m; sourceTree = "<group>"; };
 		B5EE69AF1AD7C94D00661595 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B52BB8E71AE26E1B00CD42F0 /* CoreMotion.framework in Frameworks */,
 				B5B4D1411ADBEE12001BFADC /* CoreGraphics.framework in Frameworks */,
 				B5B4D13F1ADBEDBB001BFADC /* UIKit.framework in Frameworks */,
 				B5B4D13D1ADBEDB4001BFADC /* Foundation.framework in Frameworks */,
@@ -112,7 +118,6 @@
 		B53372491AC27E6A00848BB6 = {
 			isa = PBXGroup;
 			children = (
-				B5B4D1401ADBEE12001BFADC /* CoreGraphics.framework */,
 				B53372541AC27E6A00848BB6 /* CIS3D */,
 				B533726E1AC27E6A00848BB6 /* CIS3DTests */,
 				B53372531AC27E6A00848BB6 /* Products */,
@@ -171,6 +176,8 @@
 			children = (
 				B5EE69AF1AD7C94D00661595 /* opencv2.framework */,
 				B5C8B46A1ACFC0FE0077116A /* AVFoundation.framework */,
+				B5B4D1401ADBEE12001BFADC /* CoreGraphics.framework */,
+				B52BB8E61AE26E1B00CD42F0 /* CoreMotion.framework */,
 				B5B4D13C1ADBEDB4001BFADC /* Foundation.framework */,
 				B54D22951ACE575E00F986F3 /* GLKit.framework */,
 				B54D22931ACE575600F986F3 /* OpenGLES.framework */,
@@ -197,6 +204,8 @@
 				B5B4D1291ADBED75001BFADC /* CISImagePair.mm */,
 				B5B4D12D1ADBED75001BFADC /* CISCamera.h */,
 				B5B4D12C1ADBED75001BFADC /* CISCamera.mm */,
+				B5CD1C5D1AE0F70000F593A8 /* CISSensor.h */,
+				B5CD1C5E1AE0F70000F593A8 /* CISSensor.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -329,6 +338,7 @@
 				B5C486D31ACFAAE500630B40 /* CameraViewController.mm in Sources */,
 				B5B4D1381ADBED75001BFADC /* CISCamera.mm in Sources */,
 				B5B4D1361ADBED75001BFADC /* CISImagePair.mm in Sources */,
+				B5CD1C5F1AE0F70000F593A8 /* CISSensor.m in Sources */,
 				B5B4D1441ADBEE2B001BFADC /* PointCloudViewController.mm in Sources */,
 				B5B4D1351ADBED75001BFADC /* CISCloud.mm in Sources */,
 				B533725B1AC27E6A00848BB6 /* AppDelegate.m in Sources */,
