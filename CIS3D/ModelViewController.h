@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
-#import "GLUtility.h"
+#import "GLManager.h"
 
 @interface ModelViewController : GLKViewController
 

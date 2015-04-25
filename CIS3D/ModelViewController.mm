@@ -22,42 +22,16 @@
 @synthesize glView        = _glView;
 @synthesize shaderProgram = _shaderProgram;
 
-#pragma mark - OpenGL setup and teardown
-- (void)setupGL {
-    [EAGLContext setCurrentContext:_glContext];
-    // 编译加载渲染的核函数并链接生成GPU可执行程序
-    GLuint vShader = [GLUtility loadShaderSource:vShaderStr
-                                        withType:GL_VERTEX_SHADER];
-    GLuint fShader = [GLUtility loadShaderSource:fShaderStr
-                                        withType:GL_FRAGMENT_SHADER];
-    _shaderProgram = [GLUtility initShaderProgramWithVertexShader:vShader
-                                                andFragmentShader:fShader];
-}
-
-- (void)tearGL {
-    [EAGLContext setCurrentContext:_glContext];
-    glDeleteProgram(_shaderProgram);
-}
-
 #pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"ModelViewController loaded");
-
-    _glContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
-    if (!_glContext) {
-        NSLog(@"ModelViewController: Failed to init OpenGL");
-    }
+    
+    _shaderProgram  = [GLManager sharedInstance].shaderProgram;
     
     _glView = (GLKView *)self.view;
-    _glView.context = _glContext;
+    _glView.context = [GLManager sharedInstance].glContext;
     _glView.drawableDepthFormat = GLKViewDrawableDepthFormat24;
-    
-    [self setupGL];
-}
-
-- (void)dealloc {
-    [self tearGL];
 }
 
 #pragma mark - update -> display -> cycle

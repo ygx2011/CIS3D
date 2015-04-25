@@ -18,7 +18,7 @@
 		B54D22941ACE575600F986F3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54D22931ACE575600F986F3 /* OpenGLES.framework */; };
 		B54D22961ACE575E00F986F3 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54D22951ACE575E00F986F3 /* GLKit.framework */; };
 		B54D22981ACE576D00F986F3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54D22971ACE576D00F986F3 /* QuartzCore.framework */; };
-		B557AB111AEA16C70064CCB8 /* GLUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = B557AB101AEA16C70064CCB8 /* GLUtility.m */; };
+		B557AB111AEA16C70064CCB8 /* GLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B557AB101AEA16C70064CCB8 /* GLManager.m */; };
 		B5AEA01F1ADCDECA00B716A6 /* PhotoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5AEA01E1ADCDECA00B716A6 /* PhotoViewController.mm */; };
 		B5B4D1351ADBED75001BFADC /* CISCloud.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5B4D1281ADBED75001BFADC /* CISCloud.mm */; };
 		B5B4D1361ADBED75001BFADC /* CISImagePair.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5B4D1291ADBED75001BFADC /* CISImagePair.mm */; };
@@ -63,8 +63,8 @@
 		B54D22931ACE575600F986F3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		B54D22951ACE575E00F986F3 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		B54D22971ACE576D00F986F3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		B557AB0F1AEA16C70064CCB8 /* GLUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLUtility.h; sourceTree = "<group>"; };
-		B557AB101AEA16C70064CCB8 /* GLUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLUtility.m; sourceTree = "<group>"; };
+		B557AB0F1AEA16C70064CCB8 /* GLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLManager.h; sourceTree = "<group>"; };
+		B557AB101AEA16C70064CCB8 /* GLManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLManager.m; sourceTree = "<group>"; };
 		B5AEA01D1ADCDECA00B716A6 /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
 		B5AEA01E1ADCDECA00B716A6 /* PhotoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PhotoViewController.mm; sourceTree = "<group>"; };
 		B5B4D1281ADBED75001BFADC /* CISCloud.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CISCloud.mm; sourceTree = "<group>"; };
@@ -226,8 +226,8 @@
 			children = (
 				B5B4D1301ADBED75001BFADC /* CISUtility.h */,
 				B51A83951AE371DE0099CC3D /* CISUtility.m */,
-				B557AB0F1AEA16C70064CCB8 /* GLUtility.h */,
-				B557AB101AEA16C70064CCB8 /* GLUtility.m */,
+				B557AB0F1AEA16C70064CCB8 /* GLManager.h */,
+				B557AB101AEA16C70064CCB8 /* GLManager.m */,
 				B557AB0C1AEA10970064CCB8 /* SfM */,
 				B557AB0D1AEA10A50064CCB8 /* Sensor */,
 			);
@@ -366,7 +366,7 @@
 				B5B4D1441ADBEE2B001BFADC /* ModelViewController.mm in Sources */,
 				B5B4D1351ADBED75001BFADC /* CISCloud.mm in Sources */,
 				B533725B1AC27E6A00848BB6 /* AppDelegate.mm in Sources */,
-				B557AB111AEA16C70064CCB8 /* GLUtility.m in Sources */,
+				B557AB111AEA16C70064CCB8 /* GLManager.m in Sources */,
 				B51A83961AE371DE0099CC3D /* CISUtility.m in Sources */,
 				B53372581AC27E6A00848BB6 /* main.mm in Sources */,
 				B5B4D1391ADBED75001BFADC /* CISSfM.mm in Sources */,
