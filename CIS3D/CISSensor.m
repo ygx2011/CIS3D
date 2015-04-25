@@ -8,7 +8,15 @@
 
 #import "CISSensor.h"
 
+@interface CISSensor()
+
+@property (nonatomic, strong) CMMotionManager *motionManager;
+
+@end
+
 @implementation CISSensor
+
+@synthesize motionManager = _motionManager;
 
 + (CISSensor *)sharedInstance {
     static CISSensor *singletonSensor;
@@ -21,11 +29,13 @@
     return singletonSensor;
 }
 
+#pragma mark - life cycle
 - (instancetype)init {
     self = [super init];
     if (self) {
-        
+        _motionManager = [[CMMotionManager alloc] init];
     }
     return self;
 }
+
 @end

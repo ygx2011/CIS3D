@@ -18,9 +18,9 @@
 @interface CISSfM : NSObject
 
 /* 维护的image、stereo-pair队列 */
-@property (atomic) NSMutableArray     *images;
-@property (atomic) NSMutableArray     *pairs;
-@property (atomic, strong) CISCloud   *cloud;
+@property (atomic, strong) NSMutableArray *images;
+@property (atomic, strong) NSMutableArray *pairs;
+@property (atomic, strong) CISCloud       *cloud;
 
 + (CISSfM *)sharedInstance;
 - (void)addImage:(CISImage *)image;

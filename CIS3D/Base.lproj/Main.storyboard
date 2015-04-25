@@ -102,7 +102,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0TP-d8-XQz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="876" y="-437"/>
+            <point key="canvasLocation" x="864" y="-437"/>
         </scene>
         <!--Model-->
         <scene sceneID="bHo-9j-cdl">
@@ -123,7 +123,7 @@
                 </glkViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SWl-CC-3o2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136" y="63"/>
+            <point key="canvasLocation" x="136" y="43"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="FFb-K0-HPc">
