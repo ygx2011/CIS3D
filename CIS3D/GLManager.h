@@ -7,18 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <GLKit/GLKit.h>
 #import <OpenGLES/ES3/gl.h>
 #import <OpenGLES/EAGL.h>
+#import "CC3GLMatrix.h"
 
 @interface GLManager : NSObject
 
-@property(nonatomic, strong) EAGLContext *glContext;
-@property(nonatomic)         GLuint       shaderProgram;
+@property(nonatomic) GLuint shaderProgram;
 
-+ (void)setup;
-+ (GLManager *)sharedInstance;
-
-- (void)draw;
+- (instancetype)init;
+- (void)drawInView:(GLKView *)view;
 - (void)update;
 
 @end

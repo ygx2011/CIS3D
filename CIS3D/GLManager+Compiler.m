@@ -27,8 +27,8 @@
 }
 
 - (GLuint)initProgramWithvShader:(GLuint)vShader andfShader:(GLuint)fShader {
-    GLuint shaderProgram;
-    if ((shaderProgram = glCreateProgram()) == 0) {
+    GLuint shaderProgram = glCreateProgram();
+    if (shaderProgram == 0) {
         NSLog(@"Shader program create failed.");
         return 0;
     }
@@ -43,6 +43,10 @@
         NSLog(@"Link failed");
         glDeleteProgram(shaderProgram);
     }
+    
+    glDeleteShader(vShader);
+    glDeleteShader(fShader);
+    
     return shaderProgram;
 }
 

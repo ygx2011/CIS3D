@@ -31,6 +31,10 @@
 		B5B4D13F1ADBEDBB001BFADC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5B4D13E1ADBEDBB001BFADC /* UIKit.framework */; };
 		B5B4D1411ADBEE12001BFADC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5B4D1401ADBEE12001BFADC /* CoreGraphics.framework */; };
 		B5B4D1441ADBEE2B001BFADC /* ModelViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5B4D1421ADBEE2B001BFADC /* ModelViewController.mm */; };
+		B5B680F61AF6030D003BF8AB /* CC3Foundation.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B680ED1AF6030D003BF8AB /* CC3Foundation.m */; };
+		B5B680F71AF6030D003BF8AB /* CC3GLMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B680EF1AF6030D003BF8AB /* CC3GLMatrix.m */; };
+		B5B680F81AF6030D003BF8AB /* CC3Kazmath.c in Sources */ = {isa = PBXBuildFile; fileRef = B5B680F01AF6030D003BF8AB /* CC3Kazmath.c */; };
+		B5B680F91AF6030D003BF8AB /* CC3Math.m in Sources */ = {isa = PBXBuildFile; fileRef = B5B680F41AF6030D003BF8AB /* CC3Math.m */; };
 		B5C486D31ACFAAE500630B40 /* CameraViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5C486D21ACFAAE500630B40 /* CameraViewController.mm */; };
 		B5C8B46B1ACFC0FE0077116A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5C8B46A1ACFC0FE0077116A /* AVFoundation.framework */; };
 		B5CD1C5F1AE0F70000F593A8 /* CISSensor.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CD1C5E1AE0F70000F593A8 /* CISSensor.m */; };
@@ -88,6 +92,16 @@
 		B5B4D1401ADBEE12001BFADC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B5B4D1421ADBEE2B001BFADC /* ModelViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ModelViewController.mm; sourceTree = "<group>"; };
 		B5B4D1431ADBEE2B001BFADC /* ModelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelViewController.h; sourceTree = "<group>"; };
+		B5B680EC1AF6030D003BF8AB /* CC3Foundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Foundation.h; sourceTree = "<group>"; };
+		B5B680ED1AF6030D003BF8AB /* CC3Foundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CC3Foundation.m; sourceTree = "<group>"; };
+		B5B680EE1AF6030D003BF8AB /* CC3GLMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3GLMatrix.h; sourceTree = "<group>"; };
+		B5B680EF1AF6030D003BF8AB /* CC3GLMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CC3GLMatrix.m; sourceTree = "<group>"; };
+		B5B680F01AF6030D003BF8AB /* CC3Kazmath.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CC3Kazmath.c; sourceTree = "<group>"; };
+		B5B680F11AF6030D003BF8AB /* CC3Kazmath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Kazmath.h; sourceTree = "<group>"; };
+		B5B680F21AF6030D003BF8AB /* CC3Logging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Logging.h; sourceTree = "<group>"; };
+		B5B680F31AF6030D003BF8AB /* CC3Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Math.h; sourceTree = "<group>"; };
+		B5B680F41AF6030D003BF8AB /* CC3Math.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CC3Math.m; sourceTree = "<group>"; };
+		B5B680F51AF6030D003BF8AB /* ccTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccTypes.h; sourceTree = "<group>"; };
 		B5C486D11ACFAAE500630B40 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		B5C486D21ACFAAE500630B40 /* CameraViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CameraViewController.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		B5C8B46A1ACFC0FE0077116A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -227,6 +241,7 @@
 		B5777A691AF5B3E0009E23B4 /* OpenGL */ = {
 			isa = PBXGroup;
 			children = (
+				B5B680FA1AF60313003BF8AB /* Cocos3DMathLib */,
 				B557AB0F1AEA16C70064CCB8 /* GLManager.h */,
 				B557AB101AEA16C70064CCB8 /* GLManager.m */,
 				B5777A661AF5AE32009E23B4 /* GLManager+Compiler.h */,
@@ -245,6 +260,23 @@
 				B557AB0D1AEA10A50064CCB8 /* Sensor */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		B5B680FA1AF60313003BF8AB /* Cocos3DMathLib */ = {
+			isa = PBXGroup;
+			children = (
+				B5B680EC1AF6030D003BF8AB /* CC3Foundation.h */,
+				B5B680ED1AF6030D003BF8AB /* CC3Foundation.m */,
+				B5B680EE1AF6030D003BF8AB /* CC3GLMatrix.h */,
+				B5B680EF1AF6030D003BF8AB /* CC3GLMatrix.m */,
+				B5B680F01AF6030D003BF8AB /* CC3Kazmath.c */,
+				B5B680F11AF6030D003BF8AB /* CC3Kazmath.h */,
+				B5B680F21AF6030D003BF8AB /* CC3Logging.h */,
+				B5B680F31AF6030D003BF8AB /* CC3Math.h */,
+				B5B680F41AF6030D003BF8AB /* CC3Math.m */,
+				B5B680F51AF6030D003BF8AB /* ccTypes.h */,
+			);
+			name = Cocos3DMathLib;
 			sourceTree = "<group>";
 		};
 		B5C486CF1ACFA51700630B40 /* Views */ = {
@@ -373,16 +405,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5C486D31ACFAAE500630B40 /* CameraViewController.mm in Sources */,
+				B5B680F71AF6030D003BF8AB /* CC3GLMatrix.m in Sources */,
 				B5B4D1381ADBED75001BFADC /* CISCamera.mm in Sources */,
 				B5B4D1361ADBED75001BFADC /* CISImagePair.mm in Sources */,
 				B5CD1C5F1AE0F70000F593A8 /* CISSensor.m in Sources */,
 				B5B4D1441ADBEE2B001BFADC /* ModelViewController.mm in Sources */,
+				B5B680F81AF6030D003BF8AB /* CC3Kazmath.c in Sources */,
 				B5B4D1351ADBED75001BFADC /* CISCloud.mm in Sources */,
 				B533725B1AC27E6A00848BB6 /* AppDelegate.mm in Sources */,
 				B557AB111AEA16C70064CCB8 /* GLManager.m in Sources */,
 				B51A83961AE371DE0099CC3D /* CISUtility.m in Sources */,
 				B53372581AC27E6A00848BB6 /* main.mm in Sources */,
+				B5B680F61AF6030D003BF8AB /* CC3Foundation.m in Sources */,
 				B5B4D1391ADBED75001BFADC /* CISSfM.mm in Sources */,
+				B5B680F91AF6030D003BF8AB /* CC3Math.m in Sources */,
 				B5B4D13A1ADBED75001BFADC /* CISGeometry.mm in Sources */,
 				B5AEA01F1ADCDECA00B716A6 /* PhotoViewController.mm in Sources */,
 				B5B4D1371ADBED75001BFADC /* CISImage.mm in Sources */,

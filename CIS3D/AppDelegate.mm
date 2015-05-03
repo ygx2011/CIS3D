@@ -33,9 +33,7 @@
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     tabBarController.viewControllers = @[tab1, tab2, tab3];
-    self.window.rootViewController = tabBarController;
-    
-    [GLManager setup];
+    self.window.rootViewController = tabBarController;    
     
     return YES;
 }
