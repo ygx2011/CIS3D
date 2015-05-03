@@ -7,29 +7,16 @@
 //
 
 #import "GLManager.h"
-
-static char vShaderStr[] =
-"#version 300 es                          \n"
-"layout(location = 0) in vec4 vPosition;  \n"
-"void main()                              \n"
-"{                                        \n"
-"   gl_Position = vPosition;              \n"
-"}                                        \n";
-
-static char fShaderStr[] =
-"#version 300 es                              \n"
-"precision mediump float;                     \n"
-"out vec4 fragColor;                          \n"
-"void main()                                  \n"
-"{                                            \n"
-"   fragColor = vec4 ( 1.0, 0.0, 0.0, 1.0 );  \n"
-"}                                            \n";
+#import "GLManager+Compiler.h"
 
 @interface GLManager()
 
 @end
 
-@implementation GLManager
+@implementation GLManager {
+    GLuint _vShader;
+    GLuint _fShader;
+}
 
 @synthesize shaderProgram = _shaderProgram;
 @synthesize glContext     = _glContext;
@@ -49,6 +36,7 @@ static char fShaderStr[] =
     return singletonGLManager;
 }
 
+#pragma mark - life cycle
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -56,25 +44,12 @@ static char fShaderStr[] =
         if (!_glContext) {
             NSLog(@"GLManager: Failed to init OpenGL");
         }
-        
         [EAGLContext setCurrentContext:_glContext];
-        if ((_shaderProgram = glCreateProgram()) == 0) {
-            NSLog(@"Shader program create failed.");
-            return 0;
-        }
         
-        GLuint vShader = [self loadShaderSource:vShaderStr withType:GL_VERTEX_SHADER];
-        GLuint fShader = [self loadShaderSource:fShaderStr withType:GL_FRAGMENT_SHADER];
-        glAttachShader(_shaderProgram, vShader);
-        glAttachShader(_shaderProgram, fShader);
-        glLinkProgram(_shaderProgram);
+        _vShader = [self initShaderWithSource:vShaderStr andType:GL_VERTEX_SHADER];
+        _fShader = [self initShaderWithSource:fShaderStr andType:GL_FRAGMENT_SHADER];
+        _shaderProgram = [self initProgramWithvShader:_vShader andfShader:_fShader];
         
-        GLint linkInfo;
-        glGetProgramiv(_shaderProgram, GL_LINK_STATUS, &linkInfo);
-        if (!linkInfo) {
-            NSLog(@"Link failed");
-            glDeleteProgram(_shaderProgram);
-        }
         glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     }
     return self;
@@ -84,21 +59,26 @@ static char fShaderStr[] =
     glDeleteProgram(_shaderProgram);
 }
 
-#pragma mark - utility
-- (GLuint)loadShaderSource:(const char *)source withType:(GLenum)type {
-    GLuint shader = glCreateShader(type);
-    GLint  compileInfo;
-    if (shader == 0) return 0;
+#pragma mark - draw - update - loop
+- (void)draw {
+    GLfloat vVertices[] = { 0.0f,  0.5f, 0.0f,
+        -0.5f, -0.5f, 0.0f,
+        0.5f, -0.5f, 0.0f };
     
-    // 载入并编译shader代码
-    glShaderSource(shader, 1, &source, NULL);
-    glCompileShader(shader);
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &compileInfo);
-    if (!compileInfo) {
-        NSLog(@"GLManager: Shader compile error!");
-        glDeleteShader(shader);
-    }
-    return shader;
+    // Clear the color buffer
+    glClear ( GL_COLOR_BUFFER_BIT );
+    
+    // Use the program object
+    glUseProgram(_shaderProgram);
+    
+    // Load the vertex data
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vVertices);
+    glEnableVertexAttribArray (0);
+    
+    glDrawArrays (GL_TRIANGLES, 0, 3);
+}
+
+- (void)update {
 }
 
 @end

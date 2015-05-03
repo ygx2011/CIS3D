@@ -18,4 +18,7 @@
 + (void)setup;
 + (GLManager *)sharedInstance;
 
+- (void)draw;
+- (void)update;
+
 @end
