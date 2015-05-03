@@ -15,6 +15,7 @@
 		B53372631AC27E6A00848BB6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B53372621AC27E6A00848BB6 /* Images.xcassets */; };
 		B53372661AC27E6A00848BB6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B53372641AC27E6A00848BB6 /* LaunchScreen.xib */; };
 		B53372721AC27E6A00848BB6 /* CIS3DTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B53372711AC27E6A00848BB6 /* CIS3DTests.m */; };
+		B545515C1AF6306C0020EBA1 /* GLCube.m in Sources */ = {isa = PBXBuildFile; fileRef = B545515B1AF6306C0020EBA1 /* GLCube.m */; };
 		B54D22941ACE575600F986F3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54D22931ACE575600F986F3 /* OpenGLES.framework */; };
 		B54D22961ACE575E00F986F3 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54D22951ACE575E00F986F3 /* GLKit.framework */; };
 		B54D22981ACE576D00F986F3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54D22971ACE576D00F986F3 /* QuartzCore.framework */; };
@@ -65,6 +66,8 @@
 		B533726B1AC27E6A00848BB6 /* CIS3DTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CIS3DTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B53372701AC27E6A00848BB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B53372711AC27E6A00848BB6 /* CIS3DTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIS3DTests.m; sourceTree = "<group>"; };
+		B545515A1AF6306C0020EBA1 /* GLCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLCube.h; sourceTree = "<group>"; };
+		B545515B1AF6306C0020EBA1 /* GLCube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLCube.m; sourceTree = "<group>"; };
 		B54D22931ACE575600F986F3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		B54D22951ACE575E00F986F3 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		B54D22971ACE576D00F986F3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -246,6 +249,8 @@
 				B557AB101AEA16C70064CCB8 /* GLManager.m */,
 				B5777A661AF5AE32009E23B4 /* GLManager+Compiler.h */,
 				B5777A671AF5AE32009E23B4 /* GLManager+Compiler.m */,
+				B545515A1AF6306C0020EBA1 /* GLCube.h */,
+				B545515B1AF6306C0020EBA1 /* GLCube.m */,
 			);
 			name = OpenGL;
 			sourceTree = "<group>";
@@ -421,6 +426,7 @@
 				B5B680F91AF6030D003BF8AB /* CC3Math.m in Sources */,
 				B5B4D13A1ADBED75001BFADC /* CISGeometry.mm in Sources */,
 				B5AEA01F1ADCDECA00B716A6 /* PhotoViewController.mm in Sources */,
+				B545515C1AF6306C0020EBA1 /* GLCube.m in Sources */,
 				B5B4D1371ADBED75001BFADC /* CISImage.mm in Sources */,
 				B5777A681AF5AE32009E23B4 /* GLManager+Compiler.m in Sources */,
 			);

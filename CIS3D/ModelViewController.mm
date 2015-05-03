@@ -48,7 +48,9 @@
 
 // 进行glUseProgram之类的绘制
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
-    [_glManager drawInView:view];
+    _glManager.width  = (GLfloat)view.drawableWidth;
+    _glManager.height = (GLfloat)view.drawableHeight;
+    [_glManager draw];
 }
 
 @end

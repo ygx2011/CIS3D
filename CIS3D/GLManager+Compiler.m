@@ -12,17 +12,21 @@
 
 - (GLuint)initShaderWithSource:(const char *)source andType:(GLenum)type {
     GLuint shader = glCreateShader(type);
-    GLint  compileInfo;
-    if (shader == 0) return 0;
+    if (shader == 0) {
+        NSLog(@"Shader init failed");
+        return 0;
+    }
     
-    // 载入并编译shader代码
     glShaderSource(shader, 1, &source, NULL);
     glCompileShader(shader);
+    
+    GLint compileInfo;
     glGetShaderiv(shader, GL_COMPILE_STATUS, &compileInfo);
     if (!compileInfo) {
         NSLog(@"GLManager: Shader compile error!");
         glDeleteShader(shader);
     }
+    
     return shader;
 }
 

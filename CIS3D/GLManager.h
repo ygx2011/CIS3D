@@ -10,14 +10,14 @@
 #import <GLKit/GLKit.h>
 #import <OpenGLES/ES3/gl.h>
 #import <OpenGLES/EAGL.h>
-#import "CC3GLMatrix.h"
 
 @interface GLManager : NSObject
 
-@property(nonatomic) GLuint shaderProgram;
+@property (nonatomic) GLfloat width;
+@property (nonatomic) GLfloat height;
 
 - (instancetype)init;
-- (void)drawInView:(GLKView *)view;
+- (void)draw;
 - (void)update;
 
 @end
