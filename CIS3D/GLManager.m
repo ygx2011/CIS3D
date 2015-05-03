@@ -19,8 +19,10 @@
 
 @implementation GLManager {
     GLCube *_cube;
-    GLuint _projectMatrix;
-    GLuint _modelMatrix;
+    CC3GLMatrix *_projectMatrix;
+    CC3GLMatrix *_modelViewMatrix;
+    GLuint _projectUniform;
+    GLuint _modelUniform;
     GLuint _vbo[3];
 }
 
@@ -32,14 +34,16 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        GLuint _vShader = [self initShaderWithSource:vShaderStr andType:GL_VERTEX_SHADER];
-        GLuint _fShader = [self initShaderWithSource:fShaderStr andType:GL_FRAGMENT_SHADER];
+        GLuint _vShader = [self initShaderWithName:@"vShader" andType:GL_VERTEX_SHADER];
+        GLuint _fShader = [self initShaderWithName:@"fShader" andType:GL_FRAGMENT_SHADER];
         _shaderProgram = [self initProgramWithvShader:_vShader andfShader:_fShader];
         
-        _projectMatrix = glGetUniformLocation(_shaderProgram, "projectMatrix");
-        _modelMatrix   = glGetUniformLocation(_shaderProgram, "modelMatrix");
+        _projectUniform = glGetUniformLocation(_shaderProgram, "projectMatrix");
+        _modelUniform   = glGetUniformLocation(_shaderProgram, "modelMatrix");
 
         _cube = [[GLCube alloc] init];
+        _projectMatrix   = [CC3GLMatrix matrix];
+        _modelViewMatrix = [CC3GLMatrix matrix];
     }
     return self;
 }
@@ -61,15 +65,15 @@
 }
 
 - (void)update {
-    CC3GLMatrix *projection = [CC3GLMatrix matrix];
-    float h = 4.0f * _width / _height;
-    [projection populateFromFrustumLeft:-2 andRight:2 andBottom:-h / 2 andTop:h / 2 andNear:4 andFar:10];
-    glUniformMatrix4fv(_projectMatrix, 1, 0, projection.glMatrix);
+    float h = 4.0f * _height / _width;
+    [_projectMatrix populateFromFrustumLeft:-2   andRight:2
+                                  andBottom:-h/2   andTop:h/2
+                                    andNear:4      andFar:10];
+    glUniformMatrix4fv(_projectUniform, 1, 0, _projectMatrix.glMatrix);
     
-    CC3GLMatrix *model = [CC3GLMatrix matrix];
-    [model populateFromTranslation:CC3VectorMake(sin(CACurrentMediaTime()), 0, -7)];
-    [model rotateBy:CC3VectorMake(CACurrentMediaTime() * 10, CACurrentMediaTime() * 10, 0)];
-    glUniformMatrix4fv(_modelMatrix, 1, 0, model.glMatrix);
+    [_modelViewMatrix populateFromTranslation:CC3VectorMake(0, 0, -7)];
+    [_modelViewMatrix rotateBy:CC3VectorMake(CACurrentMediaTime() * 5, CACurrentMediaTime() * 5, 0)];
+    glUniformMatrix4fv(_modelUniform, 1, 0, _modelViewMatrix.glMatrix);
 }
 
 @end

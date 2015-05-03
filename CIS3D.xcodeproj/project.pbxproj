@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B51A83961AE371DE0099CC3D /* CISUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = B51A83951AE371DE0099CC3D /* CISUtility.m */; };
 		B52BB8E71AE26E1B00CD42F0 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B52BB8E61AE26E1B00CD42F0 /* CoreMotion.framework */; };
+		B53083DE1AF63C5E00FEDAFD /* vShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = B53083DD1AF63C5D00FEDAFD /* vShader.glsl */; };
+		B53083E01AF63C6D00FEDAFD /* fShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = B53083DF1AF63C6D00FEDAFD /* fShader.glsl */; };
 		B53372581AC27E6A00848BB6 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = B53372571AC27E6A00848BB6 /* main.mm */; };
 		B533725B1AC27E6A00848BB6 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = B533725A1AC27E6A00848BB6 /* AppDelegate.mm */; };
 		B53372611AC27E6A00848BB6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B533725F1AC27E6A00848BB6 /* Main.storyboard */; };
@@ -55,6 +57,8 @@
 /* Begin PBXFileReference section */
 		B51A83951AE371DE0099CC3D /* CISUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CISUtility.m; sourceTree = "<group>"; };
 		B52BB8E61AE26E1B00CD42F0 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		B53083DD1AF63C5D00FEDAFD /* vShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vShader.glsl; sourceTree = "<group>"; };
+		B53083DF1AF63C6D00FEDAFD /* fShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fShader.glsl; sourceTree = "<group>"; };
 		B53372521AC27E6A00848BB6 /* CIS3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CIS3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B53372561AC27E6A00848BB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B53372571AC27E6A00848BB6 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -251,6 +255,8 @@
 				B5777A671AF5AE32009E23B4 /* GLManager+Compiler.m */,
 				B545515A1AF6306C0020EBA1 /* GLCube.h */,
 				B545515B1AF6306C0020EBA1 /* GLCube.m */,
+				B53083DD1AF63C5D00FEDAFD /* vShader.glsl */,
+				B53083DF1AF63C6D00FEDAFD /* fShader.glsl */,
 			);
 			name = OpenGL;
 			sourceTree = "<group>";
@@ -390,6 +396,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B53372611AC27E6A00848BB6 /* Main.storyboard in Resources */,
+				B53083E01AF63C6D00FEDAFD /* fShader.glsl in Resources */,
+				B53083DE1AF63C5E00FEDAFD /* vShader.glsl in Resources */,
 				B53372661AC27E6A00848BB6 /* LaunchScreen.xib in Resources */,
 				B53372631AC27E6A00848BB6 /* Images.xcassets in Resources */,
 			);

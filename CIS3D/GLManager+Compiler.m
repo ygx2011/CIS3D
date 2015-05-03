@@ -30,6 +30,20 @@
     return shader;
 }
 
+- (GLuint)initShaderWithName:(NSString *)name andType:(GLenum)type {
+    NSError *error;
+    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@"glsl"];
+    NSString *content = [NSString stringWithContentsOfFile:path
+                                                  encoding:NSUTF8StringEncoding
+                                                     error:&error];
+    if (!content) {
+        NSLog(@"Error loading shader: %@", error.localizedDescription);
+    }
+
+    return [self initShaderWithSource:[content UTF8String]
+                              andType:type];
+}
+
 - (GLuint)initProgramWithvShader:(GLuint)vShader andfShader:(GLuint)fShader {
     GLuint shaderProgram = glCreateProgram();
     if (shaderProgram == 0) {
