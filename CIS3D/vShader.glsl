@@ -1,7 +1,6 @@
 #version 300 es
 
-uniform mat4 projectMatrix;
-uniform mat4 modelMatrix;
+uniform mat4 mvpMatrix;
 
 layout(location = 0) in vec4 a_position;
 layout(location = 1) in vec4 a_color;
@@ -10,5 +9,5 @@ out vec4 v_color;
 
 void main() {
     v_color = a_color;
-    gl_Position = projectMatrix * modelMatrix * a_position;
+    gl_Position = mvpMatrix * a_position;
 }
