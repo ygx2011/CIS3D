@@ -38,6 +38,13 @@
     
     [EAGLContext setCurrentContext:_glContext];
     _glManager = [[GLManager alloc] init];
+    
+    UIPinchGestureRecognizer *scaler = [[UIPinchGestureRecognizer alloc] initWithTarget:self
+                                                                                  action:@selector(didScale:)];
+    UIPanGestureRecognizer *dragger = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                              action:@selector(didDrag:)];
+    [_glView addGestureRecognizer:scaler];
+    [_glView addGestureRecognizer:dragger];
 }
 
 #pragma mark - update -> display -> cycle
@@ -51,6 +58,29 @@
     _glManager.width  = (GLfloat)view.drawableWidth;
     _glManager.height = (GLfloat)view.drawableHeight;
     [_glManager draw];
+}
+
+#pragma mark - gesture interactions
+- (void)didScale:(UIPinchGestureRecognizer *)pincher {
+    if (pincher.state == UIGestureRecognizerStateChanged) {
+        NSLog(@"%f", pincher.scale);
+
+        _glManager.cameraRadius /= pincher.scale;
+        if (_glManager.cameraRadius < 4) {
+            _glManager.cameraRadius = 4;
+        }
+        if (_glManager.cameraRadius > 20) {
+            _glManager.cameraRadius = 20;
+        }
+    }
+}
+
+- (void)didDrag:(UIPanGestureRecognizer *)panner {
+    CGPoint offset = [panner translationInView:_glView];
+    NSLog(@"x: %f, y: %f", offset.x, offset.y);
+    float sign = cosf(_glManager.cameraElevation) > 0 ? 1 : -1;
+    _glManager.cameraAzimuth   -= offset.x * 0.001 * sign;
+    _glManager.cameraElevation += offset.y * 0.001;
 }
 
 @end

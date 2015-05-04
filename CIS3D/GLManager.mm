@@ -27,6 +27,10 @@
 @synthesize width = _width;
 @synthesize height = _height;
 
+@synthesize cameraRadius    = _radius;
+@synthesize cameraAzimuth   = _azimuth;
+@synthesize cameraElevation = _elevation;
+
 #pragma mark - life cycle
 - (instancetype)init {
     self = [super init];
@@ -38,6 +42,10 @@
         _mvpUniform = glGetUniformLocation(_shaderProgram, "mvpMatrix");
 
         _cube = [[GLCube alloc] init];
+        
+        _radius    = 5.0f;
+        _azimuth   = 0.0f;
+        _elevation = 0.0f;
     }
     return self;
 }
@@ -59,8 +67,14 @@
 }
 
 - (void)update {
-    glm::mat4 Projection = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
-    glm::mat4 View = glm::lookAt(glm::vec3(4, 3, 3), glm::vec3(0, 1, 0), glm::vec3(0, 1, 0));
+    if (_height == 0) return;
+    glm::mat4 Projection = glm::perspective(45.0f, _width / _height, 0.1f, 100.0f);
+    glm::mat4 View = glm::lookAt(glm::vec3(_radius * cosf(_elevation) * sinf(_azimuth),
+                                           _radius * sinf(_elevation),
+                                           _radius * cosf(_elevation) * cosf(_azimuth)), // position
+                                 glm::vec3(0, 0, 0),                                     // target
+                                 glm::vec3(0, cosf(_elevation) > 0 ? 1 : -1, 0));        // head
+    
     glm::mat4 Model = glm::mat4(1.0f);
     glm::mat4 mvp = Projection * View * Model;
     glUniformMatrix4fv(_mvpUniform, 1, GL_FALSE, &mvp[0][0]);

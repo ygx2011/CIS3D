@@ -16,6 +16,10 @@
 @property (nonatomic) GLfloat width;
 @property (nonatomic) GLfloat height;
 
+@property (nonatomic) GLfloat cameraRadius;
+@property (nonatomic) GLfloat cameraAzimuth;
+@property (nonatomic) GLfloat cameraElevation;
+
 - (instancetype)init;
 - (void)draw;
 - (void)update;
