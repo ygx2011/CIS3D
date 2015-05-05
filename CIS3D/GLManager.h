@@ -19,6 +19,7 @@
 @property (nonatomic) GLfloat cameraRadius;
 @property (nonatomic) GLfloat cameraAzimuth;
 @property (nonatomic) GLfloat cameraElevation;
+@property (nonatomic) GLfloat inverseRotateSign;
 
 - (instancetype)init;
 - (void)draw;

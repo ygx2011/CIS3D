@@ -9,7 +9,12 @@
 #import "GLManager.h"
 #import "GLManager+Compiler.h"
 #import "GLCube.h"
+#import "GLAxis.h"
+#import "GLCloud.h"
 #import "glm/gtc/matrix_transform.hpp"
+
+#define MIN_RADIUS 3
+#define MAX_RADIUS 10
 
 @interface GLManager()
 
@@ -19,6 +24,9 @@
 
 @implementation GLManager {
     GLCube *_cube;
+    GLAxis *_axis;
+    GLCloud *_cloud;
+    
     GLuint _mvpUniform;
     GLuint _vbo[3];
 }
@@ -27,9 +35,10 @@
 @synthesize width = _width;
 @synthesize height = _height;
 
-@synthesize cameraRadius    = _radius;
-@synthesize cameraAzimuth   = _azimuth;
-@synthesize cameraElevation = _elevation;
+@synthesize cameraRadius      = _radius;
+@synthesize cameraAzimuth     = _azimuth;
+@synthesize cameraElevation   = _elevation;
+@synthesize inverseRotateSign = _sign;
 
 #pragma mark - life cycle
 - (instancetype)init {
@@ -42,10 +51,13 @@
         _mvpUniform = glGetUniformLocation(_shaderProgram, "mvpMatrix");
 
         _cube = [[GLCube alloc] init];
+        _axis = [[GLAxis alloc] init];
+        _cloud = [[GLCloud alloc] init];
         
         _radius    = 5.0f;
         _azimuth   = 0.0f;
         _elevation = 0.0f;
+        _sign      = 1.0f;
     }
     return self;
 }
@@ -64,16 +76,20 @@
     glUseProgram(_shaderProgram);
     
     [_cube draw];
+    [_axis draw];
+    [_cloud draw];
 }
 
 - (void)update {
     if (_height == 0) return;
+    _radius = MAX(MIN(_radius, MAX_RADIUS), MIN_RADIUS);
+    
     glm::mat4 Projection = glm::perspective(45.0f, _width / _height, 0.1f, 100.0f);
     glm::mat4 View = glm::lookAt(glm::vec3(_radius * cosf(_elevation) * sinf(_azimuth),
                                            _radius * sinf(_elevation),
                                            _radius * cosf(_elevation) * cosf(_azimuth)), // position
                                  glm::vec3(0, 0, 0),                                     // target
-                                 glm::vec3(0, cosf(_elevation) > 0 ? 1 : -1, 0));        // head
+                                 glm::vec3(0, _sign, 0));        // head
     
     glm::mat4 Model = glm::mat4(1.0f);
     glm::mat4 mvp = Projection * View * Model;

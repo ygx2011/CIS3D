@@ -9,5 +9,6 @@ out vec4 v_color;
 
 void main() {
     v_color = a_color;
-    gl_Position = mvpMatrix * a_position;
+    gl_Position  = mvpMatrix * a_position;
+    gl_PointSize = 5.0;
 }

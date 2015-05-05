@@ -24,6 +24,8 @@
 		B54D22981ACE576D00F986F3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54D22971ACE576D00F986F3 /* QuartzCore.framework */; };
 		B557AB111AEA16C70064CCB8 /* GLManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = B557AB101AEA16C70064CCB8 /* GLManager.mm */; };
 		B5777A681AF5AE32009E23B4 /* GLManager+Compiler.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5777A671AF5AE32009E23B4 /* GLManager+Compiler.mm */; };
+		B577863E1AF885070093ED74 /* GLAxis.mm in Sources */ = {isa = PBXBuildFile; fileRef = B577863D1AF885070093ED74 /* GLAxis.mm */; };
+		B57786451AF895640093ED74 /* GLCloud.mm in Sources */ = {isa = PBXBuildFile; fileRef = B57786441AF895640093ED74 /* GLCloud.mm */; };
 		B5AEA01F1ADCDECA00B716A6 /* PhotoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5AEA01E1ADCDECA00B716A6 /* PhotoViewController.mm */; };
 		B5B4D1351ADBED75001BFADC /* CISCloud.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5B4D1281ADBED75001BFADC /* CISCloud.mm */; };
 		B5B4D1361ADBED75001BFADC /* CISImagePair.mm in Sources */ = {isa = PBXBuildFile; fileRef = B5B4D1291ADBED75001BFADC /* CISImagePair.mm */; };
@@ -188,6 +190,11 @@
 		B557AB101AEA16C70064CCB8 /* GLManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GLManager.mm; sourceTree = "<group>"; };
 		B5777A661AF5AE32009E23B4 /* GLManager+Compiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GLManager+Compiler.h"; sourceTree = "<group>"; };
 		B5777A671AF5AE32009E23B4 /* GLManager+Compiler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "GLManager+Compiler.mm"; sourceTree = "<group>"; };
+		B577863C1AF885070093ED74 /* GLAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLAxis.h; sourceTree = "<group>"; };
+		B577863D1AF885070093ED74 /* GLAxis.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GLAxis.mm; sourceTree = "<group>"; };
+		B57786401AF8914B0093ED74 /* GLShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLShape.h; sourceTree = "<group>"; };
+		B57786431AF895640093ED74 /* GLCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLCloud.h; sourceTree = "<group>"; };
+		B57786441AF895640093ED74 /* GLCloud.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GLCloud.mm; sourceTree = "<group>"; };
 		B5AEA01D1ADCDECA00B716A6 /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
 		B5AEA01E1ADCDECA00B716A6 /* PhotoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PhotoViewController.mm; sourceTree = "<group>"; };
 		B5B4D1281ADBED75001BFADC /* CISCloud.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CISCloud.mm; sourceTree = "<group>"; };
@@ -607,12 +614,33 @@
 				B557AB101AEA16C70064CCB8 /* GLManager.mm */,
 				B5777A661AF5AE32009E23B4 /* GLManager+Compiler.h */,
 				B5777A671AF5AE32009E23B4 /* GLManager+Compiler.mm */,
+				B57786401AF8914B0093ED74 /* GLShape.h */,
+				B57786411AF891540093ED74 /* GLShapes */,
+				B57786421AF8915E0093ED74 /* GLSLs */,
+			);
+			name = OpenGL;
+			sourceTree = "<group>";
+		};
+		B57786411AF891540093ED74 /* GLShapes */ = {
+			isa = PBXGroup;
+			children = (
+				B577863C1AF885070093ED74 /* GLAxis.h */,
+				B577863D1AF885070093ED74 /* GLAxis.mm */,
 				B545515A1AF6306C0020EBA1 /* GLCube.h */,
 				B545515B1AF6306C0020EBA1 /* GLCube.mm */,
+				B57786431AF895640093ED74 /* GLCloud.h */,
+				B57786441AF895640093ED74 /* GLCloud.mm */,
+			);
+			name = GLShapes;
+			sourceTree = "<group>";
+		};
+		B57786421AF8915E0093ED74 /* GLSLs */ = {
+			isa = PBXGroup;
+			children = (
 				B53083DD1AF63C5D00FEDAFD /* vShader.glsl */,
 				B53083DF1AF63C6D00FEDAFD /* fShader.glsl */,
 			);
-			name = OpenGL;
+			name = GLSLs;
 			sourceTree = "<group>";
 		};
 		B5B4D13B1ADBED7C001BFADC /* Models */ = {
@@ -1152,6 +1180,7 @@
 				B5B4D1381ADBED75001BFADC /* CISCamera.mm in Sources */,
 				B5B4D1361ADBED75001BFADC /* CISImagePair.mm in Sources */,
 				B5CD1C5F1AE0F70000F593A8 /* CISSensor.mm in Sources */,
+				B57786451AF895640093ED74 /* GLCloud.mm in Sources */,
 				B5B4D1441ADBEE2B001BFADC /* ModelViewController.mm in Sources */,
 				B5B4D1351ADBED75001BFADC /* CISCloud.mm in Sources */,
 				B533725B1AC27E6A00848BB6 /* AppDelegate.mm in Sources */,
@@ -1161,6 +1190,7 @@
 				B5B4D1391ADBED75001BFADC /* CISSfM.mm in Sources */,
 				B5D5F1CB1AF769FA00A9E945 /* glm.cpp in Sources */,
 				B5B4D13A1ADBED75001BFADC /* CISGeometry.mm in Sources */,
+				B577863E1AF885070093ED74 /* GLAxis.mm in Sources */,
 				B5AEA01F1ADCDECA00B716A6 /* PhotoViewController.mm in Sources */,
 				B545515C1AF6306C0020EBA1 /* GLCube.mm in Sources */,
 				B5B4D1371ADBED75001BFADC /* CISImage.mm in Sources */,

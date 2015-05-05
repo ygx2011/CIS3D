@@ -39,10 +39,11 @@
     [EAGLContext setCurrentContext:_glContext];
     _glManager = [[GLManager alloc] init];
     
-    UIPinchGestureRecognizer *scaler = [[UIPinchGestureRecognizer alloc] initWithTarget:self
-                                                                                  action:@selector(didScale:)];
-    UIPanGestureRecognizer *dragger = [[UIPanGestureRecognizer alloc] initWithTarget:self
-                                                                              action:@selector(didDrag:)];
+    UIPinchGestureRecognizer *scaler =
+    [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(didScale:)];
+    UIPanGestureRecognizer *dragger =
+    [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didDrag:)];
+    
     [_glView addGestureRecognizer:scaler];
     [_glView addGestureRecognizer:dragger];
 }
@@ -64,23 +65,21 @@
 - (void)didScale:(UIPinchGestureRecognizer *)pincher {
     if (pincher.state == UIGestureRecognizerStateChanged) {
         NSLog(@"%f", pincher.scale);
-
-        _glManager.cameraRadius /= pincher.scale;
-        if (_glManager.cameraRadius < 4) {
-            _glManager.cameraRadius = 4;
-        }
-        if (_glManager.cameraRadius > 20) {
-            _glManager.cameraRadius = 20;
-        }
+        
+        _glManager.cameraRadius /= (0.8f + pincher.scale * 0.2f);
     }
 }
 
 - (void)didDrag:(UIPanGestureRecognizer *)panner {
-    CGPoint offset = [panner translationInView:_glView];
-    NSLog(@"x: %f, y: %f", offset.x, offset.y);
-    float sign = cosf(_glManager.cameraElevation) > 0 ? 1 : -1;
-    _glManager.cameraAzimuth   -= offset.x * 0.001 * sign;
-    _glManager.cameraElevation += offset.y * 0.001;
+    if (panner.state == UIGestureRecognizerStateChanged) {
+        CGPoint offset = [panner translationInView:_glView];
+        NSLog(@"x: %f, y: %f", offset.x, offset.y);
+        
+        float sign = cosf(_glManager.cameraElevation) > 0 ? 1.0f : -1.0f;
+        _glManager.cameraAzimuth    -= offset.x * 0.001f * sign;
+        _glManager.cameraElevation  += offset.y * 0.001f;
+        _glManager.inverseRotateSign = sign;
+    }
 }
 
 @end
