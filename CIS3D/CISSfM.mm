@@ -6,7 +6,9 @@
 //  Copyright (c) 2015年 PKU. All rights reserved.
 //
 
+#import "CISUtility.h"
 #import "CISSfM.h"
+#import "CISImagePair.h"
 
 @interface CISSfM ()
 
@@ -41,6 +43,11 @@
         _images = [[NSMutableArray alloc] init];
         _pairs  = [[NSMutableArray alloc] init];
         _cloud  = [[CISCloud alloc] init];
+        [_cloud addPointWithX:1.0f Y:1.5f Z:0.0f
+                         AndR:1.0f G:0.0f B:0.0f];
+        [_cloud addPointWithX:-1.0f Y:1.5f Z:0.0f
+                         AndR:1.0f G:0.0f B:0.0f];
+
     }
     return self;
 }

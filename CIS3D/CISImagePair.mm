@@ -6,6 +6,9 @@
 //  Copyright (c) 2015年 PKU. All rights reserved.
 //
 
+#import <iostream>
+
+#import "CISUtility.h"
 #import "CISImagePair.h"
 
 @interface CISImagePair ()

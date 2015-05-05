@@ -7,9 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <GLKit/GLKit.h>
 #import <OpenGLES/ES3/gl.h>
-#import <OpenGLES/EAGL.h>
 
 @interface GLManager : NSObject
 

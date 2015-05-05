@@ -64,7 +64,7 @@
 #pragma mark - gesture interactions
 - (void)didScale:(UIPinchGestureRecognizer *)pincher {
     if (pincher.state == UIGestureRecognizerStateChanged) {
-        NSLog(@"%f", pincher.scale);
+        //NSLog(@"%f", pincher.scale);
         
         _glManager.cameraRadius /= (0.8f + pincher.scale * 0.2f);
     }
@@ -73,7 +73,7 @@
 - (void)didDrag:(UIPanGestureRecognizer *)panner {
     if (panner.state == UIGestureRecognizerStateChanged) {
         CGPoint offset = [panner translationInView:_glView];
-        NSLog(@"x: %f, y: %f", offset.x, offset.y);
+        //NSLog(@"x: %f, y: %f", offset.x, offset.y);
         
         float sign = cosf(_glManager.cameraElevation) > 0 ? 1.0f : -1.0f;
         _glManager.cameraAzimuth    -= offset.x * 0.001f * sign;

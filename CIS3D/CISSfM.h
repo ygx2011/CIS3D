@@ -10,10 +10,8 @@
 
 #import <opencv2/opencv.hpp>
 
-#import "CISUtility.h"
 #import "CISCloud.h"
 #import "CISImage.h"
-#import "CISImagePair.h"
 
 @interface CISSfM : NSObject
 

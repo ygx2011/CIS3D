@@ -8,14 +8,6 @@
 
 #import "GLCloud.h"
 
-static GLfloat testCloud[] = {
-    1.5f, 1.5f, 1.5f
-};
-
-static GLfloat testCloudColor[] = {
-    0.0f, 1.0f, 0.0f, 1.0f
-};
-
 @interface GLCloud()
 
 @end
@@ -23,6 +15,8 @@ static GLfloat testCloudColor[] = {
 @implementation GLCloud {
     GLuint _vbos[2];
 }
+
+@synthesize data = _data;
 
 #pragma mark - life cycle
 - (instancetype)init {
@@ -40,21 +34,20 @@ static GLfloat testCloudColor[] = {
 #pragma mark - draw
 - (void)draw {
     glBindBuffer(GL_ARRAY_BUFFER, _vbos[0]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(testCloud), testCloud, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, 3 * _data.count * sizeof(GLfloat), _data.coordinates, GL_STATIC_DRAW);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GL_FLOAT), 0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), 0);
     
     glBindBuffer(GL_ARRAY_BUFFER, _vbos[1]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(testCloudColor), testCloudColor, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, 4 * _data.count * sizeof(GLfloat), _data.colors, GL_STATIC_DRAW);
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GL_FLOAT), 0);
+    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0);
     
-    glDrawArrays(GL_POINTS, 0, 1);
+    glDrawArrays(GL_POINTS, 0, _data.count);
     
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
     
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);}
-
 @end

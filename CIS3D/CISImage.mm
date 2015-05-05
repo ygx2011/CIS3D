@@ -6,6 +6,9 @@
 //  Copyright (c) 2015年 PKU. All rights reserved.
 //
 
+#import <opencv2/nonfree/nonfree.hpp>
+
+#import "CISUtility.h"
 #import "CISImage.h"
 
 @interface CISImage()

@@ -7,9 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-
-#import "CISUtility.h"
+#import <OpenGLES/ES3/gl.h>
 
 @interface CISCloud : NSObject
+
+@property (nonatomic) GLfloat *coordinates;
+@property (nonatomic) GLfloat *colors;
+@property (nonatomic) int count;
+
+- (instancetype)init;
+- (void)addPointWithX:(GLfloat)x Y:(GLfloat)y Z:(GLfloat)z
+                 AndR:(GLfloat)r G:(GLfloat)g B:(GLfloat)b;
 
 @end

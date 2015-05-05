@@ -17,14 +17,15 @@
 #define CISImagePairAdded             @"CISImagePairAdded"
 #define CISImagePairAddedNotification @"CISImagePairAdedNotifiation"
 
+/* 特征匹配中使用 */
 #define KNN_THRESHOLD                 0.6
 #define MIN_MATCH_THRESHOLD           10
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+/* 点云的最大数量 */
+#define MAX_POINT_NUM                 100000
 
-@interface CISUtility : NSObject
-
-@end
+/* 摄像机距离的原点(Model)的半径 */
+#define MIN_CAMERA_RADIUS             3
+#define MAX_CAMERA_RADIUS             10
 
 #endif

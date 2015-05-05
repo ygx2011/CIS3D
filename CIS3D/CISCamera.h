@@ -10,9 +10,6 @@
 
 #import <opencv2/opencv.hpp>
 
-#import "CISUtility.h"
-#import "CISGeometry.h"
-
 @interface CISCamera : NSObject
 
 /* P = K [ R | t] */

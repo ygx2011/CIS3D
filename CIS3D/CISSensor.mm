@@ -7,6 +7,7 @@
 //
 
 #import "CISSensor.h"
+#import <CoreMotion/CoreMotion.h>
 
 @interface CISSensor()
 

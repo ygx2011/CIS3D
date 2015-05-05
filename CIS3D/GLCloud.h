@@ -7,7 +7,10 @@
 //
 
 #import "GLShape.h"
+#import "CISCloud.h"
 
 @interface GLCloud : NSObject <GLShape>
+
+@property (nonatomic, strong) CISCloud *data;
 
 @end

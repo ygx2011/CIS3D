@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B51A83961AE371DE0099CC3D /* CISUtility.mm in Sources */ = {isa = PBXBuildFile; fileRef = B51A83951AE371DE0099CC3D /* CISUtility.mm */; };
 		B52BB8E71AE26E1B00CD42F0 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B52BB8E61AE26E1B00CD42F0 /* CoreMotion.framework */; };
 		B53083DE1AF63C5E00FEDAFD /* vShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = B53083DD1AF63C5D00FEDAFD /* vShader.glsl */; };
 		B53083E01AF63C6D00FEDAFD /* fShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = B53083DF1AF63C6D00FEDAFD /* fShader.glsl */; };
@@ -165,7 +164,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B51A83951AE371DE0099CC3D /* CISUtility.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CISUtility.mm; sourceTree = "<group>"; };
 		B52BB8E61AE26E1B00CD42F0 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		B53083DD1AF63C5D00FEDAFD /* vShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vShader.glsl; sourceTree = "<group>"; };
 		B53083DF1AF63C6D00FEDAFD /* fShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fShader.glsl; sourceTree = "<group>"; };
@@ -647,7 +645,6 @@
 			isa = PBXGroup;
 			children = (
 				B5B4D1301ADBED75001BFADC /* CISUtility.h */,
-				B51A83951AE371DE0099CC3D /* CISUtility.mm */,
 				B5777A691AF5B3E0009E23B4 /* OpenGL */,
 				B557AB0C1AEA10970064CCB8 /* SfM */,
 				B557AB0D1AEA10A50064CCB8 /* Sensor */,
@@ -1185,7 +1182,6 @@
 				B5B4D1351ADBED75001BFADC /* CISCloud.mm in Sources */,
 				B533725B1AC27E6A00848BB6 /* AppDelegate.mm in Sources */,
 				B557AB111AEA16C70064CCB8 /* GLManager.mm in Sources */,
-				B51A83961AE371DE0099CC3D /* CISUtility.mm in Sources */,
 				B53372581AC27E6A00848BB6 /* main.mm in Sources */,
 				B5B4D1391ADBED75001BFADC /* CISSfM.mm in Sources */,
 				B5D5F1CB1AF769FA00A9E945 /* glm.cpp in Sources */,

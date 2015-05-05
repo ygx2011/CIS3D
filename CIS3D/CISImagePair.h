@@ -8,10 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import <iostream>
 #import <opencv2/opencv.hpp>
 
-#import "CISUtility.h"
 #import "CISImage.h"
 
 @interface CISImagePair : NSObject

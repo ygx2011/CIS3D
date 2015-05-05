@@ -6,6 +6,7 @@
 //  Copyright (c) 2015年 PKU. All rights reserved.
 //
 
+#import "CISUtility.h"
 #import "CISGeometry.h"
 
 @interface CISGeometry ()

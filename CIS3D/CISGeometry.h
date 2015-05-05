@@ -10,8 +10,6 @@
 
 #import <opencv2/opencv.hpp>
 
-#import "CISUtility.h"
-
 @interface CISGeometry : NSObject
 
 /* 只有在运算过程中会用到关于Mat的辅助函数，才储存成变量形式；
