@@ -13,11 +13,14 @@
 @interface CISCamera : NSObject
 
 /* P = K [ R | t] */
-@property (nonatomic) cv::Mat *P;
-@property (nonatomic) cv::Mat *K;
-@property (nonatomic) cv::Mat *R;
-@property (nonatomic) cv::Mat *t;
+@property (nonatomic) cv::Matx34d P;
+@property (nonatomic) cv::Mat    *K;
 
+- (instancetype)initWithFundamentalMat:(cv::Mat *)F
+                       andIntrinsicMat:(cv::Mat *)K;
+- (instancetype)initWithIntrinsicMat:(cv::Mat *)K;
+
+#pragma mark - deprecated
 - (instancetype)initWithFundamentalMat:(cv::Mat *)F;
 - (instancetype)init;
 

@@ -18,5 +18,6 @@
 - (instancetype)init;
 - (void)addPointWithX:(GLfloat)x Y:(GLfloat)y Z:(GLfloat)z
                  AndR:(GLfloat)r G:(GLfloat)g B:(GLfloat)b;
+- (void)clear;
 
 @end

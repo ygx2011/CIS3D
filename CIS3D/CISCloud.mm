@@ -50,4 +50,8 @@
     NSLog(@"%d", _count);
 }
 
+- (void)clear {
+    _count = 0;
+}
+
 @end

@@ -6,6 +6,11 @@
 //  Copyright (c) 2015年 PKU. All rights reserved.
 //
 
+/* Logically, the most important code snippets includes:
+ * 1. ModelViewController - the event-driven loop
+ * 2. CISSfM - manages the queues
+ * 3. CISImagePair - match 2 images and 2d -> 3d
+ */
 #ifndef CIS3D_CISConsts_h
 #define CIS3D_CISConsts_h
 

@@ -16,4 +16,13 @@
  * 作为接口的Mat，全都储存成指针。 */
 + (cv::Mat)crossMatrix:(cv::Mat &)A;
 
++ (cv::Mat)iterativeTriangulationWithPoint1:(cv::Point2f)u1 camera1:(cv::Matx34d)P1
+                                  andPoint2:(cv::Point2f)u2 camera2:(cv::Matx34d)P2;
+
++ (cv::Mat)trianguationWithPoint1:(cv::Point2f)u1 camera1:(cv::Matx34d)P1
+                        andPoint2:(cv::Point2f)u2 camera2:(cv::Matx34d)P2;
+
++ (void)decomposeEssentialMat:(cv::Mat &)E
+                         ToR1:(cv::Mat &)R1 t1:(cv::Mat &)t1
+                        andR2:(cv::Mat &)R2 t2:(cv::Mat &)t2;
 @end
