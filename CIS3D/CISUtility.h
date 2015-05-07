@@ -30,7 +30,7 @@
 #define MAX_POINT_NUM                 100000
 
 /* 摄像机距离的原点(Model)的半径 */
-#define MIN_CAMERA_RADIUS             3
-#define MAX_CAMERA_RADIUS             10
+#define MIN_CAMERA_RADIUS             1
+#define MAX_CAMERA_RADIUS             15
 
 #endif

@@ -21,7 +21,8 @@
 @end
 
 @implementation CISImagePair {
-    cv::Mat *_guessK;
+    cv::Mat *_guessedK;
+    cv::Mat *_guessedKInv;
 }
 
 @synthesize image1         = _image1;
@@ -39,9 +40,11 @@
 - (instancetype)initWithImage1:(CISImage *)image1 andImage2:(CISImage *)image2 {
     self = [super init];
     if (self) {
-        _guessK = new cv::Mat((cv::Mat_<double>(3, 3) << 480, 0, 240,
-                                                        0, 640, 320,
-                                                        0, 0, 1));
+        _guessedK = new cv::Mat((cv::Mat_<double>(3, 3) << 480, 0, 240,
+                                                            0, 640, 320,
+                                                            0, 0, 1));
+        _guessedKInv = new cv::Mat(_guessedK->inv());
+        
         _image1 = image1;
         _image2 = image2;
         
@@ -81,9 +84,9 @@
             _fundamentalMat = new cv::Mat(cv::findFundamentalMat(*_keyPoints1, *_keyPoints2));
             std::cout << "CISImagePair: _fundamentalMat = \n" << *_fundamentalMat << std::endl;
 
-            _image1.camera = [[CISCamera alloc] initWithIntrinsicMat:_guessK];
+            _image1.camera = [[CISCamera alloc] initWithIntrinsicMat:_guessedK];
             _image2.camera = [[CISCamera alloc] initWithFundamentalMat:_fundamentalMat
-                                                       andIntrinsicMat:_guessK];
+                                                       andIntrinsicMat:_guessedK];
             std::cout << "CISImagePair: _image1s P = \n" << _image1.camera.P << std::endl;
             std::cout << "CISImagePair: _image2s P = \n" << _image2.camera.P << std::endl;
         
@@ -91,17 +94,28 @@
             int n = (int)_keyPoints1->size();
             [[CISSfM sharedInstance].cloud clear];
             for (int i = 0; i < n; ++i) {
+                cv::Mat reprojectPt1 = cv::Mat((cv::Mat_<double>(3, 1) <<
+                                                   (*_keyPoints1)[i].x, (*_keyPoints1)[i].y, 1.0));
+                cv::Mat reprojectPt2 = cv::Mat((cv::Mat_<double>(3, 1) <<
+                                                   (*_keyPoints2)[i].x, (*_keyPoints2)[i].y, 1.0));
+                reprojectPt1 = *(_guessedKInv) * reprojectPt1;
+                reprojectPt2 = *(_guessedKInv) * reprojectPt2;
+                
+                cv::Point2f pt1 = cv::Point2f(reprojectPt1.at<double>(0, 0) / reprojectPt1.at<double>(2, 0));
+                cv::Point2f pt2 = cv::Point2f(- reprojectPt1.at<double>(1, 0) / reprojectPt1.at<double>(2, 0));
+                
                 cv::Mat point3dim =
-                [CISGeometry trianguationWithPoint1:(*_keyPoints1)[i] camera1:_image1.camera.P
-                                          andPoint2:(*_keyPoints2)[i] camera2:_image2.camera.P];
+                [CISGeometry iterativeTriangulationWithPoint1:pt1 camera1:_image1.camera.P
+                                                    andPoint2:pt2 camera2:_image2.camera.P];
                 std::cout << point3dim << std::endl;
+                
                 int x = (int)(*_keyPoints1)[i].x, y = (int)(*_keyPoints2)[i].y;
                 [[CISSfM sharedInstance].cloud addPointWithX:point3dim.at<double>(0, 0)
                                                            Y:point3dim.at<double>(1, 0)
                                                            Z:point3dim.at<double>(2, 0)
-                                                        AndR:(_image1.image->at<cv::Vec3b>(y, x)[2] / 255.0f)
-                                                           G:(_image1.image->at<cv::Vec3b>(y, x)[1] / 255.0f)
-                                                           B:(_image1.image->at<cv::Vec3b>(y, x)[0] / 255.0f)];
+                                                        AndR:(_image1.image->at<cv::Vec4b>(y, x)[0] / 255.0f)
+                                                           G:(_image1.image->at<cv::Vec4b>(y, x)[1] / 255.0f)
+                                                           B:(_image1.image->at<cv::Vec4b>(y, x)[2] / 255.0f)];
             }
             /** 然后 3D 到 2D **/
         }
@@ -117,6 +131,8 @@
     
     delete _keyPoints1;
     delete _keyPoints2;
+    
+    delete _guessedK;
 }
 
 @end
