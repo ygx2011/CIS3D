@@ -101,8 +101,10 @@
                 reprojectPt1 = *(_guessedKInv) * reprojectPt1;
                 reprojectPt2 = *(_guessedKInv) * reprojectPt2;
                 
-                cv::Point2f pt1 = cv::Point2f(reprojectPt1.at<double>(0, 0) / reprojectPt1.at<double>(2, 0));
-                cv::Point2f pt2 = cv::Point2f(- reprojectPt1.at<double>(1, 0) / reprojectPt1.at<double>(2, 0));
+                cv::Point2f pt1 = cv::Point2f(reprojectPt1.at<double>(0, 0) / reprojectPt1.at<double>(2, 0),
+                                              reprojectPt1.at<double>(1, 0) / reprojectPt1.at<double>(2, 0));
+                cv::Point2f pt2 = cv::Point2f(reprojectPt2.at<double>(0, 0) / reprojectPt2.at<double>(2, 0),
+                                              reprojectPt2.at<double>(1, 0) / reprojectPt2.at<double>(2, 0));
                 
                 cv::Mat point3dim =
                 [CISGeometry iterativeTriangulationWithPoint1:pt1 camera1:_image1.camera.P
