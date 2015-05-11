@@ -18,12 +18,14 @@
 
 @synthesize P = _P;
 @synthesize K = _K;
+@synthesize KInv = _KInv;
 
 #pragma mark - life cycle
 - (instancetype)initWithFundamentalMat:(cv::Mat *)F andIntrinsicMat:(cv::Mat *)K {
     self = [super init];
     if (self) {
         _K = K;
+        _KInv = new cv::Mat(K->inv());
 
         cv::Mat E = K->t() * (*F) * (*K);
         cv::Mat R1, t1, R2, t2;
@@ -41,6 +43,8 @@
     self = [super init];
     if (self) {
         _K = K;
+        _KInv = new cv::Mat(K->inv());
+
         _P = cv::Matx34d(1, 0, 0, 0,
                          0, 1, 0, 0,
                          0, 0, 1, 0);
@@ -79,6 +83,7 @@
 
 - (void)dealloc {
     delete _K;
+    delete _KInv;
 }
 
 @end

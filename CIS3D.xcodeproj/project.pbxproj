@@ -150,6 +150,7 @@
 		B5D5F22D1AF769FB00A9E945 /* vector_angle.inl in Resources */ = {isa = PBXBuildFile; fileRef = B5D5F1AA1AF769FA00A9E945 /* vector_angle.inl */; };
 		B5D5F22E1AF769FB00A9E945 /* vector_query.inl in Resources */ = {isa = PBXBuildFile; fileRef = B5D5F1AC1AF769FA00A9E945 /* vector_query.inl */; };
 		B5D5F22F1AF769FB00A9E945 /* wrap.inl in Resources */ = {isa = PBXBuildFile; fileRef = B5D5F1AE1AF769FA00A9E945 /* wrap.inl */; };
+		B5E913C41AFCAB9000F289F7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5E913C31AFCAB9000F289F7 /* CoreMedia.framework */; };
 		B5EE69B01AD7C94D00661595 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5EE69AF1AD7C94D00661595 /* opencv2.framework */; };
 /* End PBXBuildFile section */
 
@@ -471,6 +472,7 @@
 		B5D5F1BD1AF769FA00A9E945 /* vec3.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = vec3.hpp; sourceTree = "<group>"; };
 		B5D5F1BE1AF769FA00A9E945 /* vec4.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = vec4.hpp; sourceTree = "<group>"; };
 		B5D5F1BF1AF769FA00A9E945 /* vector_relational.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = vector_relational.hpp; sourceTree = "<group>"; };
+		B5E913C31AFCAB9000F289F7 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		B5EE69AF1AD7C94D00661595 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -480,6 +482,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B548F0791AF7677800D50E7B /* libstdc++.6.0.9.dylib in Frameworks */,
+				B5E913C41AFCAB9000F289F7 /* CoreMedia.framework in Frameworks */,
 				B52BB8E71AE26E1B00CD42F0 /* CoreMotion.framework in Frameworks */,
 				B5B4D1411ADBEE12001BFADC /* CoreGraphics.framework in Frameworks */,
 				B5B4D13F1ADBEDBB001BFADC /* UIKit.framework in Frameworks */,
@@ -566,6 +569,7 @@
 				B5C8B46A1ACFC0FE0077116A /* AVFoundation.framework */,
 				B5B4D1401ADBEE12001BFADC /* CoreGraphics.framework */,
 				B52BB8E61AE26E1B00CD42F0 /* CoreMotion.framework */,
+				B5E913C31AFCAB9000F289F7 /* CoreMedia.framework */,
 				B5B4D13C1ADBEDB4001BFADC /* Foundation.framework */,
 				B54D22951ACE575E00F986F3 /* GLKit.framework */,
 				B54D22931ACE575600F986F3 /* OpenGLES.framework */,

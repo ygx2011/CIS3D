@@ -15,6 +15,7 @@
 /* P = K [ R | t] */
 @property (nonatomic) cv::Matx34d P;
 @property (nonatomic) cv::Mat    *K;
+@property (nonatomic) cv::Mat    *KInv;
 
 - (instancetype)initWithFundamentalMat:(cv::Mat *)F
                        andIntrinsicMat:(cv::Mat *)K;

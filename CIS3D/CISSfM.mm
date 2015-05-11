@@ -7,6 +7,7 @@
 //
 
 #import "CISUtility.h"
+#import "CISGeometry.h"
 #import "CISSfM.h"
 #import "CISImagePair.h"
 
@@ -42,7 +43,7 @@
     if (self) {
         _images = [[NSMutableArray alloc] init];
         _pairs  = [[NSMutableArray alloc] init];
-        _cloud  = [[CISCloud alloc] init];
+        _cloud  = [[CISCloud alloc] init];        
     }
     return self;
 }
@@ -100,6 +101,34 @@
 }
 
 - (void)constructWithImagePair:(CISImagePair *)pair {
+    int n = (int)pair.keyPoints1->size();
+    [[CISSfM sharedInstance].cloud clear];
+    for (int i = 0; i < n; ++i) {
+        cv::Mat rectifiedPt1 = cv::Mat((cv::Mat_<double>(3, 1) <<
+                                        (*pair.keyPoints1)[i].x, (*pair.keyPoints1)[i].y, 1.0));
+        cv::Mat rectifiedPt2 = cv::Mat((cv::Mat_<double>(3, 1) <<
+                                        (*pair.keyPoints2)[i].x, (*pair.keyPoints2)[i].y, 1.0));
+        rectifiedPt1 = (*pair.image1.camera.KInv) * rectifiedPt1;
+        rectifiedPt2 = (*pair.image2.camera.KInv) * rectifiedPt2;
+        
+        cv::Point2f pt1 = cv::Point2f(rectifiedPt1.at<double>(0, 0) / rectifiedPt1.at<double>(2, 0),
+                                      rectifiedPt1.at<double>(1, 0) / rectifiedPt1.at<double>(2, 0));
+        cv::Point2f pt2 = cv::Point2f(rectifiedPt2.at<double>(0, 0) / rectifiedPt2.at<double>(2, 0),
+                                      rectifiedPt2.at<double>(1, 0) / rectifiedPt2.at<double>(2, 0));
+        
+        cv::Mat point3dim =
+        [CISGeometry iterativeTriangulationWithPoint1:pt1 camera1:pair.image1.camera.P
+                                            andPoint2:pt2 camera2:pair.image2.camera.P];
+        std::cout << point3dim << std::endl;
+        
+        int x = (int)(*pair.keyPoints1)[i].x, y = (int)(*pair.keyPoints2)[i].y;
+        [[CISSfM sharedInstance].cloud addPointWithX:point3dim.at<double>(0, 0)
+                                                   Y:point3dim.at<double>(1, 0)
+                                                   Z:point3dim.at<double>(2, 0)
+                                                AndR:(pair.image1.image->at<cv::Vec4b>(y, x)[0] / 255.0f)
+                                                   G:(pair.image1.image->at<cv::Vec4b>(y, x)[1] / 255.0f)
+                                                   B:(pair.image1.image->at<cv::Vec4b>(y, x)[2] / 255.0f)];
+    }
 }
 
 - (void)updateWithImagePair:(CISImagePair *)pair {

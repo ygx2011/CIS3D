@@ -22,6 +22,9 @@
 
 @property (nonatomic) cv::Mat                 *drawImage;
 
+@property (nonatomic) std::vector<cv::Point2f> *keyPoints1;
+@property (nonatomic) std::vector<cv::Point2f> *keyPoints2;
+
 - (instancetype)initWithImage1:(CISImage *)image1 andImage2:(CISImage *)image2;
 
 @end
