@@ -127,7 +127,7 @@
              
              dispatch_async(dispatch_get_main_queue(), ^{
                  /* 更新UI */
-                 _imageView.image = [CISImage UIImageFromCVMat:capturedImage.drawImage];
+                 _imageView.image = [CISImage UIImageFromCVMat:[capturedImage drawKeypoints]];
                  
                  /* 将图像添加至SfM维护的队列中 */
                  [[CISSfM sharedInstance] addImage:capturedImage];

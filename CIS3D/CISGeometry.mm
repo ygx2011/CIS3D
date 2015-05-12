@@ -31,11 +31,11 @@
     
     double w1 = 1, w2 = 1;
     cv::Mat_<double> X(4, 1);
-    cv::Mat_<double> X_ = [CISGeometry triangulationWithPoint1:u1 camera1:P1
-                                                     andPoint2:u2 camera2:P2];
-    X(0) = X_(0); X(1) = X_(1); X(2) = X_(2); X(3) = 1.0;
     
     for (int i = 0; i < ITER_TIME; ++i) { //Hartley suggests 10 iterations at most
+        cv::Mat_<double> X_ = [CISGeometry triangulationWithPoint1:u1 camera1:P1
+                                                         andPoint2:u2 camera2:P2];
+        X(0) = X_(0); X(1) = X_(1); X(2) = X_(2); X(3) = 1.0;
         //recalculate weights
         double p2x1 = cv::Mat_<double>(cv::Mat_<double>(P1).row(2)*X)(0);
         double p2x2 = cv::Mat_<double>(cv::Mat_<double>(P2).row(2)*X)(0);
@@ -100,6 +100,13 @@
     R2 = svd.u * cv::Mat(Wt) * svd.vt; //HZ 9.19
     t1 = svd.u.col(2); //u3
     t2 = - svd.u.col(2); //u3
+}
+
++ (cv::Point2f)reprojectPoint:(cv::Point2f)u withKInv:(cv::Mat *)KInv {
+    cv::Mat reprojectedU = cv::Mat( (cv::Mat_<double>(3, 1) << u.x, u.y, 1.0) );
+    reprojectedU = (*KInv) * reprojectedU;
+    return cv::Point2f(reprojectedU.at<double>(0, 0) / reprojectedU.at<double>(2, 0),
+                       reprojectedU.at<double>(1, 0) / reprojectedU.at<double>(2, 0));
 }
 
 @end

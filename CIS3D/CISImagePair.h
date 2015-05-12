@@ -21,13 +21,12 @@
 @property (nonatomic) std::vector<cv::DMatch> *matches;
 @property (nonatomic) cv::Mat                 *fundamentalMat;
 
-@property (nonatomic) cv::Mat                 *drawImage;
-
-@property (nonatomic) std::vector<cv::Point2f> *keyPoints1;
-@property (nonatomic) std::vector<cv::Point2f> *keyPoints2;
-@property (nonatomic) std::vector<int>         *keyPointsIndex1;
-@property (nonatomic) std::vector<int>         *keyPointsIndex2;
+@property (nonatomic) std::vector<cv::Point2f> *matchedPoints1;
+@property (nonatomic) std::vector<cv::Point2f> *matchedPoints2;
+@property (nonatomic) std::vector<int>         *matchedPointsIndex1;
+@property (nonatomic) std::vector<int>         *matchedPointsIndex2;
 
 - (instancetype)initWithImage1:(CISImage *)image1 andImage2:(CISImage *)image2;
+- (cv::Mat)drawMatches;
 
 @end

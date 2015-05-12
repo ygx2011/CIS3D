@@ -27,13 +27,11 @@
 @synthesize matches        = _matches;
 @synthesize fundamentalMat = _fundamentalMat;
 
-@synthesize drawImage      = _drawImage;
+@synthesize matchedPoints1     = _matchedPoints1;
+@synthesize matchedPoints2     = _matchedPoints2;
 
-@synthesize keyPoints1     = _keyPoints1;
-@synthesize keyPoints2     = _keyPoints2;
-
-@synthesize keyPointsIndex1 = _keyPointsIndex1;
-@synthesize keyPointsIndex2 = _keyPointsIndex2;
+@synthesize matchedPointsIndex1 = _matchedPointsIndex1;
+@synthesize matchedPointsIndex2 = _matchedPointsIndex2;
 
 #pragma mark - life cycle
 - (instancetype)initWithImage1:(CISImage *)image1 andImage2:(CISImage *)image2 {
@@ -48,10 +46,10 @@
         cv::FlannBasedMatcher matcher;
         std::vector<std::vector<cv::DMatch> > knnMatches;
         
-        _keyPoints1 = new std::vector<cv::Point2f>();
-        _keyPoints2 = new std::vector<cv::Point2f>();
-        _keyPointsIndex1 = new std::vector<int>();
-        _keyPointsIndex2 = new std::vector<int>();
+        _matchedPoints1 = new std::vector<cv::Point2f>();
+        _matchedPoints2 = new std::vector<cv::Point2f>();
+        _matchedPointsIndex1 = new std::vector<int>();
+        _matchedPointsIndex2 = new std::vector<int>();
 
         /* 寻找两图匹配点 */
         matcher.knnMatch(*(_image1.keyDescriptor), *(_image2.keyDescriptor), knnMatches, 2);
@@ -60,60 +58,56 @@
             if (best.distance < good.distance * KNN_THRESHOLD) {
                 _matches->push_back(best);
                 
-                _keyPointsIndex1->push_back(best.queryIdx);
-                _keyPoints1->push_back((*_image1.keyPoints)[best.queryIdx].pt);
+                _matchedPointsIndex1->push_back(best.queryIdx);
+                _matchedPoints1->push_back((*_image1.keyPoints)[best.queryIdx].pt);
                 
-                _keyPointsIndex2->push_back(best.trainIdx);
-                _keyPoints2->push_back((*_image2.keyPoints)[best.trainIdx].pt);
+                _matchedPointsIndex2->push_back(best.trainIdx);
+                _matchedPoints2->push_back((*_image2.keyPoints)[best.trainIdx].pt);
             }
         }
         
-        /* 绘制两图对应关系。四通道图片没法调用drawMatches，必须转换颜色 */
-        cv::Mat __image1, __image2, __drawImage;
-        cv::cvtColor(*_image1.image, __image1, CV_RGBA2RGB);
-        cv::cvtColor(*_image2.image, __image2, CV_RGBA2RGB);
-        
-        cv::drawMatches(__image1, *_image1.keyPoints,
-                        __image2, *_image2.keyPoints,
-                        *_matches, __drawImage);
-        
-        _drawImage = new cv::Mat(__drawImage);
-        
         /* 计算F，恢复摄像机矩阵。当两幅图完全不匹配时可能发生崩溃。此时不必计算 F */
         NSLog(@"CISImagePair: %lu matches in _matches", _matches->size());
+        _score = 0;
         if (_matches->size() > MIN_MATCH_THRESHOLD) {
-            /* 由对应点得到基础矩阵 */
-            cv::Mat filter;
-            _fundamentalMat =
-            new cv::Mat(cv::findFundamentalMat(*_keyPoints1,
-                                               *_keyPoints2,
-                                               cv::FM_RANSAC,
-                                               3.0,
-                                               0.99,
-                                               filter));
-            std::cout << "Filter: " << filter << std::endl;
-            std::cout << "CISImagePair: _fundamentalMat = \n" << *_fundamentalMat << std::endl;
-
+            cv::Mat filter; _score = 0.0f;                        /* 由对应点得到基础矩阵, filter存储野点信息 */
+            _fundamentalMat = new cv::Mat(cv::findFundamentalMat(*_matchedPoints1, *_matchedPoints2,
+                                                                 cv::FM_RANSAC, 3.0, 0.99, filter));
+            for (int i = 0; i < filter.rows; ++i) {
+                if (filter.at<char>(i, 0)                                                       /* 是内点 */
+                    && (*image1.correspondenceTo3DIndex)[(*_matchedPointsIndex1)[i]] != -1) {   /* 有3D对应点 */
+                    _score += 1.0f;
+                }
+            }
             _image1.camera = [[CISCamera alloc] init];
             _image2.camera = [[CISCamera alloc] initWithFundamentalMat:_fundamentalMat];
-            std::cout << "CISImagePair: _image1s P = \n" << _image1.camera.P << std::endl;
-            std::cout << "CISImagePair: _image2s P = \n" << _image2.camera.P << std::endl;
         }
     }
     return self;
+}
+
+- (cv::Mat)drawMatches {
+    /* 绘制两图对应关系。四通道图片没法调用drawMatches，必须转换颜色 */
+    cv::Mat __image1, __image2, __drawImage;
+    cv::cvtColor(*_image1.image, __image1, CV_RGBA2RGB);
+    cv::cvtColor(*_image2.image, __image2, CV_RGBA2RGB);
+    
+    cv::drawMatches(__image1, *_image1.keyPoints,
+                    __image2, *_image2.keyPoints,
+                    *_matches, __drawImage);
+    
+    return __drawImage;
 }
 
 - (void)dealloc {
     delete _matches;
     delete _fundamentalMat;
     
-    delete _drawImage;
+    delete _matchedPoints1;
+    delete _matchedPoints2;
     
-    delete _keyPoints1;
-    delete _keyPoints2;
-    
-    delete _keyPointsIndex1;
-    delete _keyPointsIndex2;
+    delete _matchedPointsIndex1;
+    delete _matchedPointsIndex2;
 }
 
 @end

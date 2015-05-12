@@ -41,13 +41,13 @@
 - (void)didReceiveImageAddedNotification:(NSNotification *)notification {
     NSLog(@"PhotoViewController: Image get.");
     CISImage *image = [[notification userInfo] objectForKey:CISImageAdded];
-    _cachedMonoImage = [CISImage UIImageFromCVMat:image.drawImage];
+    _cachedMonoImage = [CISImage UIImageFromCVMat:[image drawKeypoints]];
 }
 
 - (void)didReceiveImagePairAddedNotification:(NSNotification *)notification {
     NSLog(@"PhotoViewController: Image pair get.");
     CISImagePair *pair = [[notification userInfo] objectForKey:CISImagePairAdded];
-    _cachedStereoImage = [CISImage UIImageFromCVMat:pair.drawImage];
+    _cachedStereoImage = [CISImage UIImageFromCVMat:[pair drawMatches]];
 }
 
 @end

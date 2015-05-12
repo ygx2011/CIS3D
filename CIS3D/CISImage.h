@@ -24,13 +24,12 @@
 
 @property (nonatomic, strong) CISCamera         *camera;
 
-@property (nonatomic) cv::Mat                   *drawImage;
-
 + (cv::Mat *)cvMatFromUIImage:(UIImage *)image;
 
-+ (UIImage *)UIImageFromCVMat:(cv::Mat *)cvMat;
-+ (UIImage *)UIImageFromCVMat:(cv::Mat *)cvMat WithOrientation:(UIImageOrientation)orientation;
++ (UIImage *)UIImageFromCVMat:(cv::Mat)cvMat;
++ (UIImage *)UIImageFromCVMat:(cv::Mat)cvMat WithOrientation:(UIImageOrientation)orientation;
 
 - (instancetype)initWithUIImage:(UIImage *)image;
+- (cv::Mat)drawKeypoints;
 
 @end
