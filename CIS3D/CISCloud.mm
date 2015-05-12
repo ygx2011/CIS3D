@@ -36,6 +36,15 @@
 }
 
 #pragma mark - array access
+- (cv::Point3f)pointAtIndex:(int)index {
+    cv::Point3f pt;
+    int baseIndex = _count * 3;
+    pt.x = _coordinates[baseIndex    ];
+    pt.y = _coordinates[baseIndex + 1];
+    pt.z = _coordinates[baseIndex + 2];
+    return pt;
+}
+
 - (void)addPointWithX:(GLfloat)x Y:(GLfloat)y Z:(GLfloat)z
                  AndR:(GLfloat)r G:(GLfloat)g B:(GLfloat)b {
     int baseIndex = _count * 3, colorIndex = _count * 4;

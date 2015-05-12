@@ -24,7 +24,7 @@
 
 /* 特征匹配中使用 */
 #define KNN_THRESHOLD                 0.6
-#define MIN_MATCH_THRESHOLD           10
+#define MIN_MATCH_THRESHOLD           100
 
 /* 点云的最大数量 */
 #define MAX_POINT_NUM                 100000

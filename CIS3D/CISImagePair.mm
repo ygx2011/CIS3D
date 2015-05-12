@@ -17,10 +17,9 @@
 
 @end
 
-@implementation CISImagePair {
-    cv::Mat *_guessedK;
-    cv::Mat *_guessedKInv;
-}
+@implementation CISImagePair
+
+@synthesize score          = _score;
 
 @synthesize image1         = _image1;
 @synthesize image2         = _image2;
@@ -33,16 +32,17 @@
 @synthesize keyPoints1     = _keyPoints1;
 @synthesize keyPoints2     = _keyPoints2;
 
+@synthesize keyPointsIndex1 = _keyPointsIndex1;
+@synthesize keyPointsIndex2 = _keyPointsIndex2;
+
 #pragma mark - life cycle
 - (instancetype)initWithImage1:(CISImage *)image1 andImage2:(CISImage *)image2 {
     self = [super init];
-    if (self) {        
+    if (self) {
+        _score = 0.0f;
+        
         _image1 = image1;
         _image2 = image2;
-        
-        _guessedK = new cv::Mat((cv::Mat_<double>(3, 3) << 407.36,   0, 240,
-                                                             0, 723.71, 320,
-                                                             0,      0, 1));
         
         _matches = new std::vector<cv::DMatch>;
         cv::FlannBasedMatcher matcher;
@@ -50,6 +50,8 @@
         
         _keyPoints1 = new std::vector<cv::Point2f>();
         _keyPoints2 = new std::vector<cv::Point2f>();
+        _keyPointsIndex1 = new std::vector<int>();
+        _keyPointsIndex2 = new std::vector<int>();
 
         /* 寻找两图匹配点 */
         matcher.knnMatch(*(_image1.keyDescriptor), *(_image2.keyDescriptor), knnMatches, 2);
@@ -57,7 +59,11 @@
             cv::DMatch best = knnMatches[i][0], good = knnMatches[i][1];
             if (best.distance < good.distance * KNN_THRESHOLD) {
                 _matches->push_back(best);
+                
+                _keyPointsIndex1->push_back(best.queryIdx);
                 _keyPoints1->push_back((*_image1.keyPoints)[best.queryIdx].pt);
+                
+                _keyPointsIndex2->push_back(best.trainIdx);
                 _keyPoints2->push_back((*_image2.keyPoints)[best.trainIdx].pt);
             }
         }
@@ -77,12 +83,19 @@
         NSLog(@"CISImagePair: %lu matches in _matches", _matches->size());
         if (_matches->size() > MIN_MATCH_THRESHOLD) {
             /* 由对应点得到基础矩阵 */
-            _fundamentalMat = new cv::Mat(cv::findFundamentalMat(*_keyPoints1, *_keyPoints2));
+            cv::Mat filter;
+            _fundamentalMat =
+            new cv::Mat(cv::findFundamentalMat(*_keyPoints1,
+                                               *_keyPoints2,
+                                               cv::FM_RANSAC,
+                                               3.0,
+                                               0.99,
+                                               filter));
+            std::cout << "Filter: " << filter << std::endl;
             std::cout << "CISImagePair: _fundamentalMat = \n" << *_fundamentalMat << std::endl;
 
-            _image1.camera = [[CISCamera alloc] initWithIntrinsicMat:_guessedK];
-            _image2.camera = [[CISCamera alloc] initWithFundamentalMat:_fundamentalMat
-                                                       andIntrinsicMat:_guessedK];
+            _image1.camera = [[CISCamera alloc] init];
+            _image2.camera = [[CISCamera alloc] initWithFundamentalMat:_fundamentalMat];
             std::cout << "CISImagePair: _image1s P = \n" << _image1.camera.P << std::endl;
             std::cout << "CISImagePair: _image2s P = \n" << _image2.camera.P << std::endl;
         }
@@ -99,7 +112,8 @@
     delete _keyPoints1;
     delete _keyPoints2;
     
-    delete _guessedK;
+    delete _keyPointsIndex1;
+    delete _keyPointsIndex2;
 }
 
 @end

@@ -14,6 +14,7 @@
 
 @interface CISImagePair : NSObject
 
+@property (nonatomic) double                   score;
 @property (nonatomic) CISImage                *image1;
 @property (nonatomic) CISImage                *image2;
 
@@ -24,6 +25,8 @@
 
 @property (nonatomic) std::vector<cv::Point2f> *keyPoints1;
 @property (nonatomic) std::vector<cv::Point2f> *keyPoints2;
+@property (nonatomic) std::vector<int>         *keyPointsIndex1;
+@property (nonatomic) std::vector<int>         *keyPointsIndex2;
 
 - (instancetype)initWithImage1:(CISImage *)image1 andImage2:(CISImage *)image2;
 

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <OpenGLES/ES3/gl.h>
 
+#import <opencv2/opencv.hpp>
+
 @interface CISCloud : NSObject
 
 @property (nonatomic) GLfloat *coordinates;
@@ -16,8 +18,11 @@
 @property (nonatomic) int count;
 
 - (instancetype)init;
+
+- (cv::Point3f)pointAtIndex:(int)index;
 - (void)addPointWithX:(GLfloat)x Y:(GLfloat)y Z:(GLfloat)z
                  AndR:(GLfloat)r G:(GLfloat)g B:(GLfloat)b;
 - (void)clear;
+
 
 @end

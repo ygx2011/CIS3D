@@ -23,6 +23,7 @@
     return Ax;
 }
 
+/* 迭代地进行三角化。 */
 + (cv::Mat)iterativeTriangulationWithPoint1:(cv::Point2f)u1 camera1:(cv::Matx34d)P1
                                   andPoint2:(cv::Point2f)u2 camera2:(cv::Matx34d)P2 {
     const static int ITER_TIME = 10;
@@ -62,6 +63,7 @@
     return X;
 }
 
+/* 简单的三角化 */
 + (cv::Mat)triangulationWithPoint1:(cv::Point2f)u1 camera1:(cv::Matx34d)P1
                          andPoint2:(cv::Point2f)u2 camera2:(cv::Matx34d)P2 {
 
@@ -81,6 +83,7 @@
     return X;
 }
 
+/* 分解 Essential 矩阵，获取两种可能的解 */
 + (void)decomposeEssentialMat:(cv::Mat &)E
                          ToR1:(cv::Mat &)R1 t1:(cv::Mat &)t1
                         andR2:(cv::Mat &)R2 t2:(cv::Mat &)t2 {

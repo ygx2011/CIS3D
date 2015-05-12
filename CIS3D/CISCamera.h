@@ -17,11 +17,6 @@
 @property (nonatomic) cv::Mat    *K;
 @property (nonatomic) cv::Mat    *KInv;
 
-- (instancetype)initWithFundamentalMat:(cv::Mat *)F
-                       andIntrinsicMat:(cv::Mat *)K;
-- (instancetype)initWithIntrinsicMat:(cv::Mat *)K;
-
-#pragma mark - deprecated
 - (instancetype)initWithFundamentalMat:(cv::Mat *)F;
 - (instancetype)init;
 

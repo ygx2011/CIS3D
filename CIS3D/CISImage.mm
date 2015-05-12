@@ -19,7 +19,10 @@
 
 @synthesize image         = _image;
 @synthesize keyDescriptor = _keyDescriptor;
+
 @synthesize keyPoints     = _keyPoints;
+@synthesize correspondenceTo3DIndex = _correspondenceTo3DIndex;
+
 @synthesize camera        = _camera;
 
 @synthesize drawImage     = _drawImage;
@@ -39,6 +42,10 @@
         detector .detect (*_image, *_keyPoints);
         extractor.compute(*_image, *_keyPoints, __keyDescriptor);
         _keyDescriptor = new cv::Mat(__keyDescriptor);
+        _correspondenceTo3DIndex = new std::vector<int>(_keyPoints->size());
+        for (int i = 0; i < _correspondenceTo3DIndex->size(); ++i) {
+            (*_correspondenceTo3DIndex)[i] = -1;
+        }
         
         /* 四通道图片没法调用drawKeyPoints，必须转换颜色 */
         cv::Mat __drawImage, __image;
@@ -51,9 +58,10 @@
 
 - (void)dealloc {
     delete _image;
-    delete _drawImage;
+
     delete _keyDescriptor;
     delete _keyPoints;
+    delete _correspondenceTo3DIndex;
     
     delete _drawImage;
 }

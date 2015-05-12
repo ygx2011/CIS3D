@@ -18,7 +18,10 @@
 
 @property (nonatomic) cv::Mat                   *image;
 @property (atomic)    cv::Mat                   *keyDescriptor;
+
 @property (atomic)    std::vector<cv::KeyPoint> *keyPoints;
+@property (nonatomic) std::vector<int>          *correspondenceTo3DIndex;
+
 @property (nonatomic, strong) CISCamera         *camera;
 
 @property (nonatomic) cv::Mat                   *drawImage;
