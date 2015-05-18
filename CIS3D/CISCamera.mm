@@ -57,9 +57,9 @@
 
 #pragma mark - utility
 - (void)setupK {
-    _K = new cv::Mat((cv::Mat_<double>(3, 3) << 407.36,      0, 240,
-                      0, 723.71, 320,
-                      0,      0, 1));
+    _K = new cv::Mat((cv::Mat_<double>(3, 3) << 407.36, 0, 240,
+                                                0, 723.71, 320,
+                                                0,      0, 1));
     _KInv = new cv::Mat(_K->inv());
 }
 

@@ -21,7 +21,7 @@
 @synthesize keyDescriptor = _keyDescriptor;
 
 @synthesize keyPoints     = _keyPoints;
-@synthesize correspondenceTo3DIndex = _correspondenceTo3DIndex;
+@synthesize keyPointTo3DIndex = _keyPointTo3DIndex;
 
 @synthesize camera        = _camera;
 
@@ -40,9 +40,9 @@
         detector .detect (*_image, *_keyPoints);
         extractor.compute(*_image, *_keyPoints, __keyDescriptor);
         _keyDescriptor = new cv::Mat(__keyDescriptor);
-        _correspondenceTo3DIndex = new std::vector<int>(_keyPoints->size());
-        for (int i = 0; i < _correspondenceTo3DIndex->size(); ++i) {
-            (*_correspondenceTo3DIndex)[i] = -1;
+        _keyPointTo3DIndex = new std::vector<int>(_keyPoints->size());
+        for (int i = 0; i < _keyPointTo3DIndex->size(); ++i) {
+            (*_keyPointTo3DIndex)[i] = -1;
         }
     }
     return self;
@@ -53,7 +53,7 @@
 
     delete _keyDescriptor;
     delete _keyPoints;
-    delete _correspondenceTo3DIndex;
+    delete _keyPointTo3DIndex;
 }
 
 #pragma mark - utility convertions

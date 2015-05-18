@@ -39,4 +39,44 @@
     return self;
 }
 
+- (void)start {
+    [self startAccelerator];
+    [self startGyroscope];
+}
+
+- (void)stop {
+    [self stopAccelerator];
+    [self stopGyroscope];
+}
+
+- (void)startAccelerator {
+    if ([_motionManager isAccelerometerAvailable]){
+        NSLog(@"Accelerometer is available.");
+        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+        [_motionManager startAccelerometerUpdatesToQueue:queue
+                                             withHandler:
+         ^(CMAccelerometerData *accData, NSError *error) {
+         }];
+    }
+}
+
+- (void)stopAccelerator {
+    [_motionManager stopAccelerometerUpdates];
+}
+
+- (void)startGyroscope {
+    if ([_motionManager isAccelerometerAvailable]){
+        NSLog(@"Accelerometer is available.");
+        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+        [_motionManager startGyroUpdatesToQueue:queue
+                                    withHandler:
+         ^(CMGyroData *gyroData, NSError *error) {
+         }];
+    }
+}
+
+- (void)stopGyroscope {
+    [_motionManager stopGyroUpdates];
+}
+
 @end

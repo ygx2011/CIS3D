@@ -8,6 +8,12 @@
 
 #import "AppDelegate.h"
 
+#import "CameraViewController.h"
+#import "ModelViewController.h"
+#import "PhotoViewController.h"
+
+#import "CISSensor.h"
+
 @interface AppDelegate ()
 
 @end

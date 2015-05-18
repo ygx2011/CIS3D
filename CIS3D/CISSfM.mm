@@ -65,18 +65,19 @@
     else {
         /* 即使队列里已经有很多图像，有可能因为没有合适的图像对，仍然尚未开始重建。
          * 新图像 [暂时] 只与最后一个匹配 */
+        [_images addObject:image];
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             CISImage *imageToMatch = [_images lastObject];
             CISImagePair *pair = [[CISImagePair alloc] initWithImage1:imageToMatch andImage2:image];
-            
+
             if (pair.score) {
                 if ([_pairs count] == 0) {
                     [self constructWithImagePair:pair];
                 } else {
-                    //[self constructWithImagePair:pair];
-                    [self updateWithImagePair:pair];
+                    [self constructWithImagePair:pair];
+                    //[self updateWithImagePair:pair];
                 }
-                [_images addObject:image];
                 [_pairs  addObject:pair];
                 
                 /* 完成Pair匹配以后，也向ProcessImageViewController发布消息，更新ImageView */
@@ -92,19 +93,21 @@
     int n = (int)pair.matchedPoints1->size();
     [[CISSfM sharedInstance].cloud clear];
     for (int i = 0; i < n; ++i) {
-        /* 首先将二维点乘以内参的逆，投射回世界坐标系屏幕上的成像点坐标 */
-        cv::Point2f pt1 = [CISGeometry reprojectPoint:(*pair.matchedPoints1)[i]
-                                             withKInv:pair.image1.camera.KInv];
-        cv::Point2f pt2 = [CISGeometry reprojectPoint:(*pair.matchedPoints2)[i]
-                                             withKInv:pair.image2.camera.KInv];
+        cv::Point2f pt1 = (*pair.matchedPoints1)[i], pt2 = (*pair.matchedPoints2)[i];
+        
+        /* 首先将二维点乘以内参的逆，矫正回世界坐标系屏幕上的成像点坐标 */
+        cv::Point2f rectifiedPt1 = [CISGeometry rectifyPoint:pt1
+                                                    withKInv:pair.image1.camera.KInv];
+        cv::Point2f rectifiedPt2 = [CISGeometry rectifyPoint:pt2
+                                                    withKInv:pair.image2.camera.KInv];
         
         /* 三角化得到三维点 */
         cv::Mat point3dim =
-        [CISGeometry iterativeTriangulationWithPoint1:pt1 camera1:pair.image1.camera.P
-                                            andPoint2:pt2 camera2:pair.image2.camera.P];
+        [CISGeometry iterativeTriangulationWithPoint1:rectifiedPt1 camera1:pair.image1.camera.P
+                                            andPoint2:rectifiedPt2 camera2:pair.image2.camera.P];
         //std::cout << point3dim << std::endl;
         
-        int x = (int)(*pair.matchedPoints1)[i].x, y = (int)(*pair.matchedPoints2)[i].y;
+        int x = (int)pt1.x, y = (int)pt1.y;
         [[CISSfM sharedInstance].cloud addPointWithX:point3dim.at<double>(0, 0)
                                                    Y:point3dim.at<double>(1, 0)
                                                    Z:point3dim.at<double>(2, 0)
@@ -114,8 +117,8 @@
         
         /* 将二维点与三维点建立联系 */
         int indexOf3DPt = [[CISSfM sharedInstance].cloud count];
-        (*pair.image1.correspondenceTo3DIndex)[(*pair.matchedPointsIndex1)[i]] = indexOf3DPt;
-        (*pair.image2.correspondenceTo3DIndex)[(*pair.matchedPointsIndex2)[i]] = indexOf3DPt;
+        (*pair.image1.keyPointTo3DIndex)[(*pair.matchedPointsIndex1)[i]] = indexOf3DPt;
+        (*pair.image2.keyPointTo3DIndex)[(*pair.matchedPointsIndex2)[i]] = indexOf3DPt;
     }
 }
 

@@ -13,4 +13,13 @@
 + (CISSensor *)sharedInstance;
 - (instancetype)init;
 
+- (void)start;
+- (void)stop;
+
+- (void)startAccelerator;
+- (void)stopAccelerator;
+
+- (void)startGyroscope;
+- (void)stopGyroscope;
+
 @end

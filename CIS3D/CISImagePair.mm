@@ -68,15 +68,28 @@
         
         /* 计算F，恢复摄像机矩阵。当两幅图完全不匹配时可能发生崩溃。此时不必计算 F */
         NSLog(@"CISImagePair: %lu matches in _matches", _matches->size());
-        _score = 0;
+
         if (_matches->size() > MIN_MATCH_THRESHOLD) {
-            cv::Mat filter; _score = 0.0f;                        /* 由对应点得到基础矩阵, filter存储野点信息 */
+            _score = 1.0f;
+            
+            /* 由对应点得到基础矩阵, filter存储野点信息 */
+            cv::Mat filter;
             _fundamentalMat = new cv::Mat(cv::findFundamentalMat(*_matchedPoints1, *_matchedPoints2,
                                                                  cv::FM_RANSAC, 3.0, 0.99, filter));
+            _matchedPoints1->clear();
+            _matchedPoints2->clear();
+            
             for (int i = 0; i < filter.rows; ++i) {
-                if (filter.at<char>(i, 0)                                                       /* 是内点 */
-                    && (*image1.correspondenceTo3DIndex)[(*_matchedPointsIndex1)[i]] != -1) {   /* 有3D对应点 */
-                    _score += 1.0f;
+                /* 是内点，有用 */
+                if (filter.at<char>(i, 0)) {
+                    int index1 = (*_matchedPointsIndex1)[i], index2 = (*_matchedPointsIndex2)[i];
+                    _matchedPoints1->push_back((*_image1.keyPoints)[index1].pt);
+                    _matchedPoints2->push_back((*_image2.keyPoints)[index2].pt);
+
+                    /* 有3D对应点，得分增加 */
+                    if ((*image1.keyPointTo3DIndex)[index1] != -1) {
+                        _score += 1.0f;
+                    }
                 }
             }
             _image1.camera = [[CISCamera alloc] init];

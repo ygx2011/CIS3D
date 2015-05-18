@@ -20,7 +20,7 @@
 @property (atomic)    cv::Mat                   *keyDescriptor;
 
 @property (atomic)    std::vector<cv::KeyPoint> *keyPoints;
-@property (nonatomic) std::vector<int>          *correspondenceTo3DIndex;
+@property (nonatomic) std::vector<int>          *keyPointTo3DIndex;
 
 @property (nonatomic, strong) CISCamera         *camera;
 
