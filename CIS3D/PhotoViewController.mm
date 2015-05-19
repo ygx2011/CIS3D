@@ -39,13 +39,13 @@
 
 #pragma mark - update image frame when a new image comes in
 - (void)didReceiveImageAddedNotification:(NSNotification *)notification {
-    NSLog(@"PhotoViewController: Image get.");
+    NSLog(@"%@: Image get.", self.class);
     CISImage *image = [[notification userInfo] objectForKey:CISImageAdded];
     _cachedMonoImage = [CISImage UIImageFromCVMat:[image drawKeypoints]];
 }
 
 - (void)didReceiveImagePairAddedNotification:(NSNotification *)notification {
-    NSLog(@"PhotoViewController: Image pair get.");
+    NSLog(@"%@: Image pair get.", self.class);
     CISImagePair *pair = [[notification userInfo] objectForKey:CISImagePairAdded];
     _cachedStereoImage = [CISImage UIImageFromCVMat:[pair drawMatches]];
 }

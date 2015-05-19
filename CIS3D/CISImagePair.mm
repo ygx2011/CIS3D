@@ -67,9 +67,9 @@
         }
         
         /* 计算F，恢复摄像机矩阵。当两幅图完全不匹配时可能发生崩溃。此时不必计算 F */
-        NSLog(@"CISImagePair: %lu matches in _matches", _matches->size());
+        NSLog(@"%@: %lu matches in _matches", self.class, _matches->size());
 
-        if (_matches->size() > MIN_MATCH_THRESHOLD) {
+        if (_matches->size() > MIN_2D_2D_MATCH_THRESHOLD) {
             _score = 1.0f;
             
             /* 由对应点得到基础矩阵, filter存储野点信息 */

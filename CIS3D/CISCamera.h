@@ -19,5 +19,6 @@
 
 - (instancetype)initWithFundamentalMat:(cv::Mat *)F;
 - (instancetype)init;
+- (instancetype)initWithR:(cv::Mat)R andT:(cv::Mat)t;
 
 @end

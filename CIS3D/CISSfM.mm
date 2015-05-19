@@ -28,7 +28,7 @@
     
     static dispatch_once_t singleton;
     dispatch_once(&singleton, ^{
-        NSLog(@"CISSfM: instantialized.");
+        NSLog(@"%@: instantialized.", self.class);
         singletonSfM = [[CISSfM alloc] init];
     });
     
@@ -53,8 +53,8 @@
                                                         object:self
                                                       userInfo:@{CISImageAdded : image}];
     
-    NSLog(@"CISSfM: %lu images in _image.", (unsigned long)[_images count]);
-    NSLog(@"CISSfM: %lu pairs in _pair."  , (unsigned long)[_pairs count]);
+    NSLog(@"%@: %lu images in _image.",self.class, (unsigned long)[_images count]);
+    NSLog(@"%@: %lu pairs in _pair."  ,self.class, (unsigned long)[_pairs count]);
     
     /* 队列没有图像，初始化 */
     if ([_images count] == 0) {
@@ -86,7 +86,7 @@
                 if ([_pairs count] == 0) {
                     [self constructWithImagePair:selectedPair];
                 } else {
-                    [self constructWithImagePair:selectedPair];
+                    [self updateWithImagePair:selectedPair];
                 }
                 [_pairs addObject:selectedPair];
                 /* 完成Pair匹配以后，也向ProcessImageViewController发布消息，更新ImageView */

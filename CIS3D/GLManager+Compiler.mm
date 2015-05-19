@@ -13,7 +13,7 @@
 - (GLuint)initShaderWithSource:(const char *)source andType:(GLenum)type {
     GLuint shader = glCreateShader(type);
     if (shader == 0) {
-        NSLog(@"Shader init failed");
+        NSLog(@"%@: Shader init failed", self.class);
         return 0;
     }
     
@@ -23,7 +23,7 @@
     GLint compileInfo;
     glGetShaderiv(shader, GL_COMPILE_STATUS, &compileInfo);
     if (!compileInfo) {
-        NSLog(@"GLManager: Shader compile error!");
+        NSLog(@"%@: Shader compile error!", self.class);
         glDeleteShader(shader);
     }
     
@@ -37,7 +37,7 @@
                                                   encoding:NSUTF8StringEncoding
                                                      error:&error];
     if (!content) {
-        NSLog(@"Error loading shader: %@", error.localizedDescription);
+        NSLog(@"%@: Error loading shader: %@", self.class, error.localizedDescription);
     }
 
     return [self initShaderWithSource:[content UTF8String]
@@ -47,7 +47,7 @@
 - (GLuint)initProgramWithvShader:(GLuint)vShader andfShader:(GLuint)fShader {
     GLuint shaderProgram = glCreateProgram();
     if (shaderProgram == 0) {
-        NSLog(@"Shader program create failed.");
+        NSLog(@"%@: Shader program create failed.", self.class);
         return 0;
     }
     
@@ -58,7 +58,7 @@
     GLint linkInfo;
     glGetProgramiv(shaderProgram, GL_LINK_STATUS, &linkInfo);
     if (!linkInfo) {
-        NSLog(@"Link failed");
+        NSLog(@"%@: Link failed", self.class);
         glDeleteProgram(shaderProgram);
     }
     

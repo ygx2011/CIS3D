@@ -22,9 +22,15 @@
 #define CISImagePairAdded             @"CISImagePairAdded"
 #define CISImagePairAddedNotification @"CISImagePairAdedNotifiation"
 
+#define HEIGHT                        640.0
+#define WIDTH                         480.0
+
+#define IMG2WLD(y)                    (HEIGHT - y)
+
 /* 特征匹配中使用 */
 #define KNN_THRESHOLD                 0.6
-#define MIN_MATCH_THRESHOLD           100
+#define MIN_2D_2D_MATCH_THRESHOLD     100
+#define MIN_2D_3D_MATCH_THRESHOLD     20
 
 /* 点云的最大数量 */
 #define MAX_POINT_NUM                 100000
@@ -33,6 +39,7 @@
 #define MIN_CAMERA_RADIUS             1
 #define MAX_CAMERA_RADIUS             15
 
+/* 图像队列中的搜索窗口 */
 #define SEARCH_WINDOW                 5
 
 #endif

@@ -38,10 +38,11 @@
 #pragma mark - array access
 - (cv::Point3f)pointAtIndex:(int)index {
     cv::Point3f pt;
-    int baseIndex = _count * 3;
+    int baseIndex = index * 3;
     pt.x = _coordinates[baseIndex    ];
     pt.y = _coordinates[baseIndex + 1];
     pt.z = _coordinates[baseIndex + 2];
+    std::cout << pt << std::endl;
     return pt;
 }
 
@@ -56,7 +57,7 @@
     _colors[colorIndex + 2] = b;
     _colors[colorIndex + 3] = 1.0f;
     _count ++;
-    NSLog(@"%d", _count);
+    NSLog(@"%@: count = %d", self.class, _count);
 }
 
 - (void)clear {

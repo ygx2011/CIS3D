@@ -103,7 +103,7 @@
 }
 
 + (cv::Point2f)rectifyPoint:(cv::Point2f)u withKInv:(cv::Mat *)KInv {
-    cv::Mat reprojectedU = cv::Mat( (cv::Mat_<double>(3, 1) << u.x, 640.0 - u.y, 1.0) );
+    cv::Mat reprojectedU = cv::Mat( (cv::Mat_<double>(3, 1) << u.x, IMG2WLD(u.y), 1.0) );
     reprojectedU = (*KInv) * reprojectedU;
     return cv::Point2f(reprojectedU.at<double>(0, 0) / reprojectedU.at<double>(2, 0),
                        reprojectedU.at<double>(1, 0) / reprojectedU.at<double>(2, 0));

@@ -25,11 +25,11 @@
 #pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"ModelViewController loaded");
+    NSLog(@"%@: loaded", self.class);
 
     _glContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
     if (!_glContext) {
-        NSLog(@"GLManager: Failed to init OpenGL");
+        NSLog(@"%@: Failed to init OpenGL", self.class);
     }
     
     _glView = (GLKView *)self.view;
