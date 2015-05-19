@@ -33,4 +33,6 @@
 #define MIN_CAMERA_RADIUS             1
 #define MAX_CAMERA_RADIUS             15
 
+#define SEARCH_WINDOW                 5
+
 #endif

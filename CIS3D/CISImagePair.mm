@@ -73,27 +73,37 @@
             _score = 1.0f;
             
             /* 由对应点得到基础矩阵, filter存储野点信息 */
-            cv::Mat filter;
+            std::vector<uchar> filter;
             _fundamentalMat = new cv::Mat(cv::findFundamentalMat(*_matchedPoints1, *_matchedPoints2,
                                                                  cv::FM_RANSAC, 3.0, 0.99, filter));
-            _matchedPoints1->clear();
-            _matchedPoints2->clear();
             
-            for (int i = 0; i < filter.rows; ++i) {
+            std::vector<cv::Point2f>::iterator
+            pt1iter = _matchedPoints1->begin(),
+            pt2iter = _matchedPoints2->begin();
+            
+            std::vector<int>::iterator
+            id1iter = _matchedPointsIndex1->begin(),
+            id2iter = _matchedPointsIndex2->begin();
+            
+            for (int i = 0; i < filter.size(); ++i) {
                 /* 是内点，有用 */
-                if (filter.at<char>(i, 0)) {
-                    int index1 = (*_matchedPointsIndex1)[i], index2 = (*_matchedPointsIndex2)[i];
-                    _matchedPoints1->push_back((*_image1.keyPoints)[index1].pt);
-                    _matchedPoints2->push_back((*_image2.keyPoints)[index2].pt);
-
+                if (filter[i]) {
                     /* 有3D对应点，得分增加 */
-                    if ((*image1.keyPointTo3DIndex)[index1] != -1) {
+                    if ((*image1.keyPointTo3DIndex)[*id1iter] != -1) {
                         _score += 1.0f;
                     }
+                    ++id1iter, ++pt1iter;
+                    ++id2iter, ++pt2iter;
+                }
+                /* 是野点，删了 */
+                else {
+                    _matchedPointsIndex1->erase(id1iter),
+                    _matchedPoints1->erase(pt1iter);
+                    
+                    _matchedPointsIndex2->erase(id2iter),
+                    _matchedPoints2->erase(pt2iter);
                 }
             }
-            _image1.camera = [[CISCamera alloc] init];
-            _image2.camera = [[CISCamera alloc] initWithFundamentalMat:_fundamentalMat];
         }
     }
     return self;

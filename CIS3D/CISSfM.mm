@@ -9,12 +9,10 @@
 #import "CISUtility.h"
 #import "CISGeometry.h"
 #import "CISSfM.h"
+#import "CISSfM+Update.h"
 #import "CISImagePair.h"
 
 @interface CISSfM ()
-
-- (void)constructWithImagePair:(CISImagePair *)pair;
-- (void)updateWithImagePair:(CISImagePair *)pair;
 
 @end
 
@@ -68,62 +66,36 @@
         [_images addObject:image];
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            CISImage *imageToMatch = [_images lastObject];
-            CISImagePair *pair = [[CISImagePair alloc] initWithImage1:imageToMatch andImage2:image];
-
-            if (pair.score) {
-                if ([_pairs count] == 0) {
-                    [self constructWithImagePair:pair];
-                } else {
-                    [self constructWithImagePair:pair];
-                    //[self updateWithImagePair:pair];
+            int begin = (int)([_images count] - SEARCH_WINDOW);
+            int end   = (int)[_images count];
+            begin = begin > 0 ? begin : 0;
+            
+            float maxScore = 0.0f;
+            CISImagePair *selectedPair = nil;
+            
+            for (int i = begin; i < end; ++i) {
+                /* 选取得分最高且在队列里最靠后的 (故用 >=) */
+                CISImage *imageToMatch = [_images objectAtIndex:i];
+                CISImagePair *pair = [[CISImagePair alloc] initWithImage1:imageToMatch andImage2:image];
+                if (pair.score >= maxScore) {
+                    maxScore = pair.score;
+                    selectedPair = pair;
                 }
-                [_pairs  addObject:pair];
-                
+            }
+            if (maxScore) {
+                if ([_pairs count] == 0) {
+                    [self constructWithImagePair:selectedPair];
+                } else {
+                    [self constructWithImagePair:selectedPair];
+                }
+                [_pairs addObject:selectedPair];
                 /* 完成Pair匹配以后，也向ProcessImageViewController发布消息，更新ImageView */
                 [[NSNotificationCenter defaultCenter] postNotificationName:CISImagePairAddedNotification
                                                                     object:self
-                                                                  userInfo:@{CISImagePairAdded : pair}];
+                                                                  userInfo:@{CISImagePairAdded : selectedPair}];
             }
         });
     }
-}
-
-- (void)constructWithImagePair:(CISImagePair *)pair {
-    int n = (int)pair.matchedPoints1->size();
-    [[CISSfM sharedInstance].cloud clear];
-    for (int i = 0; i < n; ++i) {
-        cv::Point2f pt1 = (*pair.matchedPoints1)[i], pt2 = (*pair.matchedPoints2)[i];
-        
-        /* 首先将二维点乘以内参的逆，矫正回世界坐标系屏幕上的成像点坐标 */
-        cv::Point2f rectifiedPt1 = [CISGeometry rectifyPoint:pt1
-                                                    withKInv:pair.image1.camera.KInv];
-        cv::Point2f rectifiedPt2 = [CISGeometry rectifyPoint:pt2
-                                                    withKInv:pair.image2.camera.KInv];
-        
-        /* 三角化得到三维点 */
-        cv::Mat point3dim =
-        [CISGeometry iterativeTriangulationWithPoint1:rectifiedPt1 camera1:pair.image1.camera.P
-                                            andPoint2:rectifiedPt2 camera2:pair.image2.camera.P];
-        //std::cout << point3dim << std::endl;
-        
-        int x = (int)pt1.x, y = (int)pt1.y;
-        [[CISSfM sharedInstance].cloud addPointWithX:point3dim.at<double>(0, 0)
-                                                   Y:point3dim.at<double>(1, 0)
-                                                   Z:point3dim.at<double>(2, 0)
-                                                AndR:(pair.image1.image->at<cv::Vec4b>(y, x)[0] / 255.0f)
-                                                   G:(pair.image1.image->at<cv::Vec4b>(y, x)[1] / 255.0f)
-                                                   B:(pair.image1.image->at<cv::Vec4b>(y, x)[2] / 255.0f)];
-        
-        /* 将二维点与三维点建立联系 */
-        int indexOf3DPt = [[CISSfM sharedInstance].cloud count];
-        (*pair.image1.keyPointTo3DIndex)[(*pair.matchedPointsIndex1)[i]] = indexOf3DPt;
-        (*pair.image2.keyPointTo3DIndex)[(*pair.matchedPointsIndex2)[i]] = indexOf3DPt;
-    }
-}
-
-- (void)updateWithImagePair:(CISImagePair *)pair {
-    std::cout << "score: " << pair.score << std::endl;
 }
 
 @end
