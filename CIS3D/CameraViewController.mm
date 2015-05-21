@@ -136,4 +136,11 @@
      }];
 }
 
+- (IBAction)didClear:(UIButton *)sender {
+    CISSfM *SfM = [CISSfM sharedInstance];
+    [SfM.cloud clear];
+    [SfM.images removeAllObjects];
+    [SfM.pairs  removeAllObjects];
+}
+
 @end
