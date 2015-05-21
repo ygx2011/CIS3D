@@ -41,7 +41,8 @@
     int baseIndex = index * 3;
     pt.x = _coordinates[baseIndex    ];
     pt.y = _coordinates[baseIndex + 1];
-    pt.z = _coordinates[baseIndex + 2];
+    /* OpenGL坐标系内，-z是面向屏幕内侧的方向，投影回原坐标系时，需要- */
+    pt.z = - _coordinates[baseIndex + 2];
     std::cout << pt << std::endl;
     return pt;
 }
@@ -51,7 +52,8 @@
     int baseIndex = _count * 3, colorIndex = _count * 4;
     _coordinates[baseIndex    ] = x;
     _coordinates[baseIndex + 1] = y;
-    _coordinates[baseIndex + 2] = z;
+    /* OpenGL坐标系内，-z是面向屏幕内侧的方向 */
+    _coordinates[baseIndex + 2] = -z;
     _colors[colorIndex    ] = r;
     _colors[colorIndex + 1] = g;
     _colors[colorIndex + 2] = b;

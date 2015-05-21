@@ -29,12 +29,14 @@
 
 /* 特征匹配中使用 */
 #define KNN_THRESHOLD                 0.6
-#define MIN_2D_2D_MATCH_THRESHOLD     100
+#define MIN_2D_2D_MATCH_THRESHOLD     50
 #define MIN_2D_3D_MATCH_THRESHOLD     20
 
 /* 点云的最大数量 */
 #define MAX_POINT_NUM                 100000
 
+/* 测试摄像机[R | t]时随机检测点数目 */
+#define RAND_CHECK_R_T_ITERATION      10
 /* 摄像机距离的原点(Model)的半径 */
 #define MIN_CAMERA_RADIUS             1
 #define MAX_CAMERA_RADIUS             15

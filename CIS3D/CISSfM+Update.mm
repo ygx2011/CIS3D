@@ -24,27 +24,88 @@
                                                 withKInv:image2.camera.KInv];
     
     /* 三角化得到三维点 */
-    cv::Mat pt3dim =
+    cv::Point3f pt3dim =
     [CISGeometry iterativeTriangulationWithPoint1:rectifiedPt1 camera1:image1.camera.P
                                         andPoint2:rectifiedPt2 camera2:image2.camera.P];
     
     int x = (int)pt1.x, y = (int)pt1.y;
-    [[CISSfM sharedInstance].cloud addPointWithX:pt3dim.at<double>(0, 0)
-                                               Y:pt3dim.at<double>(1, 0)
-                                               Z:pt3dim.at<double>(2, 0)
+    [[CISSfM sharedInstance].cloud addPointWithX:pt3dim.x
+                                               Y:pt3dim.y
+                                               Z:pt3dim.z     
                                             AndR:(image1.image->at<cv::Vec4b>(y, x)[0] / 255.0f)
                                                G:(image1.image->at<cv::Vec4b>(y, x)[1] / 255.0f)
                                                B:(image1.image->at<cv::Vec4b>(y, x)[2] / 255.0f)];
 }
 
+- (float)zOfPt1:(cv::Point2f)u1 andPt2:(cv::Point2f)u2
+         withR:(cv::Mat &)R andT:(cv::Mat &)t {
+    cv::Matx34d P1(1, 0, 0, 0,
+                   0, 1, 0, 0,
+                   0, 0, 1, 0);
+    cv::Matx34d P2 = [CISGeometry projectionMatFromR:R andT:t];
+    cv::Point3f pt = [CISGeometry iterativeTriangulationWithPoint1:u1 camera1:P1
+                                                         andPoint2:u2 camera2:P2];
+    std::cout << pt << std::endl;
+    return pt.z;
+}
+
+- (void)bestR:(cv::Mat &)R t:(cv::Mat &)t
+         inR1:(cv::Mat &)R1 t1:(cv::Mat &)t1
+        andR2:(cv::Mat &)R2 t2:(cv::Mat &)t2
+      forPair:(CISImagePair *)pair {
+    
+    std::cout << R1 << t1 << R2 << t2 << std::endl;
+
+    int cnt[4] = {0}, n = (int)pair.matchedPoints1->size();
+    /* 每次找出深度最大的（正值，且在摄像机前方），可信度加1 */
+    for (int i = 0; i < RAND_CHECK_R_T_ITERATION; ++i) {
+        int j = rand() % n;
+        cv::Point2f pt1 = (*pair.matchedPoints1)[j], pt2 = (*pair.matchedPoints2)[j];
+        float z, maxZ = -1e6; int maxId = -1;
+        if (maxZ < (z = [self zOfPt1:pt1 andPt2:pt2 withR:R1 andT:t1])) {maxZ = z; maxId = 0;}
+        if (maxZ < (z = [self zOfPt1:pt1 andPt2:pt2 withR:R1 andT:t2])) {maxZ = z; maxId = 1;}
+        if (maxZ < (z = [self zOfPt1:pt1 andPt2:pt2 withR:R2 andT:t1])) {maxZ = z; maxId = 2;}
+        if (maxZ < (z = [self zOfPt1:pt1 andPt2:pt2 withR:R2 andT:t2])) {maxZ = z; maxId = 3;}
+        cnt[maxId] ++;
+    }
+    
+    /* 找出可信度最大的 */
+    int maxCnt = 0, maxId = -1;
+    for (int i = 0; i < 4; ++i) {
+        if (maxCnt < cnt[i]) {
+            maxCnt = cnt[i]; maxId = i;
+        }
+    }
+    switch (maxId) {
+        case 0: R = R1, t = t1; break;
+        case 1: R = R1, t = t2; break;
+        case 2: R = R2, t = t1; break;
+        case 3: R = R2, t = t2; break;
+        default: break;
+    }
+}
+
+#pragma mark - constructing
 - (void)constructWithImagePair:(CISImagePair *)pair {
     NSLog(@"%@: Constructing ...", self.class);
     int n = (int)pair.matchedPoints1->size();
     [[CISSfM sharedInstance].cloud clear];
     
     pair.image1.camera = [[CISCamera alloc] init];
-    pair.image2.camera = [[CISCamera alloc] initWithFundamentalMat:pair.fundamentalMat];
     
+    cv::Mat *K = pair.image1.camera.K;
+    cv::Mat  E = K->t() * (*pair.fundamentalMat) * (*K);
+    cv::Mat R1, t1, R2, t2, R, t;
+    
+    [CISGeometry decomposeEssentialMat:E ToR1:R1 t1:t1
+                                        andR2:R2 t2:t2];
+
+    [self bestR:R t:t
+           inR1:R1 t1:t1 andR2:R2 t2:t2
+        forPair:pair];
+    
+    pair.image2.camera = [[CISCamera alloc] initWithR:R andT:t];
+
     for (int i = 0; i < n; ++i) {
         cv::Point2f pt1 = (*pair.matchedPoints1)[i], pt2 = (*pair.matchedPoints2)[i];
         /* 从二维点恢复出三维点 */
@@ -58,6 +119,7 @@
     }
 }
 
+#pragma mark - updating
 - (void)updateWithImagePair:(CISImagePair *)pair {
     NSLog(@"%@: Updating ...", self.class);
     std::vector<cv::Point3f> vec3dim;

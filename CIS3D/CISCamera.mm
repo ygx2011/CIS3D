@@ -21,23 +21,6 @@
 @synthesize KInv = _KInv;
 
 #pragma mark - life cycle
-- (instancetype)initWithFundamentalMat:(cv::Mat *)F {
-    self = [super init];
-    if (self) {
-        [self setupK];
-
-        cv::Mat E = _K->t() * (*F) * (*_K);
-        cv::Mat R1, t1, R2, t2;
-        /* R2, t2备用，可能需要选择矩阵 */
-        [CISGeometry decomposeEssentialMat:E ToR1:R1 t1:t1 andR2:R2 t2:t2];
-
-        _P = cv::Matx34d(R1.at<double>(0, 0), R1.at<double>(0, 1), R1.at<double>(0, 2), t1.at<double>(0, 0),
-                         R1.at<double>(1, 0), R1.at<double>(1, 1), R1.at<double>(1, 2), t1.at<double>(1, 0),
-                         R1.at<double>(2, 0), R1.at<double>(2, 1), R1.at<double>(2, 2), t1.at<double>(2, 0));
-    }
-    return self;
-}
-
 - (instancetype)init {
     self = [super init];
     if (self) {

@@ -24,19 +24,22 @@
 }
 
 /* 迭代地进行三角化。 */
-+ (cv::Mat)iterativeTriangulationWithPoint1:(cv::Point2f)u1 camera1:(cv::Matx34d)P1
-                                  andPoint2:(cv::Point2f)u2 camera2:(cv::Matx34d)P2 {
++ (cv::Point3f)iterativeTriangulationWithPoint1:(cv::Point2f)u1 camera1:(cv::Matx34d)P1
+                                      andPoint2:(cv::Point2f)u2 camera2:(cv::Matx34d)P2 {
     const static int ITER_TIME = 10;
     const static double EPSILON = 1e-4;
     
     double w1 = 1, w2 = 1;
+
     cv::Mat_<double> X(4, 1);
-    cv::Mat_<double> X_ = [CISGeometry triangulationWithPoint1:u1 camera1:P1
-                                                     andPoint2:u2 camera2:P2];
-    X(0) = X_(0); X(1) = X_(1); X(2) = X_(2); X(3) = 1.0;
+
     
     for (int i = 0; i < ITER_TIME; ++i) { //Hartley suggests 10 iterations at most
         //recalculate weights
+        cv::Point3f initPt3D = [CISGeometry triangulationWithPoint1:u1 camera1:P1
+                                                          andPoint2:u2 camera2:P2];
+        cv::Mat_<double> X_ = (cv::Mat_<double>(4, 1) << initPt3D.x, initPt3D.y, initPt3D.z, 1.0);
+        X(0) = X_(0); X(1) = X_(1); X(2) = X_(2); X(3) = 1.0;
         double p2x1 = cv::Mat_<double>(cv::Mat_<double>(P1).row(2)*X)(0);
         double p2x2 = cv::Mat_<double>(cv::Mat_<double>(P2).row(2)*X)(0);
         
@@ -60,12 +63,13 @@
         solve(A, B, X_, cv::DECOMP_SVD);
         X(0) = X_(0); X(1) = X_(1); X(2) = X_(2); X(3) = 1.0;
     }
-    return X;
+    
+    return cv::Point3f(X(0), X(1), X(2));
 }
 
 /* 简单的三角化 */
-+ (cv::Mat)triangulationWithPoint1:(cv::Point2f)u1 camera1:(cv::Matx34d)P1
-                         andPoint2:(cv::Point2f)u2 camera2:(cv::Matx34d)P2 {
++ (cv::Point3f)triangulationWithPoint1:(cv::Point2f)u1 camera1:(cv::Matx34d)P1
+                             andPoint2:(cv::Point2f)u2 camera2:(cv::Matx34d)P2 {
 
     cv::Matx43d A(u1.x*P1(2, 0) - P1(0, 0), u1.x*P1(2, 1) - P1(0, 1), u1.x*P1(2, 2) - P1(0, 2),
                   u1.y*P1(2, 0) - P1(1, 0), u1.y*P1(2, 1) - P1(1, 1), u1.y*P1(2, 2) - P1(1, 2),
@@ -80,7 +84,7 @@
     cv::Mat_<double> X;
     cv::solve(A, B, X, cv::DECOMP_SVD);
     
-    return X;
+    return cv::Point3f(X(0), X(1), X(2));
 }
 
 /* 分解 Essential 矩阵，获取两种可能的解 */
@@ -89,17 +93,18 @@
                         andR2:(cv::Mat &)R2 t2:(cv::Mat &)t2 {
     cv::SVD svd(E);
     
-    cv::Matx33d W(0, -1, 0,	//HZ 9.13
-                  1, 0, 0,
-                  0, 0, 1);
-    cv::Matx33d Wt(0, 1, 0,
+    cv::Matx33d W(0, -1, 0,	           //HZ 9.13
+                  1,  0, 0,
+                  0,  0, 1);
+    cv::Matx33d Wt(0,  1, 0,
                    -1, 0, 0,
-                   0, 0, 1);
+                   0,  0, 1);
     
     R1 = svd.u * cv::Mat(W)  * svd.vt; //HZ 9.19
     R2 = svd.u * cv::Mat(Wt) * svd.vt; //HZ 9.19
-    t1 = svd.u.col(2); //u3
-    t2 = - svd.u.col(2); //u3
+    
+    t1 =   svd.u.col(2);               //u3
+    t2 = - svd.u.col(2);               //u3
 }
 
 + (cv::Point2f)rectifyPoint:(cv::Point2f)u withKInv:(cv::Mat *)KInv {
@@ -107,6 +112,12 @@
     reprojectedU = (*KInv) * reprojectedU;
     return cv::Point2f(reprojectedU.at<double>(0, 0) / reprojectedU.at<double>(2, 0),
                        reprojectedU.at<double>(1, 0) / reprojectedU.at<double>(2, 0));
+}
+
++ (cv::Matx34d)projectionMatFromR:(cv::Mat &)R andT:(cv::Mat &)t {
+    return cv::Matx34d(R.at<double>(0, 0), R.at<double>(0, 1), R.at<double>(0, 2), t.at<double>(0, 0),
+                       R.at<double>(1, 0), R.at<double>(1, 1), R.at<double>(1, 2), t.at<double>(1, 0),
+                       R.at<double>(2, 0), R.at<double>(2, 1), R.at<double>(2, 2), t.at<double>(2, 0));
 }
 
 @end

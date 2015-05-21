@@ -17,14 +17,16 @@
 + (cv::Mat)crossMatrix:(cv::Mat &)A;
 + (cv::Point2f)rectifyPoint:(cv::Point2f)u withKInv:(cv::Mat *)KInv;
 
-+ (cv::Mat)iterativeTriangulationWithPoint1:(cv::Point2f)u1 camera1:(cv::Matx34d)P1
-                                  andPoint2:(cv::Point2f)u2 camera2:(cv::Matx34d)P2;
++ (cv::Point3f)iterativeTriangulationWithPoint1:(cv::Point2f)u1 camera1:(cv::Matx34d)P1
+                                      andPoint2:(cv::Point2f)u2 camera2:(cv::Matx34d)P2;
 
-+ (cv::Mat)triangulationWithPoint1:(cv::Point2f)u1 camera1:(cv::Matx34d)P1
-                         andPoint2:(cv::Point2f)u2 camera2:(cv::Matx34d)P2;
++ (cv::Point3f)triangulationWithPoint1:(cv::Point2f)u1 camera1:(cv::Matx34d)P1
+                             andPoint2:(cv::Point2f)u2 camera2:(cv::Matx34d)P2;
 
 + (void)decomposeEssentialMat:(cv::Mat &)E
                          ToR1:(cv::Mat &)R1 t1:(cv::Mat &)t1
                         andR2:(cv::Mat &)R2 t2:(cv::Mat &)t2;
+
++ (cv::Matx34d)projectionMatFromR:(cv::Mat &)R andT:(cv::Mat &)t;
 
 @end

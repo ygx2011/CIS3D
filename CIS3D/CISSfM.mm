@@ -63,11 +63,9 @@
     else {
         /* 即使队列里已经有很多图像，有可能因为没有合适的图像对，仍然尚未开始重建。
          * 新图像 [暂时] 只与最后一个匹配 */
-        [_images addObject:image];
-        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             int begin = (int)([_images count] - SEARCH_WINDOW);
-            int end   = (int)[_images count];
+            int end   = (int)([_images count]);
             begin = begin > 0 ? begin : 0;
             
             float maxScore = 0.0f;
@@ -82,18 +80,21 @@
                     selectedPair = pair;
                 }
             }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
             if (maxScore) {
                 if ([_pairs count] == 0) {
                     [self constructWithImagePair:selectedPair];
                 } else {
                     [self updateWithImagePair:selectedPair];
                 }
-                [_pairs addObject:selectedPair];
+                [_images addObject:image];
+                [_pairs  addObject:selectedPair];
                 /* 完成Pair匹配以后，也向ProcessImageViewController发布消息，更新ImageView */
                 [[NSNotificationCenter defaultCenter] postNotificationName:CISImagePairAddedNotification
                                                                     object:self
                                                                   userInfo:@{CISImagePairAdded : selectedPair}];
-            }
+            }/* if */} /* async-main */);
         });
     }
 }
