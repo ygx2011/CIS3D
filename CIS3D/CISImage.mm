@@ -44,6 +44,7 @@
         for (int i = 0; i < _keyPointTo3DIndex->size(); ++i) {
             (*_keyPointTo3DIndex)[i] = -1;
         }
+        NSLog(@"Features: %lu", _keyPoints->size());
     }
     return self;
 }

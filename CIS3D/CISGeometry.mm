@@ -30,16 +30,14 @@
     const static double EPSILON = 1e-4;
     
     double w1 = 1, w2 = 1;
-
+    cv::Point3f initPt3D = [CISGeometry triangulationWithPoint1:u1 camera1:P1
+                                                      andPoint2:u2 camera2:P2];
     cv::Mat_<double> X(4, 1);
-
+    cv::Mat_<double> X_ = (cv::Mat_<double>(4, 1) << initPt3D.x, initPt3D.y, initPt3D.z, 1.0);
+    X(0) = X_(0); X(1) = X_(1); X(2) = X_(2); X(3) = 1.0;
     
     for (int i = 0; i < ITER_TIME; ++i) { //Hartley suggests 10 iterations at most
         //recalculate weights
-        cv::Point3f initPt3D = [CISGeometry triangulationWithPoint1:u1 camera1:P1
-                                                          andPoint2:u2 camera2:P2];
-        cv::Mat_<double> X_ = (cv::Mat_<double>(4, 1) << initPt3D.x, initPt3D.y, initPt3D.z, 1.0);
-        X(0) = X_(0); X(1) = X_(1); X(2) = X_(2); X(3) = 1.0;
         double p2x1 = cv::Mat_<double>(cv::Mat_<double>(P1).row(2)*X)(0);
         double p2x2 = cv::Mat_<double>(cv::Mat_<double>(P2).row(2)*X)(0);
         
@@ -96,25 +94,32 @@
     cv::Matx33d W(0, -1, 0,	           //HZ 9.13
                   1,  0, 0,
                   0,  0, 1);
-    cv::Matx33d Wt(0,  1, 0,
+    cv::Matx33d Wt(0, 1, 0,
                    -1, 0, 0,
-                   0,  0, 1);
+                   0, 0, 1);
     
     R1 = svd.u * cv::Mat(W)  * svd.vt; //HZ 9.19
     R2 = svd.u * cv::Mat(Wt) * svd.vt; //HZ 9.19
     
     t1 =   svd.u.col(2);               //u3
-    t2 = - svd.u.col(2);               //u3
+    t1 =   t1 / cv::norm(t1);
+    t2 = - t1;
 }
 
-+ (cv::Point2f)rectifyPoint:(cv::Point2f)u withKInv:(cv::Mat *)KInv {
-    cv::Mat reprojectedU = cv::Mat( (cv::Mat_<double>(3, 1) << u.x, IMG2WLD(u.y), 1.0) );
-    reprojectedU = (*KInv) * reprojectedU;
-    return cv::Point2f(reprojectedU.at<double>(0, 0) / reprojectedU.at<double>(2, 0),
-                       reprojectedU.at<double>(1, 0) / reprojectedU.at<double>(2, 0));
++ (cv::Point2f)xFromU:(cv::Point2f)u withKInv:(cv::Mat *)KInv {
+    cv::Mat x = cv::Mat( (cv::Mat_<double>(3, 1) << u.x, IMG2WLD(u.y), 1.0) );
+    x = (*KInv) * x;
+    return cv::Point2f(x.at<double>(0, 0) / x.at<double>(2, 0),
+                       x.at<double>(1, 0) / x.at<double>(2, 0));
 }
 
-+ (cv::Matx34d)projectionMatFromR:(cv::Mat &)R andT:(cv::Mat &)t {
++ (cv::Point3f)reprojectX:(cv::Point3f)X withR:(cv::Mat)R andT:(cv::Mat)t {
+    cv::Mat u_ = cv::Mat( (cv::Mat_<double>(3, 1) << X.x, X.y, X.z) );
+    u_ = R * u_ + t;
+    return cv::Point3f(u_.at<double>(0, 0), u_.at<double>(1, 0), u_.at<double>(2, 0));
+}
+
++ (cv::Matx34d)pFromR:(cv::Mat)R andT:(cv::Mat)t {
     return cv::Matx34d(R.at<double>(0, 0), R.at<double>(0, 1), R.at<double>(0, 2), t.at<double>(0, 0),
                        R.at<double>(1, 0), R.at<double>(1, 1), R.at<double>(1, 2), t.at<double>(1, 0),
                        R.at<double>(2, 0), R.at<double>(2, 1), R.at<double>(2, 2), t.at<double>(2, 0));

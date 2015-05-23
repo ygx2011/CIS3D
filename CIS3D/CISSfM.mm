@@ -62,7 +62,7 @@
     }
     else {
         /* 即使队列里已经有很多图像，有可能因为没有合适的图像对，仍然尚未开始重建。
-         * 新图像 [暂时] 只与最后一个匹配 */
+         * 新图像 [暂时] 只与最后几个匹配 */
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             int begin = (int)([_images count] - SEARCH_WINDOW);
             int end   = (int)([_images count]);
@@ -81,13 +81,16 @@
                 }
             }
             
+            /* 计算完毕后返回主线程 */
             dispatch_async(dispatch_get_main_queue(), ^{
             if (maxScore) {
+                BOOL isSucceeded;
                 if ([_pairs count] == 0) {
-                    [self constructWithImagePair:selectedPair];
+                    isSucceeded = [self constructWithImagePair:selectedPair];
                 } else {
-                    [self updateWithImagePair:selectedPair];
+                    isSucceeded = [self updateWithImagePair:selectedPair];
                 }
+                if (! isSucceeded) return;
                 [_images addObject:image];
                 [_pairs  addObject:selectedPair];
                 /* 完成Pair匹配以后，也向ProcessImageViewController发布消息，更新ImageView */

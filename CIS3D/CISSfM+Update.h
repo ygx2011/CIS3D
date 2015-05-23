@@ -11,7 +11,7 @@
 
 @interface CISSfM (Update)
 
-- (void)constructWithImagePair:(CISImagePair *)pair;
-- (void)updateWithImagePair:(CISImagePair *)pair;
+- (BOOL)constructWithImagePair:(CISImagePair *)pair;
+- (BOOL)updateWithImagePair:(CISImagePair *)pair;
 
 @end

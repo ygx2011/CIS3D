@@ -105,6 +105,7 @@
                 }
             }
         }
+        NSLog(@"Matches: %lu", _matchedPoints1->size());
     }
     return self;
 }

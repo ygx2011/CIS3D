@@ -13,154 +13,142 @@
 
 @implementation CISSfM (Update)
 
-#pragma mark - utility function
-- (void)triangulationWithPoint1:(cv::Point2f)pt1 inImage1:(CISImage *)image1
-                      andPoint2:(cv::Point2f)pt2 inImage2:(CISImage *)image2 {
+#pragma mark - @override of triangulations
+- (cv::Point3f)triangulationWithPoint1:(cv::Point2f)u1 inImage1:(CISImage *)image1
+                             andPoint2:(cv::Point2f)u2 inImage2:(CISImage *)image2 {
     
     /* 首先将二维点乘以内参的逆，矫正回世界坐标系屏幕上的成像点坐标 */
-    cv::Point2f rectifiedPt1 = [CISGeometry rectifyPoint:pt1
-                                                withKInv:image1.camera.KInv];
-    cv::Point2f rectifiedPt2 = [CISGeometry rectifyPoint:pt2
-                                                withKInv:image2.camera.KInv];
+    cv::Point2f x1 = [CISGeometry xFromU:u1 withKInv:image1.camera.KInv];
+    cv::Point2f x2 = [CISGeometry xFromU:u2 withKInv:image2.camera.KInv];
     
     /* 三角化得到三维点 */
-    cv::Point3f pt3dim =
-    [CISGeometry iterativeTriangulationWithPoint1:rectifiedPt1 camera1:image1.camera.P
-                                        andPoint2:rectifiedPt2 camera2:image2.camera.P];
-    
-    int x = (int)pt1.x, y = (int)pt1.y;
-    [[CISSfM sharedInstance].cloud addPointWithX:pt3dim.x
-                                               Y:pt3dim.y
-                                               Z:pt3dim.z     
-                                            AndR:(image1.image->at<cv::Vec4b>(y, x)[0] / 255.0f)
-                                               G:(image1.image->at<cv::Vec4b>(y, x)[1] / 255.0f)
-                                               B:(image1.image->at<cv::Vec4b>(y, x)[2] / 255.0f)];
+    cv::Point3f X = [CISGeometry iterativeTriangulationWithPoint1:x1 camera1:image1.camera.P
+                                                        andPoint2:x2 camera2:image2.camera.P];
+    return X;
 }
 
-- (float)zOfPt1:(cv::Point2f)u1 andPt2:(cv::Point2f)u2
-         withR:(cv::Mat &)R andT:(cv::Mat &)t {
-    cv::Matx34d P1(1, 0, 0, 0,
-                   0, 1, 0, 0,
-                   0, 0, 1, 0);
-    cv::Matx34d P2 = [CISGeometry projectionMatFromR:R andT:t];
-    cv::Point3f pt = [CISGeometry iterativeTriangulationWithPoint1:u1 camera1:P1
-                                                         andPoint2:u2 camera2:P2];
-    std::cout << pt << std::endl;
-    return pt.z;
-}
-
-- (void)bestR:(cv::Mat &)R t:(cv::Mat &)t
-         inR1:(cv::Mat &)R1 t1:(cv::Mat &)t1
-        andR2:(cv::Mat &)R2 t2:(cv::Mat &)t2
-      forPair:(CISImagePair *)pair {
+- (void)triangulationForAllPointsInPair:(CISImagePair *)pair {
+    int n = (int)pair.matchedPoints1->size();
     
-    std::cout << R1 << t1 << R2 << t2 << std::endl;
-
-    int cnt[4] = {0}, n = (int)pair.matchedPoints1->size();
-    /* 每次找出深度最大的（正值，且在摄像机前方），可信度加1 */
-    for (int i = 0; i < RAND_CHECK_R_T_ITERATION; ++i) {
-        int j = rand() % n;
-        cv::Point2f pt1 = (*pair.matchedPoints1)[j], pt2 = (*pair.matchedPoints2)[j];
-        float z, maxZ = -1e6; int maxId = -1;
-        if (maxZ < (z = [self zOfPt1:pt1 andPt2:pt2 withR:R1 andT:t1])) {maxZ = z; maxId = 0;}
-        if (maxZ < (z = [self zOfPt1:pt1 andPt2:pt2 withR:R1 andT:t2])) {maxZ = z; maxId = 1;}
-        if (maxZ < (z = [self zOfPt1:pt1 andPt2:pt2 withR:R2 andT:t1])) {maxZ = z; maxId = 2;}
-        if (maxZ < (z = [self zOfPt1:pt1 andPt2:pt2 withR:R2 andT:t2])) {maxZ = z; maxId = 3;}
-        cnt[maxId] ++;
+    /* 对所有点做三角化 */
+    for (int i = 0; i < n; ++i) {
+        cv::Point2f u1 = (*pair.matchedPoints1)[i], u2 = (*pair.matchedPoints2)[i];
+        /* 从二维点恢复出三维点 */
+        cv::Point3f X = [self triangulationWithPoint1:u1 inImage1:pair.image1
+                                            andPoint2:u2 inImage2:pair.image2];
+        
+        /* 将三维点加入点云中 */
+        cv::Vec4b rgba = (pair.image1.image->at<cv::Vec4b>((int)u1.y, (int)u1.x));
+        [[CISSfM sharedInstance].cloud addPointWithX:X.x Y:X.y Z:X.z
+                                                AndR:rgba[0]/255.0 G:rgba[1]/255.0 B:rgba[2]/255.0];
+        
+        /* 将二维点与三维点建立联系 */
+        int Xindex = [[CISSfM sharedInstance].cloud count] - 1;
+        (*pair.image1.keyPointTo3DIndex)[(*pair.matchedPointsIndex1)[i]] = Xindex;
+        (*pair.image2.keyPointTo3DIndex)[(*pair.matchedPointsIndex2)[i]] = Xindex;
     }
+}
+
+#pragma mark - choose of R t
+- (BOOL)correctR:(cv::Mat &)R0 t:(cv::Mat &)t0
+            inRs:(cv::Mat[2])R ts:(cv::Mat[2])t
+         forPair:(CISImagePair *)pair {
+    int n = (int)pair.matchedPoints1->size();
     
-    /* 找出可信度最大的 */
-    int maxCnt = 0, maxId = -1;
-    for (int i = 0; i < 4; ++i) {
-        if (maxCnt < cnt[i]) {
-            maxCnt = cnt[i]; maxId = i;
+    int atFront[2] = {0};
+    /* 测试四种情况 */
+    for (int cases = 0; cases < 4; ++cases) {
+        atFront[0] = atFront[1] = 0;
+        
+        cv::Matx34d P1(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0);
+        cv::Matx34d P2 = [CISGeometry pFromR:R[cases / 2] andT:t[cases % 2]];
+        cv::Mat R_(R[cases / 2].t()), t_(- R_ * t[cases % 2]);
+
+        /* 首先生成点云 */
+        for (int i = 0; i < n; ++i) {
+            cv::Point2f u1 = (*pair.matchedPoints1)[i], u2 = (*pair.matchedPoints2)[i];
+            cv::Point3f X = [CISGeometry iterativeTriangulationWithPoint1:u1 camera1:P1
+                                                                andPoint2:u2 camera2:P2];
+            /* 在相机0的前方 */
+            cv::Point3f _u1_ = X;
+            cv::Point3f _u2_ = [CISGeometry reprojectX:X withR:R_ andT:t_];
+
+            if (_u1_.z > 0) { atFront[0] ++; }
+            if (_u2_.z > 0) { atFront[1] ++; }
+        }
+        std::cout << "Case: " << cases << std::endl
+        << (atFront[0] / (float)n) << std::endl
+        << (atFront[1] / (float)n) << std::endl;
+        if ((atFront[0] / (float)n) >= FRONT_THRESHOLD_RATIO
+         && (atFront[1] / (float)n) >= FRONT_THRESHOLD_RATIO) {
+            R0 = R[cases / 2], t0 = t[cases % 2];
+            return YES;
         }
     }
-    switch (maxId) {
-        case 0: R = R1, t = t1; break;
-        case 1: R = R1, t = t2; break;
-        case 2: R = R2, t = t1; break;
-        case 3: R = R2, t = t2; break;
-        default: break;
-    }
+    return NO;
 }
 
 #pragma mark - constructing
-- (void)constructWithImagePair:(CISImagePair *)pair {
+- (BOOL)constructWithImagePair:(CISImagePair *)pair {
     NSLog(@"%@: Constructing ...", self.class);
-    int n = (int)pair.matchedPoints1->size();
     [[CISSfM sharedInstance].cloud clear];
     
     pair.image1.camera = [[CISCamera alloc] init];
     
     cv::Mat *K = pair.image1.camera.K;
-    cv::Mat  E = K->t() * (*pair.fundamentalMat) * (*K);
-    cv::Mat R1, t1, R2, t2, R, t;
-    
-    [CISGeometry decomposeEssentialMat:E ToR1:R1 t1:t1
-                                        andR2:R2 t2:t2];
-
-    [self bestR:R t:t
-           inR1:R1 t1:t1 andR2:R2 t2:t2
-        forPair:pair];
-    
-    pair.image2.camera = [[CISCamera alloc] initWithR:R andT:t];
-
-    for (int i = 0; i < n; ++i) {
-        cv::Point2f pt1 = (*pair.matchedPoints1)[i], pt2 = (*pair.matchedPoints2)[i];
-        /* 从二维点恢复出三维点 */
-        [self triangulationWithPoint1:pt1 inImage1:pair.image1
-                            andPoint2:pt2 inImage2:pair.image2];
-        
-        /* 将二维点与三维点建立联系 */
-        int indexOf3DPt = [[CISSfM sharedInstance].cloud count] - 1;
-        (*pair.image1.keyPointTo3DIndex)[(*pair.matchedPointsIndex1)[i]] = indexOf3DPt;
-        (*pair.image2.keyPointTo3DIndex)[(*pair.matchedPointsIndex2)[i]] = indexOf3DPt;
+    cv::Mat E = K->t() * (*pair.fundamentalMat) * (*K);
+    cv::Mat R[2], t[2], R0, t0;
+    [CISGeometry decomposeEssentialMat:E ToR1:R[0] t1:t[0]
+                                        andR2:R[1] t2:t[1]];
+    /* 旋转矩阵行列式必为1， 如果是-1，需要重新分解E */
+    if ((fabs(cv::determinant(R[0]) + 1)) < 1e-6) {
+        E = -E;
+        [CISGeometry decomposeEssentialMat:E ToR1:R[0] t1:t[0]
+                                     andR2:R[1] t2:t[1]];
     }
+
+    BOOL isRecovered = [self correctR:R0 t:t0
+                                 inRs:R  ts:t
+                              forPair:pair];
+    if (!isRecovered) return NO;
+
+    pair.image2.camera = [[CISCamera alloc] initWithR:R0 andT:t0];
+    [self triangulationForAllPointsInPair:pair];
+    return YES;
 }
 
 #pragma mark - updating
-- (void)updateWithImagePair:(CISImagePair *)pair {
+- (BOOL)updateWithImagePair:(CISImagePair *)pair {
     NSLog(@"%@: Updating ...", self.class);
-    std::vector<cv::Point3f> vec3dim;
-    std::vector<cv::Point2f> vec2dim;
+    std::vector<cv::Point3f> Xs;
+    std::vector<cv::Point2f> us;
     int n = (int)pair.matchedPoints1->size();
     
     /* 建立3D点和新视图中2D点的关系 */
     for (int i = 0; i < n; ++i) {
-        int index3dim = (*pair.image1.keyPointTo3DIndex)[(*pair.matchedPointsIndex1)[i]];
-        NSLog(@"%d %d", i, index3dim);
-        if (index3dim != -1) {
-            cv::Point2f pt2dim = (*pair.matchedPoints2)[i];
-            
-            vec3dim.push_back([[CISSfM sharedInstance].cloud pointAtIndex:index3dim]);
-            vec2dim.push_back(cv::Point2f(pt2dim.x, IMG2WLD(pt2dim.y)));
+        int Xindex = (*pair.image1.keyPointTo3DIndex)[(*pair.matchedPointsIndex1)[i]];
+        if (Xindex != -1) {
+            cv::Point2f u2 = (*pair.matchedPoints2)[i];
+            Xs.push_back([[CISSfM sharedInstance].cloud pointAtIndex:Xindex]);
+            us.push_back(cv::Point2f(u2.x, IMG2WLD(u2.y)));
         }
     }
     
     /* 计算出重投影后新视图的的[R | t] */
-    if (vec3dim.size() > MIN_2D_3D_MATCH_THRESHOLD) {
-        cv::Mat R, r, t;
-        
-        cv::solvePnPRansac(vec3dim, vec2dim,
-                           *pair.image1.camera.K, cv::Mat_<double>::zeros(1, 4),
-                           r, t);
-        cv::Rodrigues(r, R);
-        pair.image2.camera = [[CISCamera alloc] initWithR:R andT:t];
-        
-        /* 利用新视图的[R | t]进行三角化计算 */
-        for (int i = 0; i < n; ++i) {
-            cv::Point2f pt1 = (*pair.matchedPoints1)[i], pt2 = (*pair.matchedPoints2)[i];
-            /* 从二维点恢复出三维点 */
-            [self triangulationWithPoint1:pt1 inImage1:pair.image1
-                                andPoint2:pt2 inImage2:pair.image2];
-            
-            /* 将二维点与三维点建立联系 */
-            int indexOf3DPt = [[CISSfM sharedInstance].cloud count] - 1;
-            (*pair.image1.keyPointTo3DIndex)[(*pair.matchedPointsIndex1)[i]] = indexOf3DPt;
-            (*pair.image2.keyPointTo3DIndex)[(*pair.matchedPointsIndex2)[i]] = indexOf3DPt;
-        }
+    if (Xs.size() < MIN_2D_3D_MATCH_THRESHOLD) {
+        return NO;
     }
+    
+    /* 生成新的三维点 */
+    cv::Mat R, r, t;
+    cv::solvePnPRansac(Xs, us,
+                       *pair.image1.camera.K, cv::Mat_<double>::zeros(1, 4),
+                       r, t);
+    cv::Rodrigues(r, R);
+    pair.image2.camera = [[CISCamera alloc] initWithR:R andT:t];
+    
+    [self triangulationForAllPointsInPair:pair];
+    return YES;
 }
 
 @end

@@ -11,6 +11,13 @@
  * 2. CISSfM - manages the queues
  * 3. CISImagePair - match 2 images and 2d -> 3d
  */
+
+/* Conventions:
+ * u_{i}, i \in {L, R} -> 2D coordinate in image plane
+ * x_{i}, i \in {L, R} -> 2D homogeneous coordinate in world coordinates, (x_x, x_y, 1.0)
+ * X -> 3D coordinate in world coordinates 
+ */
+
 #ifndef CIS3D_CISConsts_h
 #define CIS3D_CISConsts_h
 
@@ -29,7 +36,7 @@
 
 /* 特征匹配中使用 */
 #define KNN_THRESHOLD                 0.6
-#define MIN_2D_2D_MATCH_THRESHOLD     50
+#define MIN_2D_2D_MATCH_THRESHOLD     30
 #define MIN_2D_3D_MATCH_THRESHOLD     20
 
 /* 点云的最大数量 */
@@ -43,5 +50,10 @@
 
 /* 图像队列中的搜索窗口 */
 #define SEARCH_WINDOW                 5
+
+#define FRONT_THRESHOLD_RATIO         0.65f
+
+#define TICK   NSDate *startTime = [NSDate date]
+#define TOCK   NSLog(@"Time: %f", -[startTime timeIntervalSinceNow])
 
 #endif
