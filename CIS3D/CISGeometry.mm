@@ -24,14 +24,14 @@
 }
 
 /* 迭代地进行三角化。 */
-+ (cv::Point3f)iterativeTriangulationWithPoint1:(cv::Point2f)u1 camera1:(cv::Matx34d)P1
-                                      andPoint2:(cv::Point2f)u2 camera2:(cv::Matx34d)P2 {
++ (cv::Point3f)iterativeTriangulationWithPoint1:(cv::Point2f)u1 forP1:(cv::Matx34d)P1
+                                      andPoint2:(cv::Point2f)u2 forP2:(cv::Matx34d)P2 {
     const static int ITER_TIME = 10;
     const static double EPSILON = 1e-4;
     
     double w1 = 1, w2 = 1;
-    cv::Point3f initPt3D = [CISGeometry triangulationWithPoint1:u1 camera1:P1
-                                                      andPoint2:u2 camera2:P2];
+    cv::Point3f initPt3D = [CISGeometry triangulationWithPoint1:u1 forP1:P1
+                                                      andPoint2:u2 forP2:P2];
     cv::Mat_<double> X(4, 1);
     cv::Mat_<double> X_ = (cv::Mat_<double>(4, 1) << initPt3D.x, initPt3D.y, initPt3D.z, 1.0);
     X(0) = X_(0); X(1) = X_(1); X(2) = X_(2); X(3) = 1.0;
@@ -66,8 +66,8 @@
 }
 
 /* 简单的三角化 */
-+ (cv::Point3f)triangulationWithPoint1:(cv::Point2f)u1 camera1:(cv::Matx34d)P1
-                             andPoint2:(cv::Point2f)u2 camera2:(cv::Matx34d)P2 {
++ (cv::Point3f)triangulationWithPoint1:(cv::Point2f)u1 forP1:(cv::Matx34d)P1
+                             andPoint2:(cv::Point2f)u2 forP2:(cv::Matx34d)P2 {
 
     cv::Matx43d A(u1.x*P1(2, 0) - P1(0, 0), u1.x*P1(2, 1) - P1(0, 1), u1.x*P1(2, 2) - P1(0, 2),
                   u1.y*P1(2, 0) - P1(1, 0), u1.y*P1(2, 1) - P1(1, 1), u1.y*P1(2, 2) - P1(1, 2),

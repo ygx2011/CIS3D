@@ -18,11 +18,11 @@
 + (cv::Point2f)xFromU:(cv::Point2f)u withKInv:(cv::Mat *)KInv;
 + (cv::Point3f)reprojectX:(cv::Point3f)X withR:(cv::Mat)R andT:(cv::Mat)t;
 
-+ (cv::Point3f)iterativeTriangulationWithPoint1:(cv::Point2f)u1 camera1:(cv::Matx34d)P1
-                                      andPoint2:(cv::Point2f)u2 camera2:(cv::Matx34d)P2;
++ (cv::Point3f)iterativeTriangulationWithPoint1:(cv::Point2f)u1 forP1:(cv::Matx34d)P1
+                                      andPoint2:(cv::Point2f)u2 forP2:(cv::Matx34d)P2;
 
-+ (cv::Point3f)triangulationWithPoint1:(cv::Point2f)u1 camera1:(cv::Matx34d)P1
-                             andPoint2:(cv::Point2f)u2 camera2:(cv::Matx34d)P2;
++ (cv::Point3f)triangulationWithPoint1:(cv::Point2f)u1 forP1:(cv::Matx34d)P1
+                             andPoint2:(cv::Point2f)u2 forP2:(cv::Matx34d)P2;
 
 + (void)decomposeEssentialMat:(cv::Mat &)E
                          ToR1:(cv::Mat &)R1 t1:(cv::Mat &)t1

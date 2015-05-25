@@ -151,6 +151,7 @@
 		B5D5F22D1AF769FB00A9E945 /* vector_angle.inl in Resources */ = {isa = PBXBuildFile; fileRef = B5D5F1AA1AF769FA00A9E945 /* vector_angle.inl */; };
 		B5D5F22E1AF769FB00A9E945 /* vector_query.inl in Resources */ = {isa = PBXBuildFile; fileRef = B5D5F1AC1AF769FA00A9E945 /* vector_query.inl */; };
 		B5D5F22F1AF769FB00A9E945 /* wrap.inl in Resources */ = {isa = PBXBuildFile; fileRef = B5D5F1AE1AF769FA00A9E945 /* wrap.inl */; };
+		B5DDE4E41B11A12100B902C0 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = B5DDE4E31B11A12100B902C0 /* README.txt */; };
 		B5E913C41AFCAB9000F289F7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5E913C31AFCAB9000F289F7 /* CoreMedia.framework */; };
 		B5EE69B01AD7C94D00661595 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5EE69AF1AD7C94D00661595 /* opencv2.framework */; };
 /* End PBXBuildFile section */
@@ -475,6 +476,7 @@
 		B5D5F1BD1AF769FA00A9E945 /* vec3.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = vec3.hpp; sourceTree = "<group>"; };
 		B5D5F1BE1AF769FA00A9E945 /* vec4.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = vec4.hpp; sourceTree = "<group>"; };
 		B5D5F1BF1AF769FA00A9E945 /* vector_relational.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = vector_relational.hpp; sourceTree = "<group>"; };
+		B5DDE4E31B11A12100B902C0 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		B5E913C31AFCAB9000F289F7 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		B5EE69AF1AD7C94D00661595 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -511,6 +513,7 @@
 		B53372491AC27E6A00848BB6 = {
 			isa = PBXGroup;
 			children = (
+				B5DDE4E31B11A12100B902C0 /* README.txt */,
 				B53372541AC27E6A00848BB6 /* CIS3D */,
 				B533726E1AC27E6A00848BB6 /* CIS3DTests */,
 				B53372531AC27E6A00848BB6 /* Products */,
@@ -1120,6 +1123,7 @@
 				B5D5F1F41AF769FB00A9E945 /* type_precision.inl in Resources */,
 				B5D5F1C21AF769FA00A9E945 /* func_common.inl in Resources */,
 				B5D5F2001AF769FB00A9E945 /* dual_quaternion.inl in Resources */,
+				B5DDE4E41B11A12100B902C0 /* README.txt in Resources */,
 				B5D5F1D81AF769FB00A9E945 /* type_mat2x4.inl in Resources */,
 				B53372631AC27E6A00848BB6 /* Images.xcassets in Resources */,
 				B5D5F1CE1AF769FA00A9E945 /* intrinsic_geometric.inl in Resources */,

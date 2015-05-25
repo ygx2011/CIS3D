@@ -22,8 +22,8 @@
     cv::Point2f x2 = [CISGeometry xFromU:u2 withKInv:image2.camera.KInv];
     
     /* 三角化得到三维点 */
-    cv::Point3f X = [CISGeometry iterativeTriangulationWithPoint1:x1 camera1:image1.camera.P
-                                                        andPoint2:x2 camera2:image2.camera.P];
+    cv::Point3f X = [CISGeometry iterativeTriangulationWithPoint1:x1 forP1:image1.camera.P
+                                                        andPoint2:x2 forP2:image2.camera.P];
     return X;
 }
 
@@ -60,18 +60,18 @@
     for (int cases = 0; cases < 4; ++cases) {
         atFront[0] = atFront[1] = 0;
         
-        cv::Matx34d P1(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0);
-        cv::Matx34d P2 = [CISGeometry pFromR:R[cases / 2] andT:t[cases % 2]];
-        cv::Mat R_(R[cases / 2].t()), t_(- R_ * t[cases % 2]);
+        cv::Mat _R_(R[cases / 2].t()), _t_(- _R_ * t[cases % 2]);
+        [pair.image1.camera setPWithId];
+        [pair.image2.camera setPWithR:R[cases / 2] andT:t[cases % 2]];
 
         /* 首先生成点云 */
         for (int i = 0; i < n; ++i) {
             cv::Point2f u1 = (*pair.matchedPoints1)[i], u2 = (*pair.matchedPoints2)[i];
-            cv::Point3f X = [CISGeometry iterativeTriangulationWithPoint1:u1 camera1:P1
-                                                                andPoint2:u2 camera2:P2];
+            cv::Point3f X = [self triangulationWithPoint1:u1 inImage1:pair.image1
+                                                andPoint2:u2 inImage2:pair.image2];
             /* 在相机0的前方 */
             cv::Point3f _u1_ = X;
-            cv::Point3f _u2_ = [CISGeometry reprojectX:X withR:R_ andT:t_];
+            cv::Point3f _u2_ = [CISGeometry reprojectX:X withR:_R_ andT:_t_];
 
             if (_u1_.z > 0) { atFront[0] ++; }
             if (_u2_.z > 0) { atFront[1] ++; }
@@ -93,8 +93,6 @@
     NSLog(@"%@: Constructing ...", self.class);
     [[CISSfM sharedInstance].cloud clear];
     
-    pair.image1.camera = [[CISCamera alloc] init];
-    
     cv::Mat *K = pair.image1.camera.K;
     cv::Mat E = K->t() * (*pair.fundamentalMat) * (*K);
     cv::Mat R[2], t[2], R0, t0;
@@ -112,7 +110,9 @@
                               forPair:pair];
     if (!isRecovered) return NO;
 
-    pair.image2.camera = [[CISCamera alloc] initWithR:R0 andT:t0];
+    [pair.image1.camera setPWithId];
+    [pair.image2.camera setPWithR:R0 andT:t0];
+    
     [self triangulationForAllPointsInPair:pair];
     return YES;
 }
@@ -145,7 +145,7 @@
                        *pair.image1.camera.K, cv::Mat_<double>::zeros(1, 4),
                        r, t);
     cv::Rodrigues(r, R);
-    pair.image2.camera = [[CISCamera alloc] initWithR:R andT:t];
+    [pair.image2.camera setPWithR:R andT:t];
     
     [self triangulationForAllPointsInPair:pair];
     return YES;

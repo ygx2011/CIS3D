@@ -30,6 +30,7 @@
     self = [super init];
     if (self) {
         _image = [CISImage cvMatFromUIImage:image];
+        _camera = [[CISCamera alloc] init];
         _keyPoints = new std::vector<cv::KeyPoint>();
 
         cv::SiftFeatureDetector     detector;

@@ -18,6 +18,8 @@
 @property (nonatomic) cv::Mat    *KInv;
 
 - (instancetype)init;
-- (instancetype)initWithR:(cv::Mat)R andT:(cv::Mat)t;
+
+- (void)setPWithId;
+- (void)setPWithR:(cv::Mat)R andT:(cv::Mat)t;
 
 @end
