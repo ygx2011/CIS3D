@@ -51,6 +51,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {}
 
-- (void)applicationWillTerminate:(UIApplication *)application {}
+- (void)applicationWillTerminate:(UIApplication *)application {
+    [CISCamera dealloc];    
+}
 
 @end

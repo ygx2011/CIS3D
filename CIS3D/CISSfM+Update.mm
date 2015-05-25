@@ -18,8 +18,8 @@
                              andPoint2:(cv::Point2f)u2 inImage2:(CISImage *)image2 {
     
     /* 首先将二维点乘以内参的逆，矫正回世界坐标系屏幕上的成像点坐标 */
-    cv::Point2f x1 = [CISGeometry xFromU:u1 withKInv:image1.camera.KInv];
-    cv::Point2f x2 = [CISGeometry xFromU:u2 withKInv:image2.camera.KInv];
+    cv::Point2f x1 = [CISGeometry xFromU:u1 withKInv:*(image1.camera.KInv)];
+    cv::Point2f x2 = [CISGeometry xFromU:u2 withKInv:*(image2.camera.KInv)];
     
     /* 三角化得到三维点 */
     cv::Point3f X = [CISGeometry iterativeTriangulationWithPoint1:x1 forP1:image1.camera.P

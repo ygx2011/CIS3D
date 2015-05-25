@@ -39,7 +39,7 @@
 /* 图像队列中的搜索窗口 */
 #define SEARCH_WINDOW                 5
 
-#define FRONT_THRESHOLD_RATIO         0.65f
+#define FRONT_THRESHOLD_RATIO         0.75f
 
 #define TICK   NSDate *startTime = [NSDate date]
 #define TOCK   NSLog(@"Time: %f", -[startTime timeIntervalSinceNow])

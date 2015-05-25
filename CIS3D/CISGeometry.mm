@@ -106,9 +106,9 @@
     t2 = - t1;
 }
 
-+ (cv::Point2f)xFromU:(cv::Point2f)u withKInv:(cv::Mat *)KInv {
++ (cv::Point2f)xFromU:(cv::Point2f)u withKInv:(cv::Mat)KInv {
     cv::Mat x = cv::Mat( (cv::Mat_<double>(3, 1) << u.x, IMG2WLD(u.y), 1.0) );
-    x = (*KInv) * x;
+    x = KInv * x;
     return cv::Point2f(x.at<double>(0, 0) / x.at<double>(2, 0),
                        x.at<double>(1, 0) / x.at<double>(2, 0));
 }

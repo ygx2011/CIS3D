@@ -22,4 +22,6 @@
 - (void)setPWithId;
 - (void)setPWithR:(cv::Mat)R andT:(cv::Mat)t;
 
++ (void)dealloc;
+
 @end

@@ -10,6 +10,8 @@
 #import "CISGeometry.h"
 #import "CISCamera.h"
 
+static cv::Mat *sharedK, *sharedKInv;
+
 @interface CISCamera ()
 
 @end
@@ -39,17 +41,22 @@
                      0, 0, 1, 0);
 }
 
-- (void)dealloc {
-    delete _K;
-    delete _KInv;
-}
-
 #pragma mark - utility
 - (void)setupK {
-    _K = new cv::Mat((cv::Mat_<double>(3, 3) << 407.36, 0, 240,
-                                                0, 723.71, 320,
-                                                0,      0, 1));
-    _KInv = new cv::Mat(_K->inv());
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
+        sharedK = new cv::Mat((cv::Mat_<double>(3, 3) << 407.36, 0, 240,
+                                                         0, 723.71, 320,
+                                                         0,      0, 1));
+        sharedKInv = new cv::Mat(sharedK->inv());
+    });
+    _K = sharedK;
+    _KInv = sharedKInv;
+}
+
++ (void)dealloc {
+    delete sharedK;
+    delete sharedKInv;
 }
 
 @end

@@ -15,7 +15,7 @@
 /* 只有在运算过程中会用到关于Mat的辅助函数，才储存成变量形式；
  * 作为接口的Mat，全都储存成指针。 */
 + (cv::Mat)crossMatrix:(cv::Mat &)A;
-+ (cv::Point2f)xFromU:(cv::Point2f)u withKInv:(cv::Mat *)KInv;
++ (cv::Point2f)xFromU:(cv::Point2f)u withKInv:(cv::Mat)KInv;
 + (cv::Point3f)reprojectX:(cv::Point3f)X withR:(cv::Mat)R andT:(cv::Mat)t;
 
 + (cv::Point3f)iterativeTriangulationWithPoint1:(cv::Point2f)u1 forP1:(cv::Matx34d)P1
