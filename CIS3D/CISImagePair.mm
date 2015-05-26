@@ -89,7 +89,7 @@
                 /* 是内点，有用 */
                 if (filter[i]) {
                     /* 有3D对应点，得分增加 */
-                    if ((*image1.keyPointTo3DIndex)[*id1iter] != -1) {
+                    if ((*image1.keyPointTo3DIndex)[*id1iter] != NOT_EXIST_3D_POINT) {
                         _score += 1.0f;
                     }
                     ++id1iter, ++pt1iter;

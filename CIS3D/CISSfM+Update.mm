@@ -76,9 +76,7 @@
             if (_u1_.z > 0) { atFront[0] ++; }
             if (_u2_.z > 0) { atFront[1] ++; }
         }
-        std::cout << "Case: " << cases << std::endl
-        << (atFront[0] / (float)n) << std::endl
-        << (atFront[1] / (float)n) << std::endl;
+        NSLog(@"Case %d: Cam1: %f, Cam2: %f", cases, atFront[0] / float(n), atFront[1] / float(n));
         if ((atFront[0] / (float)n) >= FRONT_THRESHOLD_RATIO
          && (atFront[1] / (float)n) >= FRONT_THRESHOLD_RATIO) {
             R0 = R[cases / 2], t0 = t[cases % 2];
@@ -127,7 +125,7 @@
     /* 建立3D点和新视图中2D点的关系 */
     for (int i = 0; i < n; ++i) {
         int Xindex = (*pair.image1.keyPointTo3DIndex)[(*pair.matchedPointsIndex1)[i]];
-        if (Xindex != -1) {
+        if (Xindex != NOT_EXIST_3D_POINT) {
             cv::Point2f u2 = (*pair.matchedPoints2)[i];
             Xs.push_back([[CISSfM sharedInstance].cloud pointAtIndex:Xindex]);
             us.push_back(cv::Point2f(u2.x, IMG2WLD(u2.y)));

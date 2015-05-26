@@ -43,7 +43,7 @@
         _keyDescriptor = new cv::Mat(__keyDescriptor);
         _keyPointTo3DIndex = new std::vector<int>(_keyPoints->size());
         for (int i = 0; i < _keyPointTo3DIndex->size(); ++i) {
-            (*_keyPointTo3DIndex)[i] = -1;
+            (*_keyPointTo3DIndex)[i] = NOT_EXIST_3D_POINT;
         }
         NSLog(@"Features: %lu", _keyPoints->size());
     }

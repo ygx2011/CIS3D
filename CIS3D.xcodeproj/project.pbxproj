@@ -81,13 +81,11 @@
 		B5D5F1E71AF769FB00A9E945 /* bitfield.inl in Resources */ = {isa = PBXBuildFile; fileRef = B5D5F11A1AF769FA00A9E945 /* bitfield.inl */; };
 		B5D5F1E81AF769FB00A9E945 /* constants.inl in Resources */ = {isa = PBXBuildFile; fileRef = B5D5F11C1AF769FA00A9E945 /* constants.inl */; };
 		B5D5F1E91AF769FB00A9E945 /* epsilon.inl in Resources */ = {isa = PBXBuildFile; fileRef = B5D5F11E1AF769FA00A9E945 /* epsilon.inl */; };
-		B5D5F1EA1AF769FB00A9E945 /* integer.inl in Resources */ = {isa = PBXBuildFile; fileRef = B5D5F1201AF769FA00A9E945 /* integer.inl */; };
 		B5D5F1EB1AF769FB00A9E945 /* matrix_access.inl in Resources */ = {isa = PBXBuildFile; fileRef = B5D5F1221AF769FA00A9E945 /* matrix_access.inl */; };
 		B5D5F1EC1AF769FB00A9E945 /* matrix_inverse.inl in Resources */ = {isa = PBXBuildFile; fileRef = B5D5F1251AF769FA00A9E945 /* matrix_inverse.inl */; };
 		B5D5F1ED1AF769FB00A9E945 /* matrix_transform.inl in Resources */ = {isa = PBXBuildFile; fileRef = B5D5F1271AF769FA00A9E945 /* matrix_transform.inl */; };
 		B5D5F1EE1AF769FB00A9E945 /* noise.inl in Resources */ = {isa = PBXBuildFile; fileRef = B5D5F1291AF769FA00A9E945 /* noise.inl */; };
 		B5D5F1EF1AF769FB00A9E945 /* packing.inl in Resources */ = {isa = PBXBuildFile; fileRef = B5D5F12B1AF769FA00A9E945 /* packing.inl */; };
-		B5D5F1F01AF769FB00A9E945 /* quaternion.inl in Resources */ = {isa = PBXBuildFile; fileRef = B5D5F12D1AF769FA00A9E945 /* quaternion.inl */; };
 		B5D5F1F11AF769FB00A9E945 /* random.inl in Resources */ = {isa = PBXBuildFile; fileRef = B5D5F12F1AF769FA00A9E945 /* random.inl */; };
 		B5D5F1F21AF769FB00A9E945 /* reciprocal.inl in Resources */ = {isa = PBXBuildFile; fileRef = B5D5F1311AF769FA00A9E945 /* reciprocal.inl */; };
 		B5D5F1F31AF769FB00A9E945 /* round.inl in Resources */ = {isa = PBXBuildFile; fileRef = B5D5F1331AF769FA00A9E945 /* round.inl */; };
@@ -1087,7 +1085,6 @@
 				B5D5F2201AF769FB00A9E945 /* raw_data.inl in Resources */,
 				B5D5F2161AF769FB00A9E945 /* norm.inl in Resources */,
 				B5D5F1E21AF769FB00A9E945 /* type_vec3.inl in Resources */,
-				B5D5F1EA1AF769FB00A9E945 /* integer.inl in Resources */,
 				B5D5F1C41AF769FA00A9E945 /* func_geometric.inl in Resources */,
 				B5D5F2071AF769FB00A9E945 /* gradient_paint.inl in Resources */,
 				B5D5F1D71AF769FA00A9E945 /* type_mat2x3.inl in Resources */,
@@ -1130,7 +1127,6 @@
 				B5D5F2111AF769FB00A9E945 /* matrix_operation.inl in Resources */,
 				B5D5F1FD1AF769FB00A9E945 /* common.inl in Resources */,
 				B5D5F1CD1AF769FA00A9E945 /* intrinsic_exponential.inl in Resources */,
-				B5D5F1F01AF769FB00A9E945 /* quaternion.inl in Resources */,
 				B5D5F2191AF769FB00A9E945 /* number_precision.inl in Resources */,
 				B5D5F2031AF769FB00A9E945 /* extented_min_max.inl in Resources */,
 				B5D5F1E61AF769FB00A9E945 /* type_vec4_sse2.inl in Resources */,

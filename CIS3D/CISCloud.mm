@@ -46,6 +46,13 @@
     return pt;
 }
 
+- (void)setPoint:(cv::Point3f)X atIndex:(int)index {
+    int baseIndex = index * 3;
+    _coordinates[baseIndex    ] = X.x;
+    _coordinates[baseIndex + 1] = X.y;
+    _coordinates[baseIndex + 2] = X.z;
+}
+
 - (void)addPointWithX:(GLfloat)x Y:(GLfloat)y Z:(GLfloat)z
                  AndR:(GLfloat)r G:(GLfloat)g B:(GLfloat)b {
     int baseIndex = _count * 3, colorIndex = _count * 4;

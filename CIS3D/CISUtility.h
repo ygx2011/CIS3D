@@ -41,6 +41,8 @@
 
 #define FRONT_THRESHOLD_RATIO         0.75f
 
+#define NOT_EXIST_3D_POINT            (-1)
+
 #define TICK   NSDate *startTime = [NSDate date]
 #define TOCK   NSLog(@"Time: %f", -[startTime timeIntervalSinceNow])
 

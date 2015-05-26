@@ -20,6 +20,8 @@
 - (instancetype)init;
 
 - (cv::Point3f)pointAtIndex:(int)index;
+- (void)setPoint:(cv::Point3f)X atIndex:(int)index;
+
 - (void)addPointWithX:(GLfloat)x Y:(GLfloat)y Z:(GLfloat)z
                  AndR:(GLfloat)r G:(GLfloat)g B:(GLfloat)b;
 - (void)clear;
